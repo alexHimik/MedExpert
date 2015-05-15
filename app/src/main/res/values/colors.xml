@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="vox_red">#FFD10A00</color>-->
+    <color name="med_white">#fffafafa</color>
+    <color name="med_blue">#49bfff</color>
+
+    <color name="color_edittext">#FF333333</color>
+
+    <color name="side_bar_category_text">#FF333333</color>
+    <!--<color name="side_bar_rubrics_header_color">#FF999999</color>-->
+    <!--<color name="side_bar_divider_color">#FFDCDCDC</color>-->
+    <color name="side_bar_category_selected_color">#14999999</color>
+
+    <!-- Список категорий и рубрик -->
+    <!--<color name="color_text_title_red">#ffffffff</color>-->
+    <!--<color name="color_text_descr_red">#ffffffff</color>-->
+    <!--<color name="color_text_other_red">#ffffeeee</color>-->
+
+    <!--<color name="color_dark_grey">#ff333333</color>-->
+    <color name="color_light_grey">#ff999999</color>
+    <!--<color name="bg_red">#ffD10A00</color>-->
+    <!--<color name="bg_white">#fffafafa</color>-->
+    <!--<color name="color_text_title_white">#333333</color>-->
+    <!--<color name="color_text_other_white">#999999</color>-->
+
+    <!--Страница с новостью-->
+    <!--<color name="news_color_title">#333333</color>-->
+    <!--<color name="news_color_text">#4C4C4C</color>-->
+    <!--<color name="news_color_line">#DCDCDC</color>-->
+    <!--<color name="news_color_white">#ffffff</color>-->
+    <!--<color name="news_color_tag_bg">#cc999999</color>-->
+    <!--<color name="news_color_tag_txt">#757575</color>-->
+    <!--<color name="news_color_test">#ffffa0b2</color>-->
+    <!--<color name="news_color_test1">#ffc3ffb8</color>-->
+    <!--<color name="news_color_test2">#ffaecaff</color>-->
+
+    <!--Список комментариев-->
+    <!--<color name="comm_bg">#fafafa</color>-->
+
+    <!--<color name="restore_password_dark_grey">#ff4c4c4c</color>-->
+</resources>

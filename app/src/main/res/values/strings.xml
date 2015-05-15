@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MedExpert</string>
+    <string name="search_bar_input_hint">Поиск</string>
+
+    <!--category names-->
+    <string name="category_name_all">Все новости</string>
+    <string name="category_name_business">Business</string>
+    <string name="category_name_history">History</string>
+    <string name="category_name_interview">Interview</string>
+    <string name="category_name_vox_populi">Vox Populi</string>
+    <string name="settings_string">Настройки</string>
+    <string name="default_user_name_stub">Войти в личный кабинет</string>
+</resources>
