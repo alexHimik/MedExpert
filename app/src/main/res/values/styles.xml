@@ -19,6 +19,9 @@
     <style name="side_bar_text">
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="side_title">
+        <item name="android:textSize">20sp</item>
+    </style>
     <style name="side_bar_text.white" parent="side_bar_text">
         <item name="android:textColor">@color/med_white</item>
     </style>

@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">MedExpert</string>
+    <string name="app_name">MEDEXPERT</string>
+    <string name="app_name_med">MED</string>
+    <string name="app_name_expert">EXPERT</string>
     <string name="search_bar_input_hint">Поиск</string>
 
     <!--category names-->
-    <string name="category_name_all">Все новости</string>
+    <!--<string name="category_name_all">Все новости</string>-->
+    <string name="name_APP">MedExpert</string>
     <string name="category_name_business">Business</string>
     <string name="category_name_history">History</string>
     <string name="category_name_interview">Interview</string>

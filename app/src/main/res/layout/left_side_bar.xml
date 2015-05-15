@@ -43,14 +43,21 @@
             android:orientation="vertical">
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/blured_photo_height"
-                android:layout_marginBottom="@dimen/padding_8dp">
-                <ImageView
-                    android:id="@+id/left_bar_user_photo_blured"
+                android:layout_height="@dimen/side_hider_height"
+                android:background="@color/med_blue">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:background="@color/med_blue"/>
+                    android:paddingLeft="@dimen/side_hider_padding"
+                    android:paddingTop="@dimen/side_hider_padding"
+                    android:paddingBottom="@dimen/side_hider_padding"
+                    android:gravity="center_vertical"
+                    >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/app_icon" />
                 <!--<ImageView-->
                     <!--android:id="@+id/left_bar_user_avatar"-->
                     <!--android:layout_width="@dimen/user_avatar_diameter"-->
@@ -61,16 +68,25 @@
                     <!--android:background="@drawable/vox_upic_sidebar"/>-->
                 <com.devspark.robototextview.widget.RobotoTextView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/left_bar_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/padding_20dp"
-                    android:layout_marginLeft="@dimen/padding_16dp"
-                    style="@style/side_bar_text.white"
+                    style="@style/side_title"
                     app:fontFamily="roboto"
                     app:textWeight="normal"
-                    android:layout_gravity="bottom|left"
-                    android:text="@string/default_user_name_stub"/>
+                    android:text="@string/app_name_med"
+                    android:layout_marginLeft="@dimen/side_hider_pad_16"
+                    android:textColor="#ffffff" />
+
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/side_title"
+                        app:fontFamily="roboto"
+                        app:textWeight="normal"
+                        android:text="@string/app_name_expert"
+                        android:textColor="#000000" />
+                </LinearLayout>
             </FrameLayout>
             <include
                 android:id="@+id/left_bar_category_all"

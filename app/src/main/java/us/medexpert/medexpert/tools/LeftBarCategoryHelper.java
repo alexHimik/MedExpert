@@ -38,7 +38,7 @@ public class LeftBarCategoryHelper {
         categoryItemIds.add(R.id.left_bar_category_business);
         categoryItemIds.add(R.id.left_bar_category_interview);
 
-        categoryNames.put(R.id.left_bar_category_all, R.string.category_name_all);
+        categoryNames.put(R.id.left_bar_category_all, R.string.name_APP);
         categoryNames.put(R.id.left_bar_category_business, R.string.category_name_business);
         categoryNames.put(R.id.left_bar_category_history, R.string.category_name_history);
         categoryNames.put(R.id.left_bar_category_interview, R.string.category_name_interview);

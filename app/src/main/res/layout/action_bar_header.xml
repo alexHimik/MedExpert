@@ -49,6 +49,6 @@
         android:layout_toLeftOf="@id/right_drawer_item"
         app:fontFamily="roboto"
         app:textWeight="normal"
-        android:text="@string/category_name_all"
+        android:text="@string/name_APP"
         android:textAppearance="@style/action_bar_title" />
 </RelativeLayout>

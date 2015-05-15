@@ -53,10 +53,10 @@ import us.medexpert.medexpert.tools.ViewTools;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-    public static final int GET_PICTURE_REQUEST = 111;
-    public static final int GET_FILE_CHOICER_REQUEST = 112;
-    public static final String IMAGE_PATH_GETTING_ACTION = "captured_image_path_event";
-    public static final String CAPTURED_IMAGE_PATH = "image_path";
+//    public static final int GET_PICTURE_REQUEST = 111;
+//    public static final int GET_FILE_CHOICER_REQUEST = 112;
+//    public static final String IMAGE_PATH_GETTING_ACTION = "captured_image_path_event";
+//    public static final String CAPTURED_IMAGE_PATH = "image_path";
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -70,6 +70,66 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         getWindow().setBackgroundDrawable(new ColorDrawable(
                 getResources().getColor(R.color.med_white)));
         initViews();
+        handleFragmentSwitching(FragmentFactory.ID_HOME, null);
+
+    }
+
+    private void initViews() {
+        moveDrawerToTop();
+        initActionBar();
+        initDrawer();
+
+    }
+
+    private void moveDrawerToTop() {
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        drawerLayout = (DrawerLayout)inflater.inflate(R.layout.drawer_decor, null);
+        contentLayout = (FrameLayout)drawerLayout.findViewById(R.id.content_frame);
+
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+        View child = decor.getChildAt(0);
+        decor.removeView(child);
+
+        contentLayout.addView(child, 0);
+        decor.addView(drawerLayout);
+
+        contentLayout = (FrameLayout)drawerLayout.findViewById(R.id.content_frame);
+        drawerList = (RelativeLayout)drawerLayout.findViewById(R.id.left_drawer);
+        drawerList.setPadding(0, ViewTools.getStatusBarHeight(this), 0, 0);
+    }
+
+    private void initActionBar() {
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled(false);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name,
+                R.string.app_name) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                View customBar = getSupportActionBar().getCustomView();
+                if(customBar != null) {
+                    customBar.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                View customBar = getSupportActionBar().getCustomView();
+                if(customBar != null) {
+                    customBar.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
+    }
+
+    private void initDrawer() {
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
     }
 
     @Override
@@ -153,57 +213,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         showNewFragment(fragment, fragment.getTag());
     }
 
-    private void moveDrawerToTop() {
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        drawerLayout = (DrawerLayout)inflater.inflate(R.layout.drawer_decor, null);
-        contentLayout = (FrameLayout)drawerLayout.findViewById(R.id.content_frame);
-
-        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
-        View child = decor.getChildAt(0);
-        decor.removeView(child);
-
-        contentLayout.addView(child, 0);
-        decor.addView(drawerLayout);
-
-        contentLayout = (FrameLayout)drawerLayout.findViewById(R.id.content_frame);
-        drawerList = (RelativeLayout)drawerLayout.findViewById(R.id.left_drawer);
-        drawerList.setPadding(0, ViewTools.getStatusBarHeight(this), 0, 0);
-    }
-
-    private void initActionBar() {
-        getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayUseLogoEnabled(false);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name,
-                R.string.app_name) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                View customBar = getSupportActionBar().getCustomView();
-                if(customBar != null) {
-                    customBar.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                View customBar = getSupportActionBar().getCustomView();
-                if(customBar != null) {
-                    customBar.setVisibility(View.INVISIBLE);
-                }
-            }
-        };
-        drawerLayout.setDrawerListener(drawerToggle);
-    }
-
-    private void initDrawer() {
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-    }
-
     private void showNewFragment(Fragment fragment, String fragmentTag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(((BackStackDataDescriber)fragment).getFragmentId() == SearchFragment.FRAGMENT_ID) {
@@ -216,11 +225,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         transaction.commit();
     }
 
-    private void initViews() {
-        moveDrawerToTop();
-        initActionBar();
-        initDrawer();
-    }
 
 //    /** handlers for events from EventBus */
 //    public void onEvent(CategorySelectedEvent categorySelectedEvent) {

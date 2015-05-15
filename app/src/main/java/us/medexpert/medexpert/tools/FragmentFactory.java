@@ -3,6 +3,8 @@ package us.medexpert.medexpert.tools;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import us.medexpert.medexpert.fragments.HomeFragment;
+
 //import kz.voxpopuli.voxapplication.dialog.ProgressFragment;
 //import kz.voxpopuli.voxapplication.fragments.About;
 //import kz.voxpopuli.voxapplication.fragments.CategoryFragment;
@@ -23,6 +25,11 @@ import android.support.v4.app.FragmentManager;
 //import kz.voxpopuli.voxapplication.fragments.VersionFragment;
 
 public class FragmentFactory {
+    public static final int
+            ID_HOME = 0,
+            ID_CATALOG = 1,
+            ID_SELLERS = 2
+            ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {
         Fragment fr = fm.findFragmentById(fragmentId);
@@ -31,6 +38,9 @@ public class FragmentFactory {
 
     private static Fragment createFragment(int fragmentId) {
         switch (fragmentId){
+            case ID_HOME:
+                return new HomeFragment();
+
 //            case RubricsFragment.FRAGMENT_ID: {
 //                return new RubricsFragment();
 //            }
