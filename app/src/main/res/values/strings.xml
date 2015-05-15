@@ -4,6 +4,15 @@
     <string name="app_name_expert">EXPERT</string>
     <string name="app_version">Version 1.0</string>
     <string name="app_copyright">&#169; Med expert, inc.</string>
+    <string name="settings_string">Settings</string>
+    <string name="about_string">About</string>
+    <string name="home_string">Home</string>
+    <string name="catalog_string">Catalog</string>
+    <string name="favorites_string">Favorites</string>
+    <string name="viewed_string">Recently viewed</string>
+
+
+
     <string name="search_bar_input_hint">Поиск</string>
 
     <string name="about_attention_text">Attention!!!</string>
@@ -19,6 +28,6 @@
     <string name="category_name_history">History</string>
     <string name="category_name_interview">Interview</string>
     <string name="category_name_vox_populi">Vox Populi</string>
-    <string name="settings_string">Настройки</string>
+    <!--<string name="settings_string">Настройки</string>-->
     <string name="default_user_name_stub">Войти в личный кабинет</string>
 </resources>

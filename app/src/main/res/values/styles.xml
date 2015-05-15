@@ -16,12 +16,22 @@
     </style>
 
     <!--styles for left side bar-->
-    <style name="side_bar_text">
-        <item name="android:textSize">14sp</item>
-    </style>
     <style name="side_title">
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="side_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+
+
+
+
+    <style name="side_bar_text">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="side_bar_text.white" parent="side_bar_text">
         <item name="android:textColor">@color/med_white</item>
     </style>
