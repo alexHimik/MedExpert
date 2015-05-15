@@ -2,7 +2,15 @@
     <string name="app_name">MEDEXPERT</string>
     <string name="app_name_med">MED</string>
     <string name="app_name_expert">EXPERT</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="app_copyright">&#169; Med expert, inc.</string>
     <string name="search_bar_input_hint">Поиск</string>
+
+    <string name="about_attention_text">Attention!!!</string>
+    <string name="about_attention_body">This application neither sell any medicines nor promote any sites.\nAll price and links for information purpose only.\nWe are not responsible for any information in this app.</string>
+    <string name="about_email">contact@edpills365.net</string>
+    <string name="about_site">www.edpills365.net</string>
+
 
     <!--category names-->
     <!--<string name="category_name_all">Все новости</string>-->

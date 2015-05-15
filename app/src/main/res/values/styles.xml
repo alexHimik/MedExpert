@@ -28,9 +28,10 @@
     <style name="side_bar_text.category" parent="side_bar_text">
         <item name="android:textColor">@color/side_bar_category_text</item>
     </style>
-    <!--<style name="side_bar_text.cat_header" parent="side_bar_text">-->
-        <!--<item name="android:textColor">@color/side_bar_rubrics_header_color</item>-->
-    <!--</style>-->
+
+    <style name="about_header_text" parent="side_title">
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <!--action bar styles-->
     <style name="action_bar_title">
