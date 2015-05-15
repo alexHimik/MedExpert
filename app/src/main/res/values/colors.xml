@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--<color name="vox_red">#FFD10A00</color>-->
-    <color name="med_white">#fffafafa</color>
+    <color name="med_white">#ffffff</color>
     <color name="med_blue">#49bfff</color>
 
     <color name="color_edittext">#FF333333</color>

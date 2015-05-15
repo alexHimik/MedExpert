@@ -5,31 +5,59 @@
     android:background="@color/med_white">
     <LinearLayout
         android:id="@+id/left_bar_settings"
-        android:layout_width="fill_parent"
-        android:minWidth="@dimen/news_card_small_width"
-        android:layout_height="@dimen/category_item_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:background="@drawable/category_item_selector">
-        <ImageView
-            android:layout_width="@dimen/settings_icon_size"
-            android:layout_height="@dimen/settings_icon_size"
-            android:layout_marginLeft="@dimen/padding_16dp"
-            android:layout_marginTop="@dimen/padding_12dp"
-            android:layout_marginBottom="@dimen/padding_12dp"
-            android:src="@drawable/med_ic_grey_settings"/>
-        <com.devspark.robototextview.widget.RobotoTextView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/vox_app_settings"
-            android:layout_width="wrap_content"
+        android:clickable="false"
+        android:paddingLeft="@dimen/side_setting_pad_36"
+        android:paddingBottom="@dimen/side_setting_pad_36"
+        android:orientation="vertical">
+            <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/side_bar_text.category"
-            android:layout_marginLeft="@dimen/settings_text_margin"
-            app:fontFamily="roboto"
-            app:textWeight="normal"
-            android:layout_gravity="center_vertical"
-            android:text="@string/settings_string"
-            />
+            android:paddingTop="@dimen/side_pad_24"
+            android:clickable="true"
+            android:id="@+id/side_setting">
+
+            <ImageView
+                android:layout_width="@dimen/settings_icon_size"
+                android:layout_height="@dimen/settings_icon_size"
+                android:src="@drawable/med_ic_grey_settings"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/side_text"
+                android:layout_marginLeft="@dimen/side_pad_28"
+                app:fontFamily="roboto"
+                app:textWeight="normal"
+                android:text="@string/settings_string"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/side_pad_24"
+            android:clickable="true"
+            android:id="@+id/side_about">
+
+            <ImageView
+                android:layout_width="@dimen/settings_icon_size"
+                android:layout_height="@dimen/settings_icon_size"
+                android:src="@drawable/med_ic_grey_about"/>
+            <com.devspark.robototextview.widget.RobotoTextView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/side_text"
+                android:layout_marginLeft="@dimen/side_pad_28"
+                app:fontFamily="roboto"
+                app:textWeight="normal"
+                android:text="@string/about_string"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
     </LinearLayout>
     <ScrollView
         android:id="@+id/left_bar_scroll"
@@ -88,27 +116,118 @@
                         android:textColor="#000000" />
                 </LinearLayout>
             </FrameLayout>
-            <include
-                android:id="@+id/left_bar_category_all"
-                layout="@layout/category_item">
-            </include>
-            <include
-                android:id="@+id/left_bar_category_vox_populi"
-                layout="@layout/category_item">
-            </include>
-            <include
-                android:id="@+id/left_bar_category_history"
-                layout="@layout/category_item">
-            </include>
-            <include
-                android:id="@+id/left_bar_category_business"
-                layout="@layout/category_item">
-            </include>
-            <include
-                android:id="@+id/left_bar_category_interview"
-                layout="@layout/category_item">
-            </include>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:clickable="false"
+            android:paddingLeft="@dimen/side_setting_pad_36"
+            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/side_pad_24"
+                    android:clickable="true"
+                    android:id="@+id/side_home">
+
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:src="@drawable/med_ic_blue_home"/>
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/side_text"
+                        android:layout_marginLeft="@dimen/side_pad_28"
+                        app:fontFamily="roboto"
+                        app:textWeight="normal"
+                        android:text="@string/home_string"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/side_pad_24"
+                    android:clickable="true"
+                    android:id="@+id/side_catalog">
+
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:src="@drawable/med_ic_blue_catalog"/>
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/side_text"
+                        android:layout_marginLeft="@dimen/side_pad_28"
+                        app:fontFamily="roboto"
+                        app:textWeight="normal"
+                        android:text="@string/catalog_string"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/side_pad_24"
+                    android:clickable="true"
+                    android:id="@+id/side_favorites">
+
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:src="@drawable/med_ic_blue_favorites"/>
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/side_text"
+                        android:layout_marginLeft="@dimen/side_pad_28"
+                        app:fontFamily="roboto"
+                        app:textWeight="normal"
+                        android:text="@string/favorites_string"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/side_pad_24"
+                    android:clickable="true"
+                    android:id="@+id/side_viewed">
+
+                    <ImageView
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:src="@drawable/med_ic_blue_recent"/>
+                    <com.devspark.robototextview.widget.RobotoTextView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/side_text"
+                        android:layout_marginLeft="@dimen/side_pad_28"
+                        app:fontFamily="roboto"
+                        app:textWeight="normal"
+                        android:text="@string/viewed_string"
+                        android:layout_gravity="center_vertical" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tv"
+        android:layout_alignBottom="@+id/left_bar_scroll"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="34dp" />
 </RelativeLayout>
