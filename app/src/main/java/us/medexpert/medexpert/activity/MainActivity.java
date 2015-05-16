@@ -25,6 +25,7 @@ import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.fragments.BackStackDataDescriber;
 import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.tools.FragmentFactory;
+import us.medexpert.medexpert.tools.PreferenceTools;
 import us.medexpert.medexpert.tools.ViewTools;
 
 
@@ -43,15 +44,21 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         getWindow().setBackgroundDrawable(new ColorDrawable(
                 getResources().getColor(R.color.med_white)));
         initViews();
-        handleFragmentSwitching(FragmentFactory.ID_HOME, null);
+        resolveFirstStart();
+    }
 
+    private void resolveFirstStart() {
+        if(PreferenceTools.getTutorialShowedState(this)) {
+            handleFragmentSwitching(FragmentFactory.ID_HOME, null);
+        } else {
+            handleFragmentSwitching(FragmentFactory.ID_TUTORIAL, null);
+        }
     }
 
     private void initViews() {
         moveDrawerToTop();
         initActionBar();
         initDrawer();
-
     }
 
     private void moveDrawerToTop() {
@@ -103,18 +110,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void initDrawer() {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-//        EventBus.getDefault().unregister(this);
-        super.onStop();
     }
 
     @Override

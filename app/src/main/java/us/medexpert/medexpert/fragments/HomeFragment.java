@@ -45,7 +45,7 @@ public class HomeFragment extends BaseFragment {
     private View.OnClickListener barClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity)getActivity()).onBackPressed();
+            ((MainActivity)getActivity()).onClick(v);
         }
     };
 

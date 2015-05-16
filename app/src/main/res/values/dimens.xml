@@ -36,7 +36,7 @@
 
     <!--About fragment dimens-->
     <dimen name="about_content_side_margin">72dp</dimen>
-    <dimen name="about_content_top_margin">40</dimen>
+    <dimen name="about_content_top_margin">40dp</dimen>
     <dimen name="about_logo_icon_size">48dp</dimen>
     <dimen name="about_logo_icon_right_margin">16dp</dimen>
     <dimen name="about_logo_icon_bottom_margin">24dp</dimen>
@@ -44,4 +44,10 @@
     <dimen name="about_small_text_size">12sp</dimen>
     <dimen name="about_middle_text_size">14sp</dimen>
     <dimen name="about_text_line_extra">5dp</dimen>
+
+    <!--Tutorial fragments-->
+    <dimen name="tutorial_image_size">216dp</dimen>
+    <dimen name="tutorial_margin_top_bottom">24dp</dimen>
+    <dimen name="tutorial_main_text_margin_bottom">26dp</dimen>
+    <dimen name="tutorial_button_top_margin">64dp</dimen>
 </resources>

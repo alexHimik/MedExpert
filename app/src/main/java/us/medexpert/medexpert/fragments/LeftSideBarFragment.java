@@ -23,31 +23,24 @@ public class LeftSideBarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        EventBus.getDefault().register(this);
         View parent = inflater.inflate(R.layout.left_side_bar, container);
         tv = (TextView) parent.findViewById(R.id.tv);
         sh = (LinearLayout) parent.findViewById(R.id.side_home);
-//        sh.setClickable(true);
         sh.setOnClickListener(onSideBar);
 
         sa = (LinearLayout) parent.findViewById(R.id.side_about);
-//        sa.setClickable(true);
         sa.setOnClickListener(onSideBar);
 
         sc = (LinearLayout) parent.findViewById(R.id.side_catalog);
-//        sc.setClickable(true);
         sc.setOnClickListener(onSideBar);
 
         sf = (LinearLayout) parent.findViewById(R.id.side_favorites);
-//        sf.setClickable(true);
         sf.setOnClickListener(onSideBar);
 
         sv = (LinearLayout) parent.findViewById(R.id.side_viewed);
-//        sv.setClickable(true);
         sv.setOnClickListener(onSideBar);
 
         ss = (LinearLayout) parent.findViewById(R.id.side_setting);
-//        ss.setClickable(true);
         ss.setOnClickListener(onSideBar);
 
         return parent;
@@ -56,10 +49,10 @@ public class LeftSideBarFragment extends Fragment {
     OnClickListener onSideBar = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            ((MainActivity)getActivity()).togleLeftDrawer();
             switch (v.getId()) {
                 case R.id.side_about:
                     ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_ABOUT, null);
-//                    tv.setText("ABOUT");
                     break;
                 case R.id.side_catalog:
                     tv.setText("CATALOG");

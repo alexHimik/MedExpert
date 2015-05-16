@@ -30,4 +30,11 @@
     <string name="category_name_vox_populi">Vox Populi</string>
     <!--<string name="settings_string">Настройки</string>-->
     <string name="default_user_name_stub">Войти в личный кабинет</string>
+
+    <string name="tutorial_next_text">NEXT</string>
+    <string name="tutorial_launch_app_text">LAUNCH APP</string>
+    <string name="tutorial_1_header">Favorites list</string>
+    <string name="tutorial_1_text">Add pills to favorite list\nfor quick access</string>
+    <string name="tutorial_2_header">Application manuals</string>
+    <string name="tutorial_2_text">Online application manuals\nfor more than 2.000 medicines</string>
 </resources>

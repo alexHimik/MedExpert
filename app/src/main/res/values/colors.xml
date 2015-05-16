@@ -11,4 +11,6 @@
     <color name="side_bar_category_selected_color">#14999999</color>
 
     <color name="color_light_grey">#ff999999</color>
+
+    <color name="tutorial_pink">#ffff9999</color>
 </resources>

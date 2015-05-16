@@ -1,6 +1,5 @@
 package us.medexpert.medexpert.fragments;
 
-import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,26 +14,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-//import com.android.volley.Request;
 import com.devspark.robototextview.widget.RobotoTextView;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import de.greenrobot.event.EventBus;
 import us.medexpert.medexpert.R;
-//import kz.voxpopuli.voxapplication.activity.MainActivity;
-//import kz.voxpopuli.voxapplication.adapter.SearchByStringAdapter;
-//import kz.voxpopuli.voxapplication.adapter.SearchByTopAdapter;
-//import kz.voxpopuli.voxapplication.network.VolleyNetworkProvider;
-//import kz.voxpopuli.voxapplication.network.request.SearchByStringRequest;
-//import kz.voxpopuli.voxapplication.network.request.SearchByTopRequest;
-//import kz.voxpopuli.voxapplication.network.wrappers.mpage.Article;
-//import kz.voxpopuli.voxapplication.network.wrappers.search.string.SearchByStringWrapper;
-//import kz.voxpopuli.voxapplication.network.wrappers.search.top.Group;
-//import kz.voxpopuli.voxapplication.network.wrappers.search.top.SearchByTopWrapper;
 
 public class SearchFragment extends BaseFragment {
 
@@ -51,27 +33,12 @@ public class SearchFragment extends BaseFragment {
     private LinearLayout header;
     private BaseAdapter listAdapter;
 
-//    private List<Article> stringModeData = new LinkedList<>();
-//    private List<Group> topModeData = new LinkedList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         contentList = (ListView)inflater.inflate(R.layout.search_string_fragment, null);
         return contentList;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-        runTopMode();
-    }
-
-    @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
     }
 
     @Override
