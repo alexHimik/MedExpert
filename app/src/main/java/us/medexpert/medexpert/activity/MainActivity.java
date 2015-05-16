@@ -1,22 +1,18 @@
 package us.medexpert.medexpert.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,39 +20,16 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-//import com.android.volley.Response;
-//import com.android.volley.VolleyError;
 
-import java.io.Serializable;
-import java.net.UnknownHostException;
-
-import de.greenrobot.event.EventBus;
 import us.medexpert.medexpert.R;
-//import kz.voxpopuli.voxapplication.R;
-//import kz.voxpopuli.voxapplication.dialog.QustomDialogBuilder;
-//import kz.voxpopuli.voxapplication.events.CategorySelectedEvent;
-//import kz.voxpopuli.voxapplication.events.ErrorEvent;
-//import kz.voxpopuli.voxapplication.events.RubricSelectedEvent;
-//import kz.voxpopuli.voxapplication.events.UserAvatarSelectedEvent;
 import us.medexpert.medexpert.fragments.BackStackDataDescriber;
-//import kz.voxpopuli.voxapplication.fragments.CategoryFragment;
-//import kz.voxpopuli.voxapplication.fragments.CommentsListFragment;
-//import kz.voxpopuli.voxapplication.fragments.NewsPageFragment;
-//import kz.voxpopuli.voxapplication.fragments.RubricsFragment;
 import us.medexpert.medexpert.fragments.SearchFragment;
-//import kz.voxpopuli.voxapplication.tools.DialogTools;
 import us.medexpert.medexpert.tools.FragmentFactory;
-//import kz.voxpopuli.voxapplication.tools.ImageUtils;
-//import kz.voxpopuli.voxapplication.tools.SocialNetworkUtils;
 import us.medexpert.medexpert.tools.ViewTools;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-//    public static final int GET_PICTURE_REQUEST = 111;
-//    public static final int GET_FILE_CHOICER_REQUEST = 112;
-//    public static final String IMAGE_PATH_GETTING_ACTION = "captured_image_path_event";
-//    public static final String CAPTURED_IMAGE_PATH = "image_path";
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -179,30 +152,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-//        Fragment fragment = getSupportFragmentManager().findFragmentByTag(
-//                SocialNetworkUtils.SOCIAL_NETWORK_TAG);
-//        if (fragment != null) {
-//            fragment.onActivityResult(requestCode, resultCode, data);
-//        }
-//
-//        if(resultCode == RESULT_OK) {
-//            String filePath = null;
-//            if(requestCode == GET_PICTURE_REQUEST) {
-//                filePath = ImageUtils.mCurrentFilePhotoPath;
-//            } else if(requestCode == GET_FILE_CHOICER_REQUEST) {
-//                filePath = ImageUtils.getInstance().getFileFromGallery(data.getData(), this);
-//            }
-//            if(filePath != null) {
-//                Intent intent = new Intent(MainActivity.IMAGE_PATH_GETTING_ACTION);
-//                intent.putExtra(MainActivity.CAPTURED_IMAGE_PATH, filePath);
-//                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-//            }
-//        }
-    }
 
     public void handleFragmentSwitching(int position, Bundle args) {
         Fragment fragment = FragmentFactory.getFragment(
@@ -225,17 +174,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         transaction.commit();
     }
 
-
-//    /** handlers for events from EventBus */
-//    public void onEvent(CategorySelectedEvent categorySelectedEvent) {
-//        handleCategoryOrRubricSelection(CategoryFragment.FRAGMENT_ID,
-//                CategorySelectedEvent.CATEGORY_DATA, categorySelectedEvent);
-//    }
-//
-//    public void onEvent(RubricSelectedEvent rubricSelectedEvent) {
-//        handleCategoryOrRubricSelection(RubricsFragment.FRAGMENT_ID,
-//                RubricSelectedEvent.RUBRIC_DATA, rubricSelectedEvent);
-//    }
 //
 //    public void onEventMainThread(ErrorEvent errorEvent) {
 //        DialogTools.showInfoDialog(this, getString(R.string.error_dialog_title),

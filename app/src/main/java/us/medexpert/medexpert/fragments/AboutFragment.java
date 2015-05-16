@@ -1,6 +1,7 @@
 package us.medexpert.medexpert.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -30,18 +31,14 @@ public class AboutFragment extends BaseFragment {
 
         email.setOnClickListener(clickListener);
         site.setOnClickListener(clickListener);
-
         return parent;
     }
 
     @Override
-    public View getActionBarCustomView(LayoutInflater inflater) {
-        return super.getActionBarCustomView(inflater);
-    }
-
-    @Override
     public void initActionBarItems() {
-
+        leftItemTouch.setOnClickListener(clickListener);
+        rightBarItem.setOnClickListener(clickListener);
+        ((RobotoTextView)centerBatItem).setText(getString(R.string.about_string));
     }
 
     @Override
@@ -60,6 +57,10 @@ public class AboutFragment extends BaseFragment {
             if(v.getId() == R.id.about_email) {
                 openEmailClient();
             } else if(v.getId() == R.id.about_site) {
+                openBrowser();
+            } else if(v.getId() == R.id.left_drawer_item_touch) {
+
+            } else if(v.getId() == R.id.right_drawer_item) {
 
             }
         }
@@ -69,8 +70,14 @@ public class AboutFragment extends BaseFragment {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] { getString(R.string.about_email) });
-        intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-        intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "");
+        intent.putExtra(Intent.EXTRA_TEXT, "");
         startActivity(Intent.createChooser(intent, ""));
+    }
+
+    private void openBrowser() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                "http://" + getString(R.string.about_site)));
+        startActivity(intent);
     }
 }
