@@ -8,96 +8,18 @@
     <dimen name="side_pad_24">24dp</dimen>
     <dimen name="side_pad_28">28dp</dimen>
 
-
-
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!--<dimen name="news_card_big_width">480dp</dimen>-->
-    <!--<dimen name="news_card_big_height">620dp</dimen>-->
     <dimen name="news_card_small_width">480dp</dimen>
-    <!--<dimen name="news_card_small_height">72dp</dimen>-->
 
-    <!--<dimen name="news_card_big_text_height">372dp</dimen>-->
-    <!--<dimen name="news_card_big_image_height">248dp</dimen>-->
-
-    <!--paddinds-->
-    <!--<dimen name="padding_1dp">1dp</dimen>-->
-    <!--<dimen name="padding_2dp">2dp</dimen>-->
-    <!--<dimen name="padding_5dp">5dp</dimen>-->
     <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="padding_6dp">6dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
-    <!--<dimen name="padding_10dp">10dp</dimen>-->
     <dimen name="padding_12dp">12dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
-
-    <!--<dimen name="login_page_side_padding">24dp</dimen>-->
-
-
-    <!--Список категорий, рубрик-->
-    <!--<dimen name="padding_frame">8dp</dimen>-->
-    <!--<dimen name="padding_text">16dp</dimen>between-->
-    <!--<dimen name="padding_between_text">20dp</dimen>-->
-    <!--<dimen name="padding_frame_little">12dp</dimen>-->
-
-    <!--<dimen name="ts_title">24sp</dimen>-->
-    <!--<dimen name="ts_title_white">16sp</dimen>-->
-    <!--<dimen name="ts_descr">14sp</dimen>-->
-    <!--<dimen name="ts_other">12sp</dimen>-->
-    <!--<dimen name="ts_title_little">12sp</dimen>-->
-    <!--<dimen name="text_size_20sp">20sp</dimen>-->
-    <!--<dimen name="leding_descr">4sp</dimen>-->
-    <!--<dimen name="leding_title">4sp</dimen>-->
-    <!--<dimen name="leding_title_white">8sp</dimen>-->
-
-    <!--<dimen name="img_w_l">128dp</dimen>-->
-    <!--<dimen name="img_h_l">96dp</dimen>-->
-
-
-    <!--Страница с новостью-->
-    <!--<dimen name="news_padding_txt">24dp</dimen>-->
-    <!--<dimen name="news_padding_similar">16dp</dimen>-->
-    <!--<dimen name="news_pad_title_gallery">16dp</dimen>-->
-    <!--<dimen name="news_padding_betw_text">20dp</dimen>-->
-    <!--<dimen name="news_padding_top_title">12dp</dimen>-->
-    <!--<dimen name="news_padding_img">8dp</dimen>-->
-    <!--<dimen name="news_pad_comment_l">22dp</dimen>-->
-    <!--<dimen name="news_pad_comment_r">52dp</dimen>-->
-    <!--<dimen name="news_pad_comment_t">6dp</dimen>-->
-    <!--<dimen name="news_pad_author_top">36dp</dimen>-->
-    <!--<dimen name="news_pad_author_bot">24dp</dimen>-->
-    <!--<dimen name="news_indent48">48dp</dimen>-->
-    <!--<dimen name="news_indent12">12dp</dimen>-->
-    <!--<dimen name="news_thickness_line">1dp</dimen>-->
-    <!--<dimen name="news_fsize_title">24sp</dimen>-->
-    <!--<dimen name="news_fsize_text">14sp</dimen>-->
-    <!--<dimen name="news_fsize_photo">12sp</dimen>-->
-    <!--<dimen name="news_fsize_subtitle">16sp</dimen>-->
-    <!--<dimen name="news_video_w">344dp</dimen>-->
-    <!--<dimen name="news_video_h">202dp</dimen>-->
-    <!--<dimen name="news_gallery_h">230dp</dimen>-->
-    <!--<dimen name="news_size_line">1dp</dimen>-->
-    <!--<dimen name="news_height_tag">32dp</dimen>-->
-    <!--<dimen name="news_height_img_com">56dp</dimen>-->
-    <!--<dimen name="news_8">8dp</dimen>-->
-    <!--<dimen name="news_4">4dp</dimen>-->
-
-
-    <!-- Список комментариев -->
-    <!--<dimen name="com_size_img">40dp</dimen>-->
-    <!--<dimen name="com_radius_img">20dp</dimen>-->
-    <!--<dimen name="com_padding_img_lr">16dp</dimen>-->
-    <!--<dimen name="com_padding_img_tb">8dp</dimen>-->
-    <!--<dimen name="com_padding_line">36dp</dimen>-->
-    <!--<dimen name="com_padd_img12">12dp</dimen>-->
-
-
-    <!--search fragment items-->
-    <!--<dimen name="default_search_card_img_width">168dp</dimen>-->
-    <!--<dimen name="default_search_card_img_height">95dp</dimen>-->
-    <!--<dimen name="default_search_info_icon_size">16dp</dimen>-->
 
     <!--action bar values-->
     <dimen name="action_bar_title_felt_padding">32dp</dimen>
@@ -108,66 +30,18 @@
     <!--left side bar values-->
     <dimen name="blured_photo_height">164dp</dimen>
     <dimen name="user_avatar_diameter">64dp</dimen>
-    <!--<dimen name="rubrics_image_height">146dp</dimen>-->
     <dimen name="category_item_height">48dp</dimen>
-    <!--<dimen name="user_avatar_margin_up_left">16dp</dimen>-->
-    <!--<dimen name="user_avatar_margin_bottom">28dp</dimen>-->
-    <!--<dimen name="rubrics_divider_height">4dp</dimen>-->
     <dimen name="settings_text_margin">72dp</dimen>
     <dimen name="settings_icon_size">24dp</dimen>
-    <!--<dimen name="rubric_black_shadow_height">28dp</dimen>-->
 
-
-    <!--text sizes-->
-    <!--<dimen name="left_side_bar_text_size">14sp</dimen>-->
-
-    <!--login screen-->
-    <!--<dimen name="login_forgot_passw_up_margin">36dp</dimen>-->
-    <!--<dimen name="login_forgot_passw_bottom_margin">48dp</dimen>-->
-    <!--<dimen name="login_social_box_bottom_margin">36dp</dimen>-->
-    <!--<dimen name="create_account_btn_margin">24dp</dimen>-->
-    <!--<dimen name="social_button_size">64dp</dimen>-->
-    <!--<dimen name="social_margin_right">18dp</dimen>-->
-    <!--<dimen name="registration_social_text_top_margin">48dp</dimen>-->
-    <!--<dimen name="registration_social_block_top_margin">20dp</dimen>-->
-    <!--<dimen name="registration_social_block_bottom_margin">36dp</dimen>-->
-    <!--<dimen name="restore_password_edit_text_margin">20dp</dimen>-->
-    <!--<dimen name="restore_password_upper_text_top_margin">24dp</dimen>-->
-
-    <!--<dimen name="settings_profile_section_top_margin">16dp</dimen>-->
-    <!--<dimen name="settings_item_height">56dp</dimen>-->
-    <!--<dimen name="settings_item_text_upper_margin">20dp</dimen>-->
-
-    <!--user profile-->
-    <!--<dimen name="white_circle_background_size">96dp</dimen>-->
-    <!--<dimen name="circle_avatar_size">92dp</dimen>-->
-    <!--<dimen name="header_image_height">180dp</dimen>-->
-    <!--<dimen name="user_name_bottom_margin">32dp</dimen>-->
-    <!--<dimen name="user_name_upper_margin">16dp</dimen>-->
-    <!--<dimen name="profile_comment_first_bottom_margin">16dp</dimen>-->
-    <!--<dimen name="profile_comment_upper_margin">22dp</dimen>-->
-    <!--<dimen name="profile_comment_bottom_margin">24dp</dimen>-->
-    <!--<dimen name="profile_comment_date_bottom_margin">12dp</dimen>-->
-    <!--<dimen name="profile_comment_body_bottom_margin">14dp</dimen>-->
-
-    <!--<dimen name="profile_comment_body_line_spacing">8sp</dimen>-->
-    <!--<dimen name="profile_comment_body_text_size">14sp</dimen>-->
-
-    <!--<dimen name="profile_edit_avatar_block_bottom_margin">22dp</dimen>-->
-    <!--<dimen name="profile_edit_avatar_block_upper_margin">18dp</dimen>-->
-    <!--<dimen name="profile_edit_first_input_top_margin">12dp</dimen>-->
-    <!--<dimen name="profile_edit_input_top_margin">20dp</dimen>-->
-    <!--<dimen name="profile_edit_last_input_bottom_margin">56dp</dimen>-->
-    <!--<dimen name="profile_edit_change_passw_img_margin">16dp</dimen>-->
-    <!--<dimen name="profile_edit_change_passw_text_margin">72dp</dimen>-->
-
-    <!--<dimen name="social_dialog_margin">40dp</dimen>-->
-    <!--<dimen name="social_dialog_inner_margin">24dp</dimen>-->
-    <!--<dimen name="social_dialog_item_bottom_margin">16dp</dimen>-->
-    <!--<dimen name="social_dialog_item_diameter">56dp</dimen>-->
-    <!--<dimen name="social_dialog_title_text_size">20sp</dimen>-->
-    <!--<dimen name="social_dialog_item_text_size">16sp</dimen>-->
-
-    <!--<dimen name="progress_bar_size">64dp</dimen>-->
-    <!--<dimen name="progress_fragment_size">120dp</dimen>-->
+    <!--About fragment dimens-->
+    <dimen name="about_content_side_margin">72dp</dimen>
+    <dimen name="about_content_top_margin">40</dimen>
+    <dimen name="about_logo_icon_size">48dp</dimen>
+    <dimen name="about_logo_icon_right_margin">16dp</dimen>
+    <dimen name="about_logo_icon_bottom_margin">24dp</dimen>
+    <dimen name="about_content_title_bottom_margin">20dp</dimen>
+    <dimen name="about_small_text_size">12sp</dimen>
+    <dimen name="about_middle_text_size">14sp</dimen>
+    <dimen name="about_text_line_extra">5dp</dimen>
 </resources>
