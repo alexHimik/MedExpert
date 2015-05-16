@@ -9,20 +9,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:clickable="false"
-        android:paddingLeft="@dimen/side_setting_pad_36"
         android:paddingBottom="@dimen/side_setting_pad_36"
         android:orientation="vertical">
             <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/side_pad_24"
-            android:clickable="true"
-            android:id="@+id/side_setting">
+            android:layout_height="@dimen/side_pad_48"
+                android:clickable="true"
+            android:id="@+id/side_setting"
+                android:background="@drawable/menu_selector"
+                android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="@dimen/settings_icon_size"
                 android:layout_height="@dimen/settings_icon_size"
-                android:src="@drawable/med_ic_grey_settings"/>
+                android:src="@drawable/med_ic_grey_settings"
+                android:layout_marginLeft="@dimen/side_setting_pad_36" />
             <com.devspark.robototextview.widget.RobotoTextView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
@@ -37,15 +38,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/side_pad_24"
+            android:layout_height="@dimen/side_pad_48"
             android:clickable="true"
-            android:id="@+id/side_about">
+            android:id="@+id/side_about"
+            android:background="@drawable/menu_selector"
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="@dimen/settings_icon_size"
-                android:layout_height="@dimen/settings_icon_size"
-                android:src="@drawable/med_ic_grey_about"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/med_ic_grey_about"
+                android:layout_marginLeft="@dimen/side_setting_pad_36" />
             <com.devspark.robototextview.widget.RobotoTextView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
@@ -54,8 +57,7 @@
                 android:layout_marginLeft="@dimen/side_pad_28"
                 app:fontFamily="roboto"
                 app:textWeight="normal"
-                android:text="@string/about_string"
-                android:layout_gravity="center_vertical" />
+                android:text="@string/about_string" />
         </LinearLayout>
 
     </LinearLayout>
@@ -122,19 +124,20 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:clickable="false"
-            android:paddingLeft="@dimen/side_setting_pad_36"
             android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/side_pad_24"
+                    android:layout_height="@dimen/side_pad_48"
                     android:clickable="true"
-                    android:id="@+id/side_home">
+                    android:id="@+id/side_home"
+                    android:background="@drawable/menu_selector"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="@dimen/settings_icon_size"
                         android:layout_height="@dimen/settings_icon_size"
-                        android:src="@drawable/med_ic_blue_home"/>
+                        android:src="@drawable/med_ic_blue_home"
+                        android:layout_marginLeft="@dimen/side_setting_pad_36" />
                     <com.devspark.robototextview.widget.RobotoTextView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="wrap_content"
@@ -148,15 +151,17 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/side_pad_24"
+                    android:layout_height="@dimen/side_pad_48"
                     android:clickable="true"
-                    android:id="@+id/side_catalog">
+                    android:id="@+id/side_catalog"
+                    android:background="@drawable/menu_selector"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="@dimen/settings_icon_size"
                         android:layout_height="@dimen/settings_icon_size"
-                        android:src="@drawable/med_ic_blue_catalog"/>
+                        android:src="@drawable/med_ic_blue_catalog"
+                        android:layout_marginLeft="@dimen/side_setting_pad_36" />
                     <com.devspark.robototextview.widget.RobotoTextView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="wrap_content"
@@ -171,15 +176,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/side_pad_24"
+                    android:layout_height="@dimen/side_pad_48"
                     android:clickable="true"
-                    android:id="@+id/side_favorites">
+                    android:id="@+id/side_favorites"
+                    android:background="@drawable/menu_selector"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="@dimen/settings_icon_size"
                         android:layout_height="@dimen/settings_icon_size"
-                        android:src="@drawable/med_ic_blue_favorites"/>
+                        android:src="@drawable/med_ic_blue_favorites"
+                        android:layout_marginLeft="@dimen/side_setting_pad_36" />
                     <com.devspark.robototextview.widget.RobotoTextView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="wrap_content"
@@ -194,15 +201,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/side_pad_24"
+                    android:layout_height="@dimen/side_pad_48"
                     android:clickable="true"
-                    android:id="@+id/side_viewed">
+                    android:id="@+id/side_viewed"
+                    android:background="@drawable/menu_selector"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="@dimen/settings_icon_size"
                         android:layout_height="@dimen/settings_icon_size"
-                        android:src="@drawable/med_ic_blue_recent"/>
+                        android:src="@drawable/med_ic_blue_recent"
+                        android:layout_marginLeft="@dimen/side_setting_pad_36" />
                     <com.devspark.robototextview.widget.RobotoTextView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="wrap_content"
@@ -219,15 +228,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tv"
-        android:layout_alignBottom="@+id/left_bar_scroll"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginBottom="34dp" />
 </RelativeLayout>

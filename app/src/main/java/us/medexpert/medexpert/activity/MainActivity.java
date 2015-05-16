@@ -104,18 +104,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private void initDrawer() {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-//        EventBus.getDefault().unregister(this);
-        super.onStop();
-    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+////        EventBus.getDefault().register(this);
+//    }
+//
+//    @Override
+//    protected void onStop() {
+////        EventBus.getDefault().unregister(this);
+//        super.onStop();
+//    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -174,32 +174,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         transaction.commit();
     }
 
-//
-//    public void onEventMainThread(ErrorEvent errorEvent) {
-//        DialogTools.showInfoDialog(this, getString(R.string.error_dialog_title),
-//                errorEvent.getMessage());
-//    }
-//
-//    /** error handler for network responses from the Volley */
-//    @Override
-//    public void onErrorResponse(VolleyError error) {
-//        if(error.getCause() instanceof UnknownHostException) {
-//            DialogTools.showNetworkErrorDialog(this, getString(R.string.error_dialog_title),
-//                    getString(R.string.network_unreachable_alarm));
-//        }
-//
-//    }
-
-//    private void handleCategoryOrRubricSelection(int fragmentId, String dataKey, Serializable data) {
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(dataKey, data);
-//        if(drawerLayout.isDrawerOpen(drawerList)) {
-//            drawerLayout.closeDrawer(drawerList);
-//        }
-//        clearBackStack();
-//        handleFragmentSwitching(fragmentId, bundle);
-//    }
-
     public void togleLeftDrawer() {
         if(drawerLayout.isDrawerOpen(drawerList)) {
             drawerLayout.closeDrawer(drawerList);
@@ -208,7 +182,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
-    private void clearBackStack() {
+    public void clearBackStack() {
         FragmentManager manager = getSupportFragmentManager();
         if (manager.getBackStackEntryCount() > 0) {
             FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);

@@ -1,5 +1,6 @@
 <resources>
 
+    <dimen name="line_height">1dp</dimen>
     <!-- Side Bar -->
     <dimen name="side_hider_height">96dp</dimen>
     <dimen name="side_hider_padding">24dp</dimen>
@@ -7,6 +8,12 @@
     <dimen name="side_setting_pad_36">36dp</dimen>
     <dimen name="side_pad_24">24dp</dimen>
     <dimen name="side_pad_28">28dp</dimen>
+    <dimen name="side_pad_48">48dp</dimen>
+
+    <!-- Home -->
+    <dimen name="home_h_catal">60dp</dimen>
+    <dimen name="home_pad_16">16dp</dimen>
+    <dimen name="home_pad_72">72dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -36,7 +43,7 @@
 
     <!--About fragment dimens-->
     <dimen name="about_content_side_margin">72dp</dimen>
-    <dimen name="about_content_top_margin">40</dimen>
+    <dimen name="about_content_top_margin">40dp</dimen>
     <dimen name="about_logo_icon_size">48dp</dimen>
     <dimen name="about_logo_icon_right_margin">16dp</dimen>
     <dimen name="about_logo_icon_bottom_margin">24dp</dimen>

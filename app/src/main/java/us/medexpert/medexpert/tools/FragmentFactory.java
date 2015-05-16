@@ -3,6 +3,7 @@ package us.medexpert.medexpert.tools;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import us.medexpert.medexpert.fragments.AboutFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 
 //import kz.voxpopuli.voxapplication.dialog.ProgressFragment;
