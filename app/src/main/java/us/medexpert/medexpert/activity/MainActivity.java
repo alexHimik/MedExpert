@@ -59,6 +59,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         moveDrawerToTop();
         initActionBar();
         initDrawer();
+
     }
 
     private void moveDrawerToTop() {
@@ -203,7 +204,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
-    private void clearBackStack() {
+    public void clearBackStack() {
         FragmentManager manager = getSupportFragmentManager();
         if (manager.getBackStackEntryCount() > 0) {
             FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);

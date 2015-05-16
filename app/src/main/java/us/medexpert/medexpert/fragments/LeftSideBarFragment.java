@@ -24,7 +24,7 @@ public class LeftSideBarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View parent = inflater.inflate(R.layout.left_side_bar, container);
-        tv = (TextView) parent.findViewById(R.id.tv);
+
         sh = (LinearLayout) parent.findViewById(R.id.side_home);
         sh.setOnClickListener(onSideBar);
 
@@ -50,24 +50,25 @@ public class LeftSideBarFragment extends Fragment {
         @Override
         public void onClick(View v) {
             ((MainActivity)getActivity()).togleLeftDrawer();
+            ((MainActivity)getActivity()).clearBackStack();
             switch (v.getId()) {
                 case R.id.side_about:
                     ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_ABOUT, null);
                     break;
                 case R.id.side_catalog:
-                    tv.setText("CATALOG");
+//                    tv.setText("CATALOG");
                     break;
                 case R.id.side_home:
-                    tv.setText("HOME");
+//                    tv.setText("HOME");
                     break;
                 case R.id.side_favorites:
-                    tv.setText("FAVOR");
+//                    tv.setText("FAVOR");
                     break;
                 case R.id.side_viewed:
-                    tv.setText("VIEWED");
+//                    tv.setText("VIEWED");
                     break;
                 case R.id.side_setting:
-                    tv.setText("SETTING");
+//                    tv.setText("SETTING");
                     break;
             }
         }
