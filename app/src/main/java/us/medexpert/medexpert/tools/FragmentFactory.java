@@ -28,7 +28,8 @@ public class FragmentFactory {
     public static final int
             ID_HOME = 0,
             ID_CATALOG = 1,
-            ID_SELLERS = 2
+            ID_SELLERS = 2,
+            ID_ABOUT = 3
             ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {
@@ -40,6 +41,8 @@ public class FragmentFactory {
         switch (fragmentId){
             case ID_HOME:
                 return new HomeFragment();
+            case ID_ABOUT:
+                return new AboutFragment();
 
 //            case RubricsFragment.FRAGMENT_ID: {
 //                return new RubricsFragment();
