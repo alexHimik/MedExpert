@@ -7,25 +7,6 @@ import us.medexpert.medexpert.fragments.AboutFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
-//import kz.voxpopuli.voxapplication.dialog.ProgressFragment;
-//import kz.voxpopuli.voxapplication.fragments.About;
-//import kz.voxpopuli.voxapplication.fragments.CategoryFragment;
-//import kz.voxpopuli.voxapplication.fragments.ChangePasswordFragment;
-//import kz.voxpopuli.voxapplication.fragments.EditUserProfileFragment;
-//import kz.voxpopuli.voxapplication.fragments.CommentsListFragment;
-//import kz.voxpopuli.voxapplication.fragments.ForgotPasswordFragment;
-//import kz.voxpopuli.voxapplication.fragments.InfoFragment;
-//import kz.voxpopuli.voxapplication.fragments.LoginFragment;
-//import kz.voxpopuli.voxapplication.fragments.NewsPageFragment;
-//import kz.voxpopuli.voxapplication.fragments.RegistrationFragment;
-//import kz.voxpopuli.voxapplication.fragments.RubricsFragment;
-//import kz.voxpopuli.voxapplication.fragments.RulesFragment;
-//import kz.voxpopuli.voxapplication.fragments.SearchFragment;
-//import kz.voxpopuli.voxapplication.fragments.SettingsFragment;
-//import kz.voxpopuli.voxapplication.fragments.UserProfileFragment;
-//import kz.voxpopuli.voxapplication.fragments.VacanciesFragment;
-//import kz.voxpopuli.voxapplication.fragments.VersionFragment;
-
 public class FragmentFactory {
     public static final int
             ID_HOME = 0,
