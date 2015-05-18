@@ -13,6 +13,12 @@
     <!-- Home -->
     <dimen name="home_h_catal">60dp</dimen>
     <dimen name="home_pad_16">16dp</dimen>
+    <dimen name="home_pad_10">10dp</dimen>
+    <dimen name="home_pad_4">4dp</dimen>
+    <dimen name="home_pad_12">12dp</dimen>
+    <dimen name="home_pad_14">14dp</dimen>
+    <dimen name="home_pad_20">20dp</dimen>
+    <dimen name="home_pad_24">24dp</dimen>
     <dimen name="home_pad_72">72dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
@@ -51,4 +57,10 @@
     <dimen name="about_small_text_size">12sp</dimen>
     <dimen name="about_middle_text_size">14sp</dimen>
     <dimen name="about_text_line_extra">5dp</dimen>
+
+    <!--Tutorial fragments-->
+    <dimen name="tutorial_image_size">216dp</dimen>
+    <dimen name="tutorial_margin_top_bottom">24dp</dimen>
+    <dimen name="tutorial_main_text_margin_bottom">26dp</dimen>
+    <dimen name="tutorial_button_top_margin">64dp</dimen>
 </resources>

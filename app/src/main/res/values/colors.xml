@@ -5,6 +5,9 @@
     <color name="med_blue">#49bfff</color>
     <color name="med_dark_blue">#1981b7</color>
 
+    <color name="home_bg_block">#f9f9f9</color>
+
+
     <color name="color_edittext">#FF333333</color>
     <color name="about_text_color">#ff666666</color>
 
@@ -12,4 +15,6 @@
     <color name="side_selected_color">#14999999</color>
 
     <color name="color_light_grey">#ff999999</color>
+
+    <color name="tutorial_pink">#ffff9999</color>
 </resources>
