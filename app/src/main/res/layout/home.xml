@@ -17,7 +17,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/block_catalog">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/home_h_catal"
                     android:id="@+id/bl_catalog_one"
+                    android:tag="@string/catal_one"
                     android:gravity="center_vertical">
                     <com.devspark.robototextview.widget.RobotoTextView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -70,7 +72,8 @@
                         app:fontFamily="roboto"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Allergy"
-                        android:layout_alignParentLeft="true" />
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/one" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -88,6 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_h_catal"
                         android:id="@+id/bl_catalog_two"
+                        android:tag="@string/catal_two"
                         android:gravity="center_vertical">
                         <com.devspark.robototextview.widget.RobotoTextView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -98,7 +102,8 @@
                             app:fontFamily="roboto"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Cardiovascular"
-                            android:layout_alignParentLeft="true" />
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/two" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -116,6 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_h_catal"
                         android:id="@+id/bl_catalog_three"
+                        android:tag="@string/catal_three"
                         android:gravity="center_vertical">
                         <com.devspark.robototextview.widget.RobotoTextView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -126,7 +132,8 @@
                             app:fontFamily="roboto"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Wight loss"
-                            android:layout_alignParentLeft="true" />
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/three" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -154,7 +161,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/home_h_catal"
-                        android:id="@+id/bl_favorits"
+                        android:id="@+id/bl_favorites"
                         android:gravity="center_vertical">
                         <com.devspark.robototextview.widget.RobotoTextView
                             xmlns:app="http://schemas.android.com/apk/res-auto"

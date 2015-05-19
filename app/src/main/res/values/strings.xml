@@ -11,6 +11,10 @@
     <string name="favorites_string">Favorites</string>
     <string name="viewed_string">Recently viewed</string>
 
+    <string name="catal_one">one</string>
+    <string name="catal_two">two</string>
+    <string name="catal_three">three</string>
+
 
 
     <string name="search_bar_input_hint">Поиск</string>

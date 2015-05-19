@@ -65,13 +65,13 @@ public class LeftSideBarFragment extends Fragment {
 //                    tv.setText("CATALOG");
                     break;
                 case R.id.side_home:
-//                    tv.setText("HOME");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_HOME, null);
                     break;
                 case R.id.side_favorites:
-//                    tv.setText("FAVOR");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_FAVORITES, null);
                     break;
                 case R.id.side_viewed:
-//                    tv.setText("VIEWED");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_RECENTLY, null);
                     break;
                 case R.id.side_setting:
 //                    tv.setText("SETTING");

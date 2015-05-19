@@ -41,6 +41,6 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void initActionBarItems();
 
-//    public abstract String getFragmentTag();
+    public abstract String getFragmentTag();
     public abstract int getFragmentId();
 }
