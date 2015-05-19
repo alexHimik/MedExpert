@@ -56,7 +56,7 @@ public class LeftSideBarFragment extends Fragment {
                     ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_ABOUT, null);
                     break;
                 case R.id.side_catalog:
-//                    tv.setText("CATALOG");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATALOG, null);
                     break;
                 case R.id.side_home:
 //                    tv.setText("HOME");

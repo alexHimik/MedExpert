@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/category_letter_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:singleLine="true"
+        android:layout_marginLeft="@dimen/catalkog_default_side_bottom_margin"
+        android:layout_marginRight="@dimen/catalkog_default_side_bottom_margin"
+        android:layout_marginBottom="@dimen/catalog_main_item_bottom_margin"
+        android:layout_marginTop="@dimen/catalog_main_item_top_margin"
+        style="@style/catalog_list_main_item_style.letter"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/category_main_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/category_letter_text"
+        android:singleLine="true"
+        android:layout_marginRight="@dimen/catalkog_default_side_bottom_margin"
+        android:layout_marginBottom="@dimen/catalog_main_item_bottom_margin"
+        android:layout_marginTop="@dimen/catalog_main_item_top_margin"
+        style="@style/catalog_list_main_item_style"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/catalog_default_left_margin"
+        android:layout_height="@dimen/separator_line_height"
+        android:layout_below="@id/category_main_text"
+        android:background="@color/separator_grey_color"/>
+</RelativeLayout>

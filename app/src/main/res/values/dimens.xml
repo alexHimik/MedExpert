@@ -10,6 +10,8 @@
     <dimen name="side_pad_28">28dp</dimen>
     <dimen name="side_pad_48">48dp</dimen>
 
+    <dimen name="separator_line_height">1dp</dimen>
+
     <!-- Home -->
     <dimen name="home_h_catal">60dp</dimen>
     <dimen name="home_pad_16">16dp</dimen>
@@ -57,4 +59,21 @@
     <dimen name="tutorial_margin_top_bottom">24dp</dimen>
     <dimen name="tutorial_main_text_margin_bottom">26dp</dimen>
     <dimen name="tutorial_button_top_margin">64dp</dimen>
+
+    <!--Catalog fragment-->
+    <dimen name="catalkog_default_side_bottom_margin">24dp</dimen>
+    <dimen name="catalog_default_left_margin">72dp</dimen>
+    <dimen name="catalog_header_bottom_margin">12dp</dimen>
+    <dimen name="catalog_main_item_bottom_margin">22dp</dimen>
+    <dimen name="catalog_main_item_top_margin">20dp</dimen>
+    <dimen name="catalog_header_item_font_size">14sp</dimen>
+    <dimen name="catalog_main_item_font_size">18sp</dimen>
+
+    <!--Category tutorial-->
+    <dimen name="catalog_tutorial_image_block_width">312dp</dimen>
+    <dimen name="catalog_tutorial_image_block_height">214dp</dimen>
+    <dimen name="catalog_tutorial_image_block_top_margin">136dp</dimen>
+    <dimen name="catalog_tutorial_image_block_bottom_margin">38dp</dimen>
+    <dimen name="catalog_tutorial_button_top_padding">12dp</dimen>
+    <dimen name="catalog_tutorial_button_right_padding">16dp</dimen>
 </resources>
