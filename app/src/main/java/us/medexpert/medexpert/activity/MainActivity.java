@@ -22,7 +22,8 @@ import android.widget.RelativeLayout;
 
 
 import us.medexpert.medexpert.R;
-import us.medexpert.medexpert.fragments.BackStackDataDescriber;
+//import us.medexpert.medexpert.fragments.BackStackDataDescriber;
+import us.medexpert.medexpert.fragments.BaseFragment;
 import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.tools.FragmentFactory;
 import us.medexpert.medexpert.tools.PreferenceTools;
@@ -30,8 +31,6 @@ import us.medexpert.medexpert.tools.ViewTools;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-
-
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private FrameLayout contentLayout;
@@ -141,11 +140,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.left_drawer_item_touch) {
-            togleLeftDrawer();
-        } else if(v.getId() == R.id.right_drawer_item) {
-            handleFragmentSwitching(SearchFragment.FRAGMENT_ID, null);
+        switch (v.getId()) {
+            case R.id.left_drawer_item_touch:
+                togleLeftDrawer();
+                break;
+            case R.id.right_drawer_item:
+                handleFragmentSwitching(SearchFragment.FRAGMENT_ID, null);
+                break;
         }
+//        if(v.getId() == R.id.left_drawer_item_touch) {
+//            togleLeftDrawer();
+//        } else if(v.getId() == R.id.right_drawer_item) {
+//            handleFragmentSwitching(SearchFragment.FRAGMENT_ID, null);
+//        }
     }
 
 
@@ -160,7 +167,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void showNewFragment(Fragment fragment, String fragmentTag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(((BackStackDataDescriber)fragment).getFragmentId() == SearchFragment.FRAGMENT_ID) {
+        if(((BaseFragment)fragment).getFragmentId() == SearchFragment.FRAGMENT_ID) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         transaction.replace(R.id.main_content, fragment, fragmentTag);

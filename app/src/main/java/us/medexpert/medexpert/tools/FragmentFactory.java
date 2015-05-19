@@ -4,37 +4,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import us.medexpert.medexpert.fragments.AboutFragment;
-import us.medexpert.medexpert.fragments.CatalogFragment;
+import us.medexpert.medexpert.fragments.FavoritesFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
-//import kz.voxpopuli.voxapplication.dialog.ProgressFragment;
-//import kz.voxpopuli.voxapplication.fragments.About;
-//import kz.voxpopuli.voxapplication.fragments.CategoryFragment;
-//import kz.voxpopuli.voxapplication.fragments.ChangePasswordFragment;
-//import kz.voxpopuli.voxapplication.fragments.EditUserProfileFragment;
-//import kz.voxpopuli.voxapplication.fragments.CommentsListFragment;
-//import kz.voxpopuli.voxapplication.fragments.ForgotPasswordFragment;
-//import kz.voxpopuli.voxapplication.fragments.InfoFragment;
-//import kz.voxpopuli.voxapplication.fragments.LoginFragment;
-//import kz.voxpopuli.voxapplication.fragments.NewsPageFragment;
-//import kz.voxpopuli.voxapplication.fragments.RegistrationFragment;
-//import kz.voxpopuli.voxapplication.fragments.RubricsFragment;
-//import kz.voxpopuli.voxapplication.fragments.RulesFragment;
-//import kz.voxpopuli.voxapplication.fragments.SearchFragment;
-//import kz.voxpopuli.voxapplication.fragments.SettingsFragment;
-//import kz.voxpopuli.voxapplication.fragments.UserProfileFragment;
-//import kz.voxpopuli.voxapplication.fragments.VacanciesFragment;
-//import kz.voxpopuli.voxapplication.fragments.VersionFragment;
-
 public class FragmentFactory {
+    public static final String data = "data";
     public static final int
-            ID_HOME = 0,
-            ID_CATALOG = 1,
-            ID_SELLERS = 2,
-            ID_ABOUT = 3,
-            ID_TUTORIAL = 4;
-            ;
+        ID_HOME = 0,
+        ID_CATALOG = 1,
+        ID_SELLERS = 2,
+        ID_ABOUT = 3,
+        ID_TUTORIAL = 4,
+        ID_FAVORITES = 5,
+        ID_RECENTLY = 6,
+        ID_CATEGORY = 7
+        ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {
         Fragment fr = fm.findFragmentById(fragmentId);
@@ -51,6 +36,10 @@ public class FragmentFactory {
                 return new TutorialFragment();
             case ID_CATALOG:
                 return new CatalogFragment();
+            case ID_FAVORITES:
+                return new FavoritesFragment();
+            case ID_RECENTLY:
+                return new RecentlyFragment();
             default: {
                 return null;
             }

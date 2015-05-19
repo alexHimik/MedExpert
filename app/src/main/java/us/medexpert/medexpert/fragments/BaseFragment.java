@@ -12,7 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import us.medexpert.medexpert.R;
 
-public abstract class BaseFragment extends Fragment implements BackStackDataDescriber {
+//public abstract class BaseFragment extends Fragment implements BackStackDataDescriber {
+public abstract class BaseFragment extends Fragment {
 
     protected View leftbarItem;
     protected View centerBatItem;
@@ -39,4 +40,7 @@ public abstract class BaseFragment extends Fragment implements BackStackDataDesc
     }
 
     public abstract void initActionBarItems();
+
+    public abstract String getFragmentTag();
+    public abstract int getFragmentId();
 }

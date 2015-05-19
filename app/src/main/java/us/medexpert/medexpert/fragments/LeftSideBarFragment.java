@@ -17,31 +17,37 @@ import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class LeftSideBarFragment extends Fragment {
 
-    TextView tv;
-    LinearLayout sh, sa, sc, ss, sv, sf;
+//    TextView tv;
+//    LinearLayout sh, sa, sc, ss, sv, sf;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View parent = inflater.inflate(R.layout.left_side_bar, container);
+        ((LinearLayout) parent.findViewById(R.id.side_home)).setOnClickListener(onSideBar);
+        ((LinearLayout) parent.findViewById(R.id.side_about)).setOnClickListener(onSideBar);
+        ((LinearLayout) parent.findViewById(R.id.side_catalog)).setOnClickListener(onSideBar);
+        ((LinearLayout) parent.findViewById(R.id.side_favorites)).setOnClickListener(onSideBar);
+        ((LinearLayout) parent.findViewById(R.id.side_viewed)).setOnClickListener(onSideBar);
+        ((LinearLayout) parent.findViewById(R.id.side_setting)).setOnClickListener(onSideBar);
 
-        sh = (LinearLayout) parent.findViewById(R.id.side_home);
-        sh.setOnClickListener(onSideBar);
-
-        sa = (LinearLayout) parent.findViewById(R.id.side_about);
-        sa.setOnClickListener(onSideBar);
-
-        sc = (LinearLayout) parent.findViewById(R.id.side_catalog);
-        sc.setOnClickListener(onSideBar);
-
-        sf = (LinearLayout) parent.findViewById(R.id.side_favorites);
-        sf.setOnClickListener(onSideBar);
-
-        sv = (LinearLayout) parent.findViewById(R.id.side_viewed);
-        sv.setOnClickListener(onSideBar);
-
-        ss = (LinearLayout) parent.findViewById(R.id.side_setting);
-        ss.setOnClickListener(onSideBar);
+//        sh = (LinearLayout) parent.findViewById(R.id.side_home);
+//        sh.setOnClickListener(onSideBar);
+//
+//        sa = (LinearLayout) parent.findViewById(R.id.side_about);
+//        sa.setOnClickListener(onSideBar);
+//
+//        sc = (LinearLayout) parent.findViewById(R.id.side_catalog);
+//        sc.setOnClickListener(onSideBar);
+//
+//        sf = (LinearLayout) parent.findViewById(R.id.side_favorites);
+//        sf.setOnClickListener(onSideBar);
+//
+//        sv = (LinearLayout) parent.findViewById(R.id.side_viewed);
+//        sv.setOnClickListener(onSideBar);
+//
+//        ss = (LinearLayout) parent.findViewById(R.id.side_setting);
+//        ss.setOnClickListener(onSideBar);
 
         return parent;
     }
@@ -59,13 +65,13 @@ public class LeftSideBarFragment extends Fragment {
                     ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATALOG, null);
                     break;
                 case R.id.side_home:
-//                    tv.setText("HOME");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_HOME, null);
                     break;
                 case R.id.side_favorites:
-//                    tv.setText("FAVOR");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_FAVORITES, null);
                     break;
                 case R.id.side_viewed:
-//                    tv.setText("VIEWED");
+                    ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_RECENTLY, null);
                     break;
                 case R.id.side_setting:
 //                    tv.setText("SETTING");
