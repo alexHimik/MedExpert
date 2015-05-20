@@ -85,7 +85,8 @@ public class CatalogFragmentListAdapter extends BaseAdapter {
         this.items = items;
     }
 
-    public List<Category> makeResultList(List<Category> topCategories, List<Category> allCategories) {
+    public static List<Category> makeResultList(Context context, List<Category> topCategories,
+                                                List<Category> allCategories) {
         List<Category> result = new ArrayList<>();
         result.add(new Category(-1, context.getString(R.string.catalog_popular_categories_header_txt), CATALOG_CATEGORY_TYPE_HEADER));
         for(Category c : topCategories) {

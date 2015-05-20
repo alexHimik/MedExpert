@@ -32,6 +32,7 @@
     <dimen name="padding_4dp">4dp</dimen>
     <dimen name="padding_6dp">6dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
     <dimen name="padding_12dp">12dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
     <dimen name="padding_20dp">20dp</dimen>
@@ -82,4 +83,21 @@
     <dimen name="catalog_tutorial_image_block_bottom_margin">38dp</dimen>
     <dimen name="catalog_tutorial_button_top_padding">12dp</dimen>
     <dimen name="catalog_tutorial_button_right_padding">16dp</dimen>
+    
+    <!--Category list-->
+    <dimen name="category_drug_image_margin_top">20dp</dimen>
+    <dimen name="category_drug_image_side_margin">16dp</dimen>
+    <dimen name="category_drug_image_size">40dp</dimen>
+    <dimen name="category_like_image_size">16dp</dimen>
+    <dimen name="category_drug_from_text_top_margin">14dp</dimen>
+    <dimen name="category_drug_from_text_right_margin">24dp</dimen>
+    <dimen name="category_drug_from_text_bottom_margin">4dp</dimen>
+    <dimen name="category_drug_from_text_size">12sp</dimen>
+    <dimen name="category_drug_price_text_size">24sp</dimen>
+    <dimen name="category_drug_aver_price_text_size">9sp</dimen>
+    <dimen name="category_drug_name_text_size">30sp</dimen>
+    <dimen name="category_drug_generic_text_size">12sp</dimen>
+    <dimen name="category_drug_description_text_size">14sp</dimen>
+    <dimen name="category_drug_descr_top_margin">20dp</dimen>
+    <dimen name="category_drug_descr_bottom_margin">24dp</dimen>
 </resources>

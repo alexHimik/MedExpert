@@ -2,6 +2,8 @@ package us.medexpert.medexpert.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +19,13 @@ import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.CatalogFragmentListAdapter;
 import us.medexpert.medexpert.db.entity.Category;
+import us.medexpert.medexpert.loader.CategoriesListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 /**
  * Created by user on 18.05.15.
  */
-public class CatalogFragment extends BaseFragment {
+public class CatalogFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<Category>> {
 
     public static final String TAG = "CatalogFragment";
 
@@ -38,7 +41,7 @@ public class CatalogFragment extends BaseFragment {
         categoriesList.setOnItemClickListener(onItemClickListener);
         adapter = new CatalogFragmentListAdapter(getActivity(), elements);
         categoriesList.setAdapter(adapter);
-        initMockData();
+        getLoaderManager().initLoader(CategoriesListLoader.ID, null, this);
         return categoriesList;
     }
 
@@ -77,24 +80,24 @@ public class CatalogFragment extends BaseFragment {
         }
     };
 
-    private void initMockData() {
-        List<Category> mostPopular = new ArrayList<>();
-        List<Category> all = new ArrayList<>();
-        mostPopular.add(new Category(1, "Most Popular One", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        mostPopular.add(new Category(2, "Most Popular Two", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        mostPopular.add(new Category(3, "Most Popular Three", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        mostPopular.add(new Category(4, "Most Popular four", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
+    @Override
+    public Loader<List<Category>> onCreateLoader(int id, Bundle args) {
+        Loader<List<Category>> loader = null;
+        if(id == CategoriesListLoader.ID) {
+            loader = new CategoriesListLoader(getActivity());
+        }
+        return loader;
+    }
 
-        all.add(new Category(5, "Probenzol Diamide", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(6, "Probenzol Diamide-3", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(7, "Lidocaine hydrocloride", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(8, "Gliceryne", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(9, "Carbonated water", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(10, "Probenzol Diamid-1", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(11, "Probenzol Diamid-4", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
-        all.add(new Category(12, "Probenzol Diamide-2", CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM));
+    @Override
+    public void onLoadFinished(Loader<List<Category>> loader, List<Category> data) {
+        elements.addAll(data);
+        adapter.notifyDataSetChanged();
+    }
 
-        elements.addAll(adapter.makeResultList(mostPopular, all));
+    @Override
+    public void onLoaderReset(Loader<List<Category>> loader) {
+        elements.clear();
         adapter.notifyDataSetChanged();
     }
 }

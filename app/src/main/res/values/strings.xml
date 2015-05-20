@@ -15,8 +15,6 @@
     <string name="catal_two">two</string>
     <string name="catal_three">three</string>
 
-
-
     <string name="search_bar_input_hint">Поиск</string>
 
     <string name="about_attention_text">Attention!!!</string>
@@ -40,4 +38,9 @@
     <string name="catalog_all_categories_header_txt">All categories</string>
 
     <string name="catalog_tutorial_swipe_text">SWIPE CARDS TO THE RIGHT\nFOR ADDING TO FAVORITES LIST</string>
+
+    <string name="category_average_text">avg. price</string>
+    <string name="category_from_text">from</string>
+    <string name="category_generic_text">Generic</string>
+
 </resources>

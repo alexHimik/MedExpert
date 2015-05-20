@@ -4,8 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import us.medexpert.medexpert.fragments.AboutFragment;
+import us.medexpert.medexpert.fragments.CatalogFragment;
 import us.medexpert.medexpert.fragments.FavoritesFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
+import us.medexpert.medexpert.fragments.RecentlyFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
 public class FragmentFactory {

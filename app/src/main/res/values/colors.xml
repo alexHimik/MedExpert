@@ -19,4 +19,5 @@
 
     <color name="tutorial_pink">#ffff9999</color>
     <color name="separator_grey_color">#ffdcdcdc</color>
+    <color name="category_average_text_color">#ffb2b2b2</color>
 </resources>

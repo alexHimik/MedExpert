@@ -3,6 +3,7 @@ package us.medexpert.medexpert.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ public class TutorialDialog extends Dialog {
         super(context, R.style.TransparentProgressDialog);
         WindowManager.LayoutParams wlmp = getWindow().getAttributes();
         wlmp.gravity = Gravity.CENTER_HORIZONTAL;
+
         getWindow().setAttributes(wlmp);
         getWindow().setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(
                 R.color.med_blue_with_alfa)));
@@ -40,6 +42,15 @@ public class TutorialDialog extends Dialog {
         button = (RobotoButton)layout.findViewById(R.id.tutorial_btn);
         button.setOnClickListener(clickListener);
         addContentView(layout, params);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        WindowManager.LayoutParams wlmp = getWindow().getAttributes();
+        wlmp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        wlmp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(wlmp);
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
