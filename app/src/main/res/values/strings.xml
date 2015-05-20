@@ -37,8 +37,19 @@
 
     <string name="tutorial_next_text">NEXT</string>
     <string name="tutorial_launch_app_text">LAUNCH APP</string>
+    <string name="tutorial_catalog_got_it_text">GOT IT</string>
     <string name="tutorial_1_header">Favorites list</string>
     <string name="tutorial_1_text">Add pills to favorite list\nfor quick access</string>
     <string name="tutorial_2_header">Application manuals</string>
     <string name="tutorial_2_text">Online application manuals\nfor more than 2.000 medicines</string>
+    
+    <string name="catalog_popular_categories_header_txt">Popular categories</string>
+    <string name="catalog_all_categories_header_txt">All categories</string>
+
+    <string name="catalog_tutorial_swipe_text">SWIPE CARDS TO THE RIGHT\nFOR ADDING TO FAVORITES LIST</string>
+
+    <string name="category_average_text">avg. price</string>
+    <string name="category_from_text">from</string>
+    <string name="category_generic_text">Generic</string>
+
 </resources>

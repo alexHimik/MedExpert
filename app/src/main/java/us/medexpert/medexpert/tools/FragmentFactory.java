@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import us.medexpert.medexpert.fragments.AboutFragment;
+import us.medexpert.medexpert.fragments.CatalogFragment;
 import us.medexpert.medexpert.fragments.FavoritesFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.PillInfoFragment;
@@ -37,6 +38,8 @@ public class FragmentFactory {
                 return new AboutFragment();
             case ID_TUTORIAL:
                 return new TutorialFragment();
+            case ID_CATALOG:
+                return new CatalogFragment();
             case ID_FAVORITES:
                 return new FavoritesFragment();
             case ID_RECENTLY:

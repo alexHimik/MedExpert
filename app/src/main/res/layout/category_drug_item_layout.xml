@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/med_white">
+    
+    <ImageView
+        android:id="@+id/drug_image"
+        android:layout_width="@dimen/category_drug_image_size"
+        android:layout_height="@dimen/category_drug_image_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/category_drug_image_margin_top"
+        android:layout_marginLeft="@dimen/category_drug_image_side_margin"
+        android:layout_marginRight="@dimen/category_drug_image_side_margin"
+        android:src="@drawable/med_test_img"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/from_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/category_drug_from_text_top_margin"
+        android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
+        android:layout_marginBottom="@dimen/category_drug_from_text_bottom_margin"
+        android:textColor="@color/color_light_grey"
+        android:textSize="@dimen/category_drug_from_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="@string/category_from_text"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/from_text"
+        android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
+        android:layout_marginBottom="@dimen/padding_4dp"
+        android:textColor="@color/side_bar_category_text"
+        android:textSize="@dimen/category_drug_price_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="medium"
+        android:text="$45.5"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/aver_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
+        android:layout_marginBottom="@dimen/category_drug_from_text_bottom_margin"
+        android:textColor="@color/category_average_text_color"
+        android:textSize="@dimen/category_drug_aver_price_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="@string/category_from_text"
+        />
+
+    <ImageView
+        android:id="@+id/category_like_img"
+        android:layout_width="@dimen/category_like_image_size"
+        android:layout_height="@dimen/category_like_image_size"
+        android:layout_below="@id/aver_price"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
+        android:layout_marginBottom="@dimen/padding_8dp"
+        android:src="@drawable/med_ic_grey_heart_unchecked"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drug_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drug_image"
+        android:layout_below="@id/from_text"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginRight="@dimen/padding_8dp"
+        android:layout_marginBottom="@dimen/padding_10dp"
+        android:textColor="@color/side_bar_category_text"
+        android:textSize="@dimen/category_drug_name_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="Fucking Drug"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/generic_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drug_image"
+        android:layout_below="@id/drug_name"
+        android:layout_marginBottom="@dimen/category_drug_from_text_bottom_margin"
+        android:textColor="@color/color_light_grey"
+        android:textSize="@dimen/category_drug_generic_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="@string/category_generic_text"
+        />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drug_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drug_image"
+        android:layout_below="@id/generic_text"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:lineSpacingExtra="6sp"
+        android:layout_marginTop="@dimen/category_drug_descr_top_margin"
+        android:layout_marginBottom="@dimen/category_drug_descr_bottom_margin"
+        android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
+        android:textColor="@color/color_light_grey"
+        android:textSize="@dimen/category_drug_description_text_size"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="fghfggfgvgbnvnvbndfghfgnvbmnghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_line_height"
+        android:layout_below="@id/drug_description"
+        android:background="@color/separator_grey_color">
+
+        </View>
+</RelativeLayout>

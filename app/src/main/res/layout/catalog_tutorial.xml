@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/med_slide_info"/>
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tutorial_text"
+        android:layout_width="@dimen/catalog_tutorial_image_block_width"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        style="@style/catalog_tutorial_text_style"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
+        android:text="@string/catalog_tutorial_swipe_text"
+        />
+
+    <com.devspark.robototextview.widget.RobotoButton
+        android:id="@+id/tutorial_btn"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/catalog_tutorial_image_block_bottom_margin"
+        android:layout_marginRight="@dimen/catalog_tutorial_button_right_padding"
+        android:layout_marginLeft="@dimen/catalog_tutorial_button_right_padding"
+        app:fontFamily="roboto"
+        app:textWeight="medium"
+        android:textSize="@dimen/about_middle_text_size"
+        android:textColor="@color/med_blue"
+        android:text="@string/tutorial_catalog_got_it_text"
+        android:background="@drawable/tutorial_btn_back"/>
+
+</LinearLayout>

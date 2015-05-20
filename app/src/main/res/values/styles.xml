@@ -94,6 +94,24 @@
         <item name="android:textColor">@color/med_white</item>
     </style>
 
+    <!--Catalog styles-->
+    <style name="catalog_list_header_style">
+        <item name="android:textColor">@color/color_light_grey</item>
+        <item name="android:textSize">@dimen/catalog_header_item_font_size</item>
+    </style>
+    <style name="catalog_list_main_item_style">
+        <item name="android:textColor">@color/side_bar_category_text</item>
+        <item name="android:textSize">@dimen/catalog_main_item_font_size</item>
+    </style>
+    <style name="catalog_list_main_item_style.letter" parent="catalog_list_main_item_style">
+        <item name="android:textColor">@color/med_blue</item>
+    </style>
+    <style name="catalog_tutorial_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/med_white</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
     <!--action bar styles-->
     <style name="action_bar_title">
         <item name="android:textSize">@dimen/action_bar_title_text_size</item>
@@ -117,5 +135,11 @@
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="pills_rating_bar_style" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_drawable</item>
+        <item name="android:minHeight">12dip</item>
+        <item name="android:maxHeight">12dip</item>
     </style>
 </resources>
