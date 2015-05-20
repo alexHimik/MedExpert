@@ -2,6 +2,7 @@
 <resources>
     <color name="line">#dcdcdc</color>
     <color name="med_white">#fffafafa</color>
+    <color name="med_full_white">#ffffffff</color>
     <color name="med_blue">#49bfff</color>
     <color name="med_blue_with_alfa">#a149bfff</color>
     <color name="med_dark_blue">#1981b7</color>
