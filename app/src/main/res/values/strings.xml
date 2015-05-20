@@ -16,6 +16,7 @@
     <string name="catal_three">three</string>
 
 
+    <string name="page">PAGE</string>
 
     <string name="search_bar_input_hint">Поиск</string>
 
@@ -31,7 +32,6 @@
     <string name="category_name_business">Business</string>
     <string name="category_name_history">History</string>
     <string name="category_name_interview">Interview</string>
-    <string name="category_name_vox_populi">Vox Populi</string>
     <!--<string name="settings_string">Настройки</string>-->
     <string name="default_user_name_stub">Войти в личный кабинет</string>
 

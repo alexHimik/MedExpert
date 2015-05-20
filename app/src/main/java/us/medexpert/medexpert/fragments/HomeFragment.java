@@ -32,9 +32,6 @@ public class HomeFragment extends BaseFragment {
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
 
         parent = inflater.inflate(R.layout.home, container, false);
-//        rtw = (RobotoTextView) inflater.inflate(R.layout.newsrobot, container, false);
-//        actv = getActivity();
-//        ll = (LinearLayout) parent.findViewById(R.id.lineLayout_1);
         formHome();
         return parent;
     }
