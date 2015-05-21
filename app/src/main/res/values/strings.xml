@@ -43,7 +43,7 @@
     <string name="tutorial_1_text">Add pills to favorite list\nfor quick access</string>
     <string name="tutorial_2_header">Application manuals</string>
     <string name="tutorial_2_text">Online application manuals\nfor more than 2.000 medicines</string>
-    
+
     <string name="catalog_popular_categories_header_txt">Popular categories</string>
     <string name="catalog_all_categories_header_txt">All categories</string>
 
@@ -55,5 +55,12 @@
     <string name="attention_title">Attention</string>
     <string name="attention_text">This application neither sell any medicines nor promote any sites. All prices and links are for informational purpose only.</string>
     <string name="attention_continue">CONTINUE</string>
+    <string name="sort_dialog_title">Sort by</string>
+    <string-array name="sortBy">
+        <item>Name (A to Z)</item>
+        <item>Name (Z to A)</item>
+        <item>Rating (high to low)</item>
+        <item>Rating (low to high)</item>
+    </string-array>
 
 </resources>
