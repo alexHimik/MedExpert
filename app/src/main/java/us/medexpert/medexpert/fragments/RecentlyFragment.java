@@ -15,7 +15,7 @@ import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 
 public class RecentlyFragment extends BaseFragment {
-    public static final String TAG = "FavoritesFragment";
+    public static final String TAG = "RecentlyFragment";
     public static final int RECENTLY_ID = 6;
 
     private View parent;

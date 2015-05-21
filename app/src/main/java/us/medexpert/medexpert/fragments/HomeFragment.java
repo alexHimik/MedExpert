@@ -4,6 +4,7 @@ package us.medexpert.medexpert.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import us.medexpert.medexpert.R;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.List;
+
 import us.medexpert.medexpert.activity.MainActivity;
+import us.medexpert.medexpert.db.entity.Category;
+import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class HomeFragment extends BaseFragment {
@@ -24,17 +30,15 @@ public class HomeFragment extends BaseFragment {
     public static final int FRAGMENT_ID = 0;
 
     private View parent;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View customBar = super.getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
-
+        context = getActivity().getBaseContext();
         parent = inflater.inflate(R.layout.home, container, false);
-//        rtw = (RobotoTextView) inflater.inflate(R.layout.newsrobot, container, false);
-//        actv = getActivity();
-//        ll = (LinearLayout) parent.findViewById(R.id.lineLayout_1);
         formHome();
         return parent;
     }
@@ -47,11 +51,26 @@ public class HomeFragment extends BaseFragment {
 
     private void formCatalog(){
         ((RelativeLayout) parent.findViewById(R.id.bl_catalog)).setOnClickListener(onClick);
-        ((LinearLayout) parent.findViewById(R.id.bl_catalog_one)).setOnClickListener(onClickCatal);
-        ((LinearLayout) parent.findViewById(R.id.bl_catalog_two)).setOnClickListener(onClickCatal);
-        ((LinearLayout) parent.findViewById(R.id.bl_catalog_three)).setOnClickListener(onClickCatal);
+        LinearLayout c1 = (LinearLayout)parent.findViewById(R.id.bl_catalog_one);
+        c1.setOnClickListener(onClickCatal);
+        LinearLayout c2 = (LinearLayout)parent.findViewById(R.id.bl_catalog_two);
+        c2.setOnClickListener(onClickCatal);
+        LinearLayout c3 = (LinearLayout)parent.findViewById(R.id.bl_catalog_three);
+        c3.setOnClickListener(onClickCatal);
 
-
+        CategoryTableHelper ct = new CategoryTableHelper();
+        List<Category> data = ct.getPopularCategories(context);
+//        List<Category> data = ct.getAllCategories(context);
+        Log.d("QWERT","LL="+data.size());
+        Category cat = data.get(0);
+        ((TextView)parent.findViewById(R.id.one)).setText(cat.getCatName());
+        c1.setTag(""+cat.getId());
+        cat = data.get(1);
+        ((TextView)parent.findViewById(R.id.two)).setText(cat.getCatName());
+        c2.setTag(""+cat.getId());
+        cat = data.get(2);
+        ((TextView)parent.findViewById(R.id.three)).setText(cat.getCatName());
+        c3.setTag(""+cat.getId());
 
     }
 

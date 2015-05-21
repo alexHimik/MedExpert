@@ -16,6 +16,9 @@
     <string name="catal_two">two</string>
     <string name="catal_three">three</string>
 
+
+    <string name="page">PAGE</string>
+
     <string name="search_bar_input_hint">Поиск</string>
 
     <string name="about_attention_text">Attention!!!</string>
@@ -25,7 +28,13 @@
 
 
     <!--category names-->
+    <!--<string name="category_name_all">Все новости</string>-->
     <string name="name_APP">MedExpert</string>
+    <string name="category_name_business">Business</string>
+    <string name="category_name_history">History</string>
+    <string name="category_name_interview">Interview</string>
+    <!--<string name="settings_string">Настройки</string>-->
+    <string name="default_user_name_stub">Войти в личный кабинет</string>
 
     <string name="tutorial_next_text">NEXT</string>
     <string name="tutorial_launch_app_text">LAUNCH APP</string>
