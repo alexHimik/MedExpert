@@ -23,19 +23,22 @@ import us.medexpert.medexpert.view.SlidingTabLayout;
 public class PillInfoFragment extends BaseFragment {
     public static final String TAG = "PillInfoFragment";
     public static final int PILLINFO_ID = 8;
+    public static String PILL_KEY = "pill";
 
     private View parent;
 //    private LinearLayout ll;
     private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
     private String[] title = new String[] {"INFO","PACKAGE"};
+    private String pill;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View customBar = super.getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
-
+//        Bundle data = getArguments();
+//        pill = data.getString(PILL_KEY);
         parent = inflater.inflate(R.layout.pill_info, container, false);
 
         return parent;
@@ -47,7 +50,7 @@ public class PillInfoFragment extends BaseFragment {
         rightBarItem.setOnClickListener(barClickListener);
         leftItemTouch.setOnClickListener(barClickListener);
         leftbarItem.setBackgroundResource(R.drawable.med_ic_white_hamburger);
-        ((RobotoTextView)centerBatItem).setText(getString(R.string.viewed_string));
+        ((RobotoTextView)centerBatItem).setText(pill);
     }
 
 
@@ -96,11 +99,7 @@ public class PillInfoFragment extends BaseFragment {
             return view;
         }
 
-        /**
-         * Destroy the item from the ViewPager. In our case this is simply
-         * removing the View.
-         */
-        @Override
+         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }

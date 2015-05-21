@@ -22,9 +22,6 @@ import us.medexpert.medexpert.db.entity.Category;
 import us.medexpert.medexpert.loader.CategoriesListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
-/**
- * Created by user on 18.05.15.
- */
 public class CatalogFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<List<Category>> {
 
     public static final String TAG = "CatalogFragment";
