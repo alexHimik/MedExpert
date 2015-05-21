@@ -18,6 +18,7 @@ import com.devspark.robototextview.widget.RobotoTextView;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.view.SlidingTabLayout;
+//import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
 public class PillInfoFragment extends BaseFragment {
