@@ -43,6 +43,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         getWindow().setBackgroundDrawable(new ColorDrawable(
                 getResources().getColor(R.color.med_white)));
         initViews();
+//        handleFragmentSwitching(FragmentFactory.ID_PILLINFO, null);
         resolveFirstStart();
     }
 
@@ -163,6 +164,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             fragment.setArguments(args);
         }
         showNewFragment(fragment, fragment.getTag());
+//        showNewFragment(fragment, ((BaseFragment)fragment).getFragmentTag());
     }
 
     private void showNewFragment(Fragment fragment, String fragmentTag) {

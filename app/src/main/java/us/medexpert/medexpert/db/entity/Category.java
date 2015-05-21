@@ -1,8 +1,5 @@
 package us.medexpert.medexpert.db.entity;
 
-/**
- * Created by user on 18.05.15.
- */
 public class Category {
 
     private int id;

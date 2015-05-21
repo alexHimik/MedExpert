@@ -100,4 +100,7 @@
     <dimen name="category_drug_description_text_size">14sp</dimen>
     <dimen name="category_drug_descr_top_margin">20dp</dimen>
     <dimen name="category_drug_descr_bottom_margin">24dp</dimen>
+    
+    <!--Category data-->
+    <dimen name="favorite_item_width">80dp</dimen>
 </resources>
