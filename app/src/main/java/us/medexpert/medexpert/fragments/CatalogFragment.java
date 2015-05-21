@@ -19,6 +19,7 @@ import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.CatalogFragmentListAdapter;
 import us.medexpert.medexpert.db.entity.Category;
+import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.loader.CategoriesListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
@@ -81,6 +82,8 @@ public class CatalogFragment extends BaseFragment implements LoaderManager.Loade
             data.putString(CategoryDrugListFragment.CATEGORY_NAME_KEY, cat.getCatName());
             data.putInt(CategoryDrugListFragment.CATEGORY_ID_KEY, cat.getId());
             ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY ,data);
+            CategoryTableHelper categoryTableHelper = new CategoryTableHelper();
+            categoryTableHelper.updateCategoryViewedCount(getActivity(), cat.getId());
         }
     };
 

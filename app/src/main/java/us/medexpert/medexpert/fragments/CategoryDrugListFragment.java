@@ -1,22 +1,28 @@
 package us.medexpert.medexpert.fragments;
 
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.CategoryListAdapter;
-import us.medexpert.medexpert.loader.CategoriesListLoader;
+import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
 import us.medexpert.medexpert.loader.CategoryDrugListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
@@ -31,7 +37,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
 
     private String categoryName;
     private int categoryId;
-    private ListView drugsList;
+    private SwipeMenuListView drugsList;
     private CategoryListAdapter listAdapter;
 
     @Override
@@ -40,8 +46,11 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         Bundle data = getArguments();
         categoryName = data.getString(CATEGORY_NAME_KEY);
         categoryId = data.getInt(CATEGORY_ID_KEY);
-        drugsList = (ListView)inflater.inflate(R.layout.category_drugs_fragment, container, false);
+        drugsList = (SwipeMenuListView)inflater.inflate(R.layout.category_drugs_fragment, container, false);
         drugsList.setOnItemClickListener(onItemClickListener);
+        drugsList.setOnMenuItemClickListener(onMenuItemClickListener);
+        drugsList.setMenuCreator(swipeMenuCreator);
+        drugsList.setOnSwipeListener(onSwipeListener);
 
         getLoaderManager().initLoader(CategoryDrugListLoader.ID, getArguments(), this);
         return drugsList;
@@ -91,6 +100,15 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         }
     };
 
+    private SwipeMenuListView.OnMenuItemClickListener onMenuItemClickListener =
+            new SwipeMenuListView.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+
+                    return false;
+                }
+            };
+
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -101,6 +119,33 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             } else {
                 //TODO add handling if there will be additional bar items
             }
+        }
+    };
+
+    private SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
+        @Override
+        public void create(SwipeMenu menu) {
+            SwipeMenuItem item = new SwipeMenuItem(getActivity());
+            item.setBackground(R.color.tutorial_pink);
+            item.setIcon(R.drawable.med_ic_white_big_heart);
+            item.setWidth((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    getResources().getDimension(R.dimen.favorite_item_width),
+                    getResources().getDisplayMetrics()));
+            menu.addMenuItem(item);
+        }
+    };
+
+    private SwipeMenuListView.OnSwipeListener onSwipeListener = new SwipeMenuListView.OnSwipeListener() {
+        @Override
+        public void onSwipeStart(int position) {
+            int drugId = (int)listAdapter.getItem(position);
+            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
+            categoryDrugsTableHelper.addDrugToFavorites(getActivity(), drugId);
+        }
+
+        @Override
+        public void onSwipeEnd(int position) {
+            //do nothing here
         }
     };
 }

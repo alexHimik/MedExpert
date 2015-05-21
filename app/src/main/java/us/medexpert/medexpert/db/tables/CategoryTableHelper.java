@@ -69,14 +69,15 @@ public class CategoryTableHelper {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME, new String[] {VIEW_COUNT_COLUMN},
                 ID_CLOUMN + "=?", new String[] {String.valueOf(categoryId)}, null, null, null);
+        cursor.moveToFirst();
         StringBuilder builder = new StringBuilder();
         builder.append("update ");
         builder.append(TABLE_NAME);
-        builder.append("set ");
+        builder.append(" set ");
         builder.append(VIEW_COUNT_COLUMN);
-        builder.append("=");
+        builder.append("='");
         builder.append(cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN)) + 1);
-        builder.append("where ");
+        builder.append("' where ");
         builder.append(ID_CLOUMN);
         builder.append("=");
         builder.append(categoryId);
