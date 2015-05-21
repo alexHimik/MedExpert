@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/tutorial_btn_back" >
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        android:id="@+id/attention_title"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:fontFamily="roboto"
+        app:textWeight="medium"
+        android:textSize="20sp"
+        android:textColor="@color/color_edittext"
+        android:text="@string/attention_title"
+        android:background="@color/med_white"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:gravity="left"
+        android:layout_marginRight="24dp" />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        android:id="@+id/attention_text"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/attention_title"
+        android:lineSpacingExtra="8dp"
+        android:textSize="16sp"
+        app:textWeight="normal"
+        android:textColor="@color/about_text_color"
+        android:text="@string/attention_text"
+        android:background="@color/med_white"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:gravity="left"
+        android:layout_marginRight="24dp" />
+
+    <com.devspark.robototextview.widget.RobotoTextView
+        android:id="@+id/attention_continue"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fontFamily="roboto"
+        android:textSize="@dimen/about_middle_text_size"
+        app:textWeight="medium"
+        android:textColor="@color/med_blue"
+        android:text="@string/attention_continue"
+        android:background="@color/med_white"
+        android:layout_below="@+id/attention_text"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="24dp"
+         />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/separator_line_height"
+        android:layout_below="@id/attention_continue"
+        />
+</RelativeLayout>

@@ -42,5 +42,8 @@
     <string name="category_average_text">avg. price</string>
     <string name="category_from_text">from</string>
     <string name="category_generic_text">Generic</string>
+    <string name="attention_title">Attention</string>
+    <string name="attention_text">This application neither sell any medicines nor promote any sites. All prices and links are for informational purpose only.</string>
+    <string name="attention_continue">CONTINUE</string>
 
 </resources>

@@ -142,4 +142,10 @@
         <item name="android:minHeight">12dip</item>
         <item name="android:maxHeight">12dip</item>
     </style>
+
+    <style name="relativeLayout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>
