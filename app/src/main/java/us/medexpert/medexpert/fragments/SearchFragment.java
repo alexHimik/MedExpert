@@ -43,7 +43,7 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public View getActionBarCustomView(LayoutInflater inflater) {
-        View customBar = inflater.inflate(R.layout.search_action_bar, null);
+        View customBar = inflater.inflate(R.layout.search_bar_layout, null);
         leftbarItem = customBar.findViewById(R.id.left_drawer_item);
         centerBatItem = customBar.findViewById(R.id.search_input);
         rightBarItem = customBar.findViewById(R.id.right_drawer_item);
