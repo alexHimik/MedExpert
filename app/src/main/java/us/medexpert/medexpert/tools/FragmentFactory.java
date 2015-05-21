@@ -23,7 +23,8 @@ public class FragmentFactory {
         ID_FAVORITES = 5,
         ID_RECENTLY = 6,
         ID_CATEGORY = 7,
-        ID_PILLINFO = 8
+        ID_PILLINFO = 8,
+        ID_SEARCH = 9
         ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {

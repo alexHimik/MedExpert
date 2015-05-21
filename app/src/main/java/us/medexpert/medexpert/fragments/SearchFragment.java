@@ -11,43 +11,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.devspark.robototextview.widget.RobotoTextView;
-
 import us.medexpert.medexpert.R;
+import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class SearchFragment extends BaseFragment {
 
     public static final String TAG = "SearchFragment";
-    public static final int FRAGMENT_ID = 10;
-
-    public static final int TOP_MODE = 0;
-    public static final int STRING_MODE = 1;
-
-    private int mode = STRING_MODE; //TOP_MODE;   //TODO replace to top by default
 
     private ListView contentList;
-    private RobotoTextView headerText;
-    private LinearLayout header;
     private BaseAdapter listAdapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        contentList = (ListView)inflater.inflate(R.layout.search_string_fragment, null);
+        contentList = (ListView)inflater.inflate(R.layout.search_fragment, container, false);
+        getActionBarCustomView(inflater);
         return contentList;
     }
 
     @Override
     public View getActionBarCustomView(LayoutInflater inflater) {
         View customBar = inflater.inflate(R.layout.search_bar_layout, null);
-        leftbarItem = customBar.findViewById(R.id.left_drawer_item);
+        leftbarItem = customBar.findViewById(R.id.search_lens);
         centerBatItem = customBar.findViewById(R.id.search_input);
-        rightBarItem = customBar.findViewById(R.id.right_drawer_item);
-        leftItemTouch = customBar.findViewById(R.id.left_drawer_item_touch);
+        rightBarItem = customBar.findViewById(R.id.search_clear);
+
         initActionBarItems();
         ((ActionBarActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(
                 new ColorDrawable(getResources().getColor(R.color.med_white)));
@@ -57,7 +47,6 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public void initActionBarItems() {
-        leftItemTouch.setOnClickListener(backListener);
         ((EditText)centerBatItem).addTextChangedListener(searchInputListener);
         rightBarItem.setOnClickListener(backListener);
     }
@@ -69,94 +58,14 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public int getFragmentId() {
-        return FRAGMENT_ID;
+        return FragmentFactory.ID_SEARCH;
     }
-
-    private void handleSearchMode(String input) {
-        if(input.length() > 0) {
-            rightBarItem.setVisibility(View.VISIBLE);
-            runStringMode(input);
-        } else {
-            rightBarItem.setVisibility(View.INVISIBLE);
-            runTopMode();
-        }
-    }
-
-    private void runStringMode(String forSearch) {
-//        initFragmentForStringSearch(contentList);
-//        Map<String, String> params = new HashMap<>();
-//        params.put(SearchByStringRequest.SEARCH_STRING_PARAM, forSearch);
-//        Request request = new SearchByStringRequest(getActivity(), params,
-//                ((MainActivity)getActivity()));
-//        request.setTag(TAG);
-//        VolleyNetworkProvider provider = VolleyNetworkProvider.getInstance(getActivity());
-//        provider.getRequestQueue().cancelAll(TAG);
-//        provider.addToRequestQueue(request);
-    }
-
-    private void runTopMode() {
-//        initFragmentForTopSearch(contentList);
-//        Map<String, String> params = new HashMap<>();
-//        params.put(SearchByTopRequest.TOP_MATERIALS_PARAM, "true");
-//        Request request = new SearchByTopRequest(getActivity(), params,
-//                ((MainActivity)getActivity()));
-//        VolleyNetworkProvider.getInstance(getActivity()).addToRequestQueue(request);
-    }
-
-    private void initFragmentForStringSearch(ListView container) {
-//        if(contentList.getHeaderViewsCount() == 0) {
-//            if(header == null) {
-//                LayoutInflater inflater = (LayoutInflater)getActivity().
-//                        getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                header = (LinearLayout)inflater.inflate(
-//                        R.layout.search_string_fragment_titile, null);
-//                headerText = (RobotoTextView)header.findViewById(R.id.search_by_string_list_header);
-//            }
-//            contentList.addHeaderView(header);
-//        }
-//        listAdapter = new SearchByStringAdapter(this, stringModeData);
-//        contentList.setAdapter(listAdapter);
-    }
-
-    private void initFragmentForTopSearch(ListView container) {
-//        if(contentList.getHeaderViewsCount() > 0) {
-//            contentList.removeHeaderView(header);
-//        }
-//        listAdapter = new SearchByTopAdapter(this, topModeData);
-//        contentList.setAdapter(listAdapter);
-    }
-
-//    public void onEvent(SearchByStringWrapper searchByStringWrapper) {
-//        stringModeData.clear();
-//        List<Article> data = searchByStringWrapper.getSearchResponse().getArticles();
-//        headerText.setText(getString(R.string.string_search_header).replaceAll("%amount%",
-//                String.valueOf(data.size())));
-//        if(data != null && data.size() > 0) {
-//            stringModeData.addAll(data);
-//            listAdapter = new SearchByStringAdapter(this, stringModeData);
-//            contentList.setAdapter(listAdapter);
-//            listAdapter.notifyDataSetChanged();
-//        }
-//    }
-
-//    public void onEvent(SearchByTopWrapper searchByTopWrapper) {
-//        topModeData.clear();
-//        List<Group> data = searchByTopWrapper.getSearchResponse().getGroups();
-//        if(data != null && data.size() > 0) {
-//            topModeData.addAll(data);
-//            listAdapter = new SearchByTopAdapter(this, topModeData);
-//            contentList.setAdapter(listAdapter);
-//            listAdapter.notifyDataSetChanged();
-//        }
-//    }
 
     private View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if(v.getId() == R.id.right_drawer_item) {
                 ((EditText)centerBatItem).setText("");
-            } else if(v.getId() == R.id.left_drawer_item_touch) {
-//                ((MainActivity)getActivity()).onBackPressed();
             }
         }
     };
@@ -174,7 +83,7 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            handleSearchMode(s.toString());
+
         }
     };
 }

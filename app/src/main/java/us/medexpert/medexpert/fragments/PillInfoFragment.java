@@ -1,24 +1,18 @@
 package us.medexpert.medexpert.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.view.SlidingTabLayout;
-//import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
 public class PillInfoFragment extends BaseFragment {
@@ -27,7 +21,6 @@ public class PillInfoFragment extends BaseFragment {
     public static String PILL_KEY = "pill";
 
     private View parent;
-//    private LinearLayout ll;
     private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
     private String[] title = new String[] {"INFO","PACKAGE"};
