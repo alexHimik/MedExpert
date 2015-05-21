@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_site_base_url">http://drugstore24x7.net</string>
     <string name="app_name">MEDEXPERT</string>
     <string name="app_name_med">MED</string>
     <string name="app_name_expert">EXPERT</string>

@@ -73,7 +73,11 @@ public class CatalogFragment extends BaseFragment implements LoaderManager.Loade
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Category cat =  ((Category)adapter.getItem(position));
+            Bundle data = new Bundle();
+            data.putString(CategoryDrugListFragment.CATEGORY_NAME_KEY, cat.getCatName());
+            data.putInt(CategoryDrugListFragment.CATEGORY_ID_KEY, cat.getId());
+            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY ,data);
         }
     };
 
