@@ -103,4 +103,12 @@
     
     <!--Category data-->
     <dimen name="favorite_item_width">80dp</dimen>
+
+    <!--Search screen-->
+    <dimen name="search_bar_item_size">24dp</dimen>
+    <dimen name="search_bar_item_margin">8dp</dimen>
+    <dimen name="search_bar_input_text_margin_top">12dp</dimen>
+    <dimen name="search_bar_input_text_margin_bottom">16dp</dimen>
+    <dimen name="search_bar_input_text_size">14sp</dimen>
+
 </resources>
