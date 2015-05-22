@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_h_catal"
+            android:id="@+id/bl_catalog_one"
+            android:tag="@string/catal_one"
+            android:gravity="center_vertical"
+            android:clickable="true">
+            <com.devspark.robototextview.widget.RobotoTextView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/home_text"
+                android:layout_marginLeft="@dimen/home_pad_72"
+                app:fontFamily="roboto"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Allergy"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/one" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/line"
+            android:layout_marginLeft="@dimen/home_pad_72">
+        </LinearLayout>
+
+</LinearLayout>

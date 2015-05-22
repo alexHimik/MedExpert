@@ -47,7 +47,8 @@
                 android:text="Actonel"
                 android:layout_marginTop="@dimen/home_pad_10"
                 android:layout_marginBottom="@dimen/home_pad_10"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="10dp"
+                android:id="@+id/name" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -61,7 +62,8 @@
                     app:fontFamily="roboto"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Generic"
-                    android:paddingRight="8dp" />
+                    android:paddingRight="8dp"
+                    android:id="@+id/gener" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +114,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="FIND SELLERS"
                 android:background="@drawable/button_shape"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:id="@+id/btn_sellers" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -121,6 +124,48 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:layout_gravity="center_horizontal"
-        android:background="@color/line"></LinearLayout>
+        android:background="@color/line">
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="24dp"
+        android:paddingTop="32dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="48dp">
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_14_33"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Actonel"
+            android:layout_marginBottom="6dp"
+            android:id="@+id/name1" />
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_12_99"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Category"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/categor" />
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_14_66"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Generic Advair Diskus is used for long-term treatment of asthma and chronic obstructive pulmonary disease (COPD) in certain patients. "
+            android:id="@+id/descr" />
+        </LinearLayout>
 
 </LinearLayout>
