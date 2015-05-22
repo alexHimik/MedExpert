@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment {
         ProductHelper ph = new ProductHelper();
         listProd = ph.getProductFavor(context);
         View v;
-        if (listProd.size()==0) {
+        if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
             v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
@@ -87,7 +87,7 @@ public class HomeFragment extends BaseFragment {
         }
         else {
             Product pr;
-            for (int i = 0; i<3; i++){
+            for (int i = 0; i < 3; i++){
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);

@@ -17,16 +17,14 @@ public class ProductHelper {
     public static final String LINK = "link";
     public static final String LIKED = "liked";
     public static final String ID_CATEGORY = "category_id";
-    public static final String PRICE = "priceCol";
     public static final String IMG = "image";
     public static final String DESCR = "description";
-    public static final String F_DESCR = "fullDescription";
     public static final String V_D = "view_date";
     public static final String V_C = "view_count";
     public static final String PRICE_COLUMN = "price";
 
 
-    public String getPrise(DataBaseHelper helper, int idProduct){
+    public String getPrise(DataBaseHelper helper, int idProduct) {
         Log.d("QWERT","ID="+idProduct);
         String st = "$";
         String query = "select T1.product_package_id, T1.title, T1.priceCol, T1.pricePerPill, T2.product_id, T2.title as product_title "+
@@ -98,7 +96,7 @@ public class ProductHelper {
                 prod.setImg(cursor.getString(cursor.getColumnIndex(IMG)));
                 prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED)));
                 prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCR)));
-                prod.setPrice(cursor.getString(cursor.getColumnIndex(PRICE)));
+                prod.setPrice(cursor.getString(cursor.getColumnIndex(PRICE_COLUMN)));
                 data.add(prod);
             }
             while (cursor.moveToNext());
