@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment {
         ProductHelper ph = new ProductHelper();
         listProd = ph.getProductFavor(context);
         View v;
-        if (listProd.size()==0) {
+        if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
             v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
