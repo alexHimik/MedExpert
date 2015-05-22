@@ -2,24 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_8dp"
     android:background="@drawable/tutorial_btn_back">
 
     <ImageView
         android:id="@+id/search_lens"
-        android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/search_bar_item_margin"
         android:layout_width="@dimen/search_bar_item_size"
-        android:layout_height="@dimen/search_bar_item_size" />
+        android:layout_height="@dimen/search_bar_item_size"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/med_ic_grey_search"/>
+
     <ImageView
         android:id="@+id/search_clear"
-        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/search_bar_item_margin"
         android:layout_width="@dimen/search_bar_item_size"
-        android:layout_height="@dimen/search_bar_item_size" />
+        android:layout_height="@dimen/search_bar_item_size"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/med_ic_grey_clear"
+        />
 
     <com.devspark.robototextview.widget.RobotoEditText
         android:id="@+id/search_input"
-        android:layout_width="match_parent"
+        android:layout_width="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/search_lens"
         android:layout_toLeftOf="@id/search_clear"

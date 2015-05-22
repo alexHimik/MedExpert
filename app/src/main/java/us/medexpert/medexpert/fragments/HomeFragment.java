@@ -197,6 +197,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public int getFragmentId() {
-        return FRAGMENT_ID;
+        return FragmentFactory.ID_HOME;
     }
 }

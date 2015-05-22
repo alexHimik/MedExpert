@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.view.SlidingTabLayout;
-//import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
 public class PillInfoFragment extends BaseFragment {
@@ -33,7 +30,6 @@ public class PillInfoFragment extends BaseFragment {
     public static String CATEGORY_ID_KEY = "category_ID";
 
     private View parent;
-//    private LinearLayout ll;
     private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
     private String[] title = new String[] {"INFO","PACKAGE"};

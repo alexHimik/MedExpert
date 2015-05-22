@@ -138,14 +138,14 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private SwipeMenuListView.OnSwipeListener onSwipeListener = new SwipeMenuListView.OnSwipeListener() {
         @Override
         public void onSwipeStart(int position) {
-            int drugId = (int)listAdapter.getItem(position);
-            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
-            categoryDrugsTableHelper.addDrugToFavorites(getActivity(), drugId);
+            //do nothing here
         }
 
         @Override
         public void onSwipeEnd(int position) {
-            //do nothing here
+            int drugId = (int)listAdapter.getItem(position);
+            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
+            categoryDrugsTableHelper.addDrugToFavorites(getActivity(), drugId);
         }
     };
 }
