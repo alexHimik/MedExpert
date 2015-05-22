@@ -66,7 +66,7 @@ public class SearchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View item = null;
-        switch (getItemViewType(data.get(position).getType())) {
+        switch (getItemViewType(position)) {
             case ITEM_TYPE_HEADR: {
                 item = inflater.inflate(R.layout.category_header_item, null);
                 RobotoTextView header = (RobotoTextView)item.findViewById(R.id.category_header_text);
@@ -78,7 +78,10 @@ public class SearchListAdapter extends BaseAdapter {
                 RobotoTextView name = (RobotoTextView)item.findViewById(R.id.search_category_main_text);
                 RobotoTextView amount = (RobotoTextView)item.findViewById(R.id._search_category_amount_text);
                 name.setText(data.get(position).getName());
-                amount.setText(data.get(position).getAmount());
+                if(data.get(position).getAmount() != null &&
+                        data.get(position).getAmount().length() > 0) {
+                    amount.setText(data.get(position).getAmount() + " pills");
+                }
                 return item;
             }
             case ITEM_TYPE_DRUG: {
@@ -93,14 +96,16 @@ public class SearchListAdapter extends BaseAdapter {
                 drugName.setText(data.get(position).getName());
                 Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url)
                         + data.get(position).getImage()).asGif().into(drugImage);
-                Glide.with(context).load(R.drawable.med_ic_pink_heart_checked).into(likeImage);
+                if(data.get(position).isFavorite()) {
+                    Glide.with(context).load(R.drawable.med_ic_pink_heart_checked).into(likeImage);
+                }
                 drugPrice.setText(data.get(position).getPrice());
                 drugDescription.setText(data.get(position).getDescription());
                 genericText.setText(data.get(position).getGeneric());
                 return item;
             }
             default: {
-                return convertView;
+                return item;
             }
         }
     }

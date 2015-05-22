@@ -23,8 +23,11 @@
         />
 
     <com.devspark.robototextview.widget.RobotoEditText
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/search_input"
         android:layout_width="50dp"
+        app:fontFamily="roboto"
+        app:textWeight="normal"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/search_lens"

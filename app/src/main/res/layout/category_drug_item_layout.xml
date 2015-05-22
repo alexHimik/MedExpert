@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/med_full_white">
+    android:background="@color/med_white">
     
     <ImageView
         android:id="@+id/drug_image"
@@ -81,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/drug_image"
+        android:layout_toLeftOf="@id/price"
         android:layout_below="@id/from_text"
         android:singleLine="true"
         android:ellipsize="end"
