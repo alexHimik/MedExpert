@@ -48,7 +48,8 @@ public class CategoryListAdapter extends CursorAdapter {
                 context.getResources().getString(R.string.app_site_base_url) +
                 cursor.getString(cursor.getColumnIndex(CategoryDrugsTableHelper.IMAGE_COLUMN))).
                 asGif().into(holder.drugImage);
-        holder.drugPrice.setText("$5");
+        holder.drugPrice.setText(cursor.getString(cursor.getColumnIndex(
+                CategoryDrugsTableHelper.DRUG_PRICE_COLUMN)));
         int like = cursor.getInt(cursor.getColumnIndex(CategoryDrugsTableHelper.LIKED_COLUMN));
         if(like > 0) {
             Glide.with(fragment).load(R.drawable.med_ic_pink_heart_checked).into(holder.likeImage);

@@ -25,12 +25,13 @@ public class CategoryDrugsTableHelper {
     public static final String DESCRIPTION_COLUMN = "description";
     public static final String LIKED_COLUMN = "liked";
     public static final String VIEW_COUNT_COLUMN = "view_count";
+    public static final String DRUG_PRICE_COLUMN = "price";
 
     public Cursor getAllCategoryDrugs(Context context, int categoryId) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME,
                 new String[] {ID_COLUMN, CATEGORY_ID_COLUMN, IMAGE_COLUMN,
-                        TITLE_COLUMN, LIKED_COLUMN, DESCRIPTION_COLUMN},
+                        TITLE_COLUMN, LIKED_COLUMN, DESCRIPTION_COLUMN, DRUG_PRICE_COLUMN},
                 CATEGORY_ID_COLUMN + "=?", new String[]{String.valueOf(categoryId)},
                 TITLE_COLUMN, null, TITLE_COLUMN);
         return cursor;
@@ -89,7 +90,7 @@ public class CategoryDrugsTableHelper {
                 String justName = name.substring(0, name.indexOf("(") - 1);
                 entity.setName(justName);
                 entity.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
-                entity.setPrice("todo");
+                entity.setPrice(cursor.getString(cursor.getColumnIndex(CategoryDrugsTableHelper.DRUG_PRICE_COLUMN)));
                 entity.setImage(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
                 entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
                 entity.setFavorite(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)) > 0);
