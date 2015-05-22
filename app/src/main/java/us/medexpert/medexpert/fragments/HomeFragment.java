@@ -2,6 +2,7 @@ package us.medexpert.medexpert.fragments;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +24,9 @@ import java.util.List;
 
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.db.entity.Category;
+import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class HomeFragment extends BaseFragment {
@@ -31,7 +35,8 @@ public class HomeFragment extends BaseFragment {
 
     private View parent;
     private Context context;
-
+    private List<Category> listCatal;
+    private List<Product> listProd;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,43 +55,67 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void formCatalog(){
-        ((RelativeLayout) parent.findViewById(R.id.bl_catalog)).setOnClickListener(onClick);
-        LinearLayout c1 = (LinearLayout)parent.findViewById(R.id.bl_catalog_one);
-        c1.setOnClickListener(onClickCatal);
-        LinearLayout c2 = (LinearLayout)parent.findViewById(R.id.bl_catalog_two);
-        c2.setOnClickListener(onClickCatal);
-        LinearLayout c3 = (LinearLayout)parent.findViewById(R.id.bl_catalog_three);
-        c3.setOnClickListener(onClickCatal);
+        View v;
+        parent.findViewById(R.id.bl_catalog).setOnClickListener(onClick);
+        LinearLayout ll = (LinearLayout) parent.findViewById(R.id.block_catalog);
 
-        CategoryTableHelper ct = new CategoryTableHelper();
-        List<Category> data = ct.getPopularCategories(context);
-//        List<Category> data = ct.getAllCategories(context);
-        Log.d("QWERT","LL="+data.size());
-        Category cat = data.get(0);
-        ((TextView)parent.findViewById(R.id.one)).setText(cat.getCatName());
-        c1.setTag(""+cat.getId());
-        cat = data.get(1);
-        ((TextView)parent.findViewById(R.id.two)).setText(cat.getCatName());
-        c2.setTag(""+cat.getId());
-        cat = data.get(2);
-        ((TextView)parent.findViewById(R.id.three)).setText(cat.getCatName());
-        c3.setTag(""+cat.getId());
-
+        CategoryTableHelper ch = new CategoryTableHelper();
+        listCatal = ch.getPopularCategories(context);
+        Category cat;
+        for (int i = 0; i<3; i++){
+            cat = listCatal.get(i);
+            v = getActivity().getLayoutInflater().inflate(R.layout.home_item_category, null);
+            LinearLayout bl = (LinearLayout) v.findViewById(R.id.bl_catalog_one);
+            bl.setOnClickListener(onClickCatal);
+            bl.setTag(""+i);
+            ((RobotoTextView) v.findViewById(R.id.one)).setText(cat.getCatName());
+            ll.addView(v);
+        }
     }
 
     private void formFavorites(){
-        ((RelativeLayout) parent.findViewById(R.id.bl_favorites)).setOnClickListener(onClick);
-        if (true) {
-            LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
+        parent.findViewById(R.id.bl_favorites).setOnClickListener(onClick);
+        LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
+        ProductHelper ph = new ProductHelper();
+        listProd = ph.getProductFavor(context);
+        View v;
+        if (listProd.size()==0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
-            View v = ((LayoutInflater) getActivity().getSystemService(
+            v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
             ll.addView(v);
         }
         else {
-            LinearLayout block_favor = (LinearLayout) parent.findViewById(R.id.block_favorites);
-            View view = ((LayoutInflater) getActivity().getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_favor, null);
+            Product pr;
+            for (int i = 0; i<3; i++){
+                pr = listProd.get(i);
+                v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
+                RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
+                bl.setOnClickListener(onClickFavor);
+                bl.setTag(""+i);
+                String st = pr.getName();
+                String nam = st;
+                int i2;
+                String stGener = "";
+                int i1 = st.indexOf("(");
+                if (i1>0) {
+                    i2 = st.indexOf("}",i1);
+                    if (i2 > i1) {
+                        nam = st.substring(0,i2+1);
+                        stGener = st.substring(i1+1,i2);
+                    }
+                    else stGener = st.substring(i1+1);
+                    st = st.substring(0,i1).trim();
+                }
+
+                ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
+                ((RobotoTextView) v.findViewById(R.id.gener)).setText(stGener);
+                ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+                ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
+                        getDrawable(R.drawable.med_ic_pink_heart_checked));
+
+                ll.addView(v);
+            }
         }
     }
 
@@ -126,38 +155,25 @@ public class HomeFragment extends BaseFragment {
     OnClickListener onClickCatal = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(FragmentFactory.data, v.getTag().toString());
-            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY,
-                    bundle);
-
- /*           if (st.equals(getResources().getString(R.string.catal_one))) {
-                Bundle bundle = new Bundle();
-                RobotoTextView rv = (RobotoTextView)parent.findViewById(R.id.one);
-                bundle.putSerializable(FragmentFactory.data, rv.getText().toString());
-                ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY,
-                        bundle);
-                return;
-            }
-            if (st.equals(getResources().getString(R.string.catal_two))) {
-                Bundle bundle = new Bundle();
-                RobotoTextView rv = (RobotoTextView)parent.findViewById(R.id.two);
-                bundle.putSerializable(FragmentFactory.data, rv.getText().toString());
-                ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY,
-                        bundle);
-                return;
-            }
-            if (st.equals(getResources().getString(R.string.catal_three))) {
-                Bundle bundle = new Bundle();
-                RobotoTextView rv = (RobotoTextView)parent.findViewById(R.id.three);
-                bundle.putSerializable(FragmentFactory.data, rv.getText().toString());
-                ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY,
-                        bundle);
-                return;
-            }*/
+            Category cat = listCatal.get(Integer.valueOf(v.getTag().toString()));
+            Bundle data = new Bundle();
+            data.putString(CategoryDrugListFragment.CATEGORY_NAME_KEY, cat.getCatName());
+            data.putInt(CategoryDrugListFragment.CATEGORY_ID_KEY, cat.getId());
+            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_CATEGORY, data);
         }
     };
 
+    OnClickListener onClickFavor = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
+            Bundle data = new Bundle();
+            data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
+            data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());
+            data.putInt(PillInfoFragment.CATEGORY_ID_KEY, pr.getId_category());
+            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
+        }
+    };
 
     @Override
     public void initActionBarItems() {
@@ -181,6 +197,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public int getFragmentId() {
-        return FRAGMENT_ID;
+        return FragmentFactory.ID_HOME;
     }
 }

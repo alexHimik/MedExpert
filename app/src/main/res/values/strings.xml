@@ -20,8 +20,6 @@
 
     <string name="page">PAGE</string>
 
-    <string name="search_bar_input_hint">Поиск</string>
-
     <string name="about_attention_text">Attention!!!</string>
     <string name="about_attention_body">This application neither sell any medicines nor promote any sites.\nAll price and links for information purpose only.\nWe are not responsible for any information in this app.</string>
     <string name="about_email">contact@edpills365.net</string>
@@ -29,13 +27,7 @@
 
 
     <!--category names-->
-    <!--<string name="category_name_all">Все новости</string>-->
     <string name="name_APP">MedExpert</string>
-    <string name="category_name_business">Business</string>
-    <string name="category_name_history">History</string>
-    <string name="category_name_interview">Interview</string>
-    <!--<string name="settings_string">Настройки</string>-->
-    <string name="default_user_name_stub">Войти в личный кабинет</string>
 
     <string name="tutorial_next_text">NEXT</string>
     <string name="tutorial_launch_app_text">LAUNCH APP</string>
@@ -64,4 +56,5 @@
         <item>Rating (low to high)</item>
     </string-array>
 
+    <string name="search_bar_input_hint">Type name...</string>
 </resources>

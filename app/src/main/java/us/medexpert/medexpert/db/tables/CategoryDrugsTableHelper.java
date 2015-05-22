@@ -3,7 +3,12 @@ package us.medexpert.medexpert.db.tables;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import us.medexpert.medexpert.adapter.SearchListAdapter;
 import us.medexpert.medexpert.db.DataBaseHelper;
+import us.medexpert.medexpert.db.entity.SearchListEntity;
 
 /**
  * Created by user on 20.05.15.
@@ -69,5 +74,29 @@ public class CategoryDrugsTableHelper {
         builder.append(drugId);
         builder.append(";");
         helper.getWritableDatabase().execSQL(builder.toString());
+    }
+
+    public List<SearchListEntity> getDrugsForSearch(Context context, String query) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        List<SearchListEntity> data = new ArrayList<>();
+        Cursor cursor = helper.getReadableDatabase().rawQuery(
+                "select * from app_product where title like '" + query + "%';", null);
+        if(cursor.moveToFirst()) {
+            do {
+                SearchListEntity entity = new SearchListEntity();
+                entity.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
+                String name = cursor.getString(cursor.getColumnIndex(TITLE_COLUMN));
+                String justName = name.substring(0, name.indexOf("(") - 1);
+                entity.setName(justName);
+                entity.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
+                entity.setPrice("todo");
+                entity.setImage(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
+                entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+                entity.setFavorite(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)) > 0);
+                entity.setType(SearchListAdapter.ITEM_TYPE_DRUG);
+                data.add(entity);
+            } while (cursor.moveToNext());
+        }
+        return data;
     }
 }

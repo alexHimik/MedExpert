@@ -2,62 +2,69 @@ package us.medexpert.medexpert.fragments;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.devspark.robototextview.widget.RobotoTextView;
+import java.util.ArrayList;
+import java.util.List;
 
 import us.medexpert.medexpert.R;
+import us.medexpert.medexpert.adapter.SearchListAdapter;
+import us.medexpert.medexpert.db.entity.SearchListEntity;
+import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
+import us.medexpert.medexpert.db.tables.CategoryTableHelper;
+import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class SearchFragment extends BaseFragment {
 
     public static final String TAG = "SearchFragment";
-    public static final int FRAGMENT_ID = 10;
-
-    public static final int TOP_MODE = 0;
-    public static final int STRING_MODE = 1;
-
-    private int mode = STRING_MODE; //TOP_MODE;   //TODO replace to top by default
 
     private ListView contentList;
-    private RobotoTextView headerText;
-    private LinearLayout header;
-    private BaseAdapter listAdapter;
-
+    private SearchListAdapter listAdapter;
+    private Runnable lastSearchQuerry;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        contentList = (ListView)inflater.inflate(R.layout.search_string_fragment, null);
+        contentList = (ListView)inflater.inflate(R.layout.search_fragment, container, false);
+        getActionBarCustomView(inflater);
+        listAdapter = new SearchListAdapter(getActivity());
+        contentList.setAdapter(listAdapter);
         return contentList;
     }
 
     @Override
     public View getActionBarCustomView(LayoutInflater inflater) {
         View customBar = inflater.inflate(R.layout.search_bar_layout, null);
-        leftbarItem = customBar.findViewById(R.id.left_drawer_item);
+        leftbarItem = customBar.findViewById(R.id.search_lens);
         centerBatItem = customBar.findViewById(R.id.search_input);
-        rightBarItem = customBar.findViewById(R.id.right_drawer_item);
-        leftItemTouch = customBar.findViewById(R.id.left_drawer_item_touch);
+        rightBarItem = customBar.findViewById(R.id.search_clear);
+
         initActionBarItems();
         ((ActionBarActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(
-                new ColorDrawable(getResources().getColor(R.color.med_white)));
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
+                new ColorDrawable(getResources().getColor(R.color.med_blue)));
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int sideMargins = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                getResources().getDimension(R.dimen.padding_4dp),
+                getResources().getDisplayMetrics());
+        params.setMargins(sideMargins, 0, sideMargins, 0);
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setCustomView(customBar, params);
         return customBar;
     }
 
     @Override
     public void initActionBarItems() {
-        leftItemTouch.setOnClickListener(backListener);
         ((EditText)centerBatItem).addTextChangedListener(searchInputListener);
         rightBarItem.setOnClickListener(backListener);
     }
@@ -69,94 +76,14 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public int getFragmentId() {
-        return FRAGMENT_ID;
+        return FragmentFactory.ID_SEARCH;
     }
-
-    private void handleSearchMode(String input) {
-        if(input.length() > 0) {
-            rightBarItem.setVisibility(View.VISIBLE);
-            runStringMode(input);
-        } else {
-            rightBarItem.setVisibility(View.INVISIBLE);
-            runTopMode();
-        }
-    }
-
-    private void runStringMode(String forSearch) {
-//        initFragmentForStringSearch(contentList);
-//        Map<String, String> params = new HashMap<>();
-//        params.put(SearchByStringRequest.SEARCH_STRING_PARAM, forSearch);
-//        Request request = new SearchByStringRequest(getActivity(), params,
-//                ((MainActivity)getActivity()));
-//        request.setTag(TAG);
-//        VolleyNetworkProvider provider = VolleyNetworkProvider.getInstance(getActivity());
-//        provider.getRequestQueue().cancelAll(TAG);
-//        provider.addToRequestQueue(request);
-    }
-
-    private void runTopMode() {
-//        initFragmentForTopSearch(contentList);
-//        Map<String, String> params = new HashMap<>();
-//        params.put(SearchByTopRequest.TOP_MATERIALS_PARAM, "true");
-//        Request request = new SearchByTopRequest(getActivity(), params,
-//                ((MainActivity)getActivity()));
-//        VolleyNetworkProvider.getInstance(getActivity()).addToRequestQueue(request);
-    }
-
-    private void initFragmentForStringSearch(ListView container) {
-//        if(contentList.getHeaderViewsCount() == 0) {
-//            if(header == null) {
-//                LayoutInflater inflater = (LayoutInflater)getActivity().
-//                        getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                header = (LinearLayout)inflater.inflate(
-//                        R.layout.search_string_fragment_titile, null);
-//                headerText = (RobotoTextView)header.findViewById(R.id.search_by_string_list_header);
-//            }
-//            contentList.addHeaderView(header);
-//        }
-//        listAdapter = new SearchByStringAdapter(this, stringModeData);
-//        contentList.setAdapter(listAdapter);
-    }
-
-    private void initFragmentForTopSearch(ListView container) {
-//        if(contentList.getHeaderViewsCount() > 0) {
-//            contentList.removeHeaderView(header);
-//        }
-//        listAdapter = new SearchByTopAdapter(this, topModeData);
-//        contentList.setAdapter(listAdapter);
-    }
-
-//    public void onEvent(SearchByStringWrapper searchByStringWrapper) {
-//        stringModeData.clear();
-//        List<Article> data = searchByStringWrapper.getSearchResponse().getArticles();
-//        headerText.setText(getString(R.string.string_search_header).replaceAll("%amount%",
-//                String.valueOf(data.size())));
-//        if(data != null && data.size() > 0) {
-//            stringModeData.addAll(data);
-//            listAdapter = new SearchByStringAdapter(this, stringModeData);
-//            contentList.setAdapter(listAdapter);
-//            listAdapter.notifyDataSetChanged();
-//        }
-//    }
-
-//    public void onEvent(SearchByTopWrapper searchByTopWrapper) {
-//        topModeData.clear();
-//        List<Group> data = searchByTopWrapper.getSearchResponse().getGroups();
-//        if(data != null && data.size() > 0) {
-//            topModeData.addAll(data);
-//            listAdapter = new SearchByTopAdapter(this, topModeData);
-//            contentList.setAdapter(listAdapter);
-//            listAdapter.notifyDataSetChanged();
-//        }
-//    }
 
     private View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if(v.getId() == R.id.right_drawer_item) {
                 ((EditText)centerBatItem).setText("");
-            } else if(v.getId() == R.id.left_drawer_item_touch) {
-//                ((MainActivity)getActivity()).onBackPressed();
             }
         }
     };
@@ -174,7 +101,56 @@ public class SearchFragment extends BaseFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            handleSearchMode(s.toString());
+            if(lastSearchQuerry != null) {
+                searchHandler.removeCallbacks(lastSearchQuerry);
+            }
+            lastSearchQuerry = new SearchQuery(s.toString(), searchHandler);
+            searchHandler.post(lastSearchQuerry);
         }
     };
+
+    private Handler searchHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            listAdapter.getData().clear();
+            listAdapter.getData().addAll((List<SearchListEntity>)msg.obj);
+            listAdapter.notifyDataSetChanged();
+        }
+    };
+
+    private class SearchQuery implements Runnable {
+
+        private String query;
+        private Handler handler;
+
+        public SearchQuery(String query, Handler handler) {
+            this.query = query;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            CategoryTableHelper categoryTableHelper = new CategoryTableHelper();
+            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
+            List<SearchListEntity> categories = categoryTableHelper.getCategoriesForSearch(
+                    getActivity(), query);
+            List<SearchListEntity> drugs = categoryDrugsTableHelper.getDrugsForSearch(
+                    getActivity(), query);
+            List<SearchListEntity> result = new ArrayList<>();
+            SearchListEntity catHeader = new SearchListEntity();
+            catHeader.setId(-1);
+            catHeader.setName("Category");
+            result.add(catHeader);
+            result.addAll(categories);
+            SearchListEntity pillsHeader = new SearchListEntity();
+            pillsHeader.setId(-1);
+            pillsHeader.setName("Pills");
+            result.add(pillsHeader);
+            result.addAll(drugs);
+
+            Message msg = Message.obtain();
+            msg.obj = result;
+            handler.sendMessage(msg);
+        }
+    }
 }

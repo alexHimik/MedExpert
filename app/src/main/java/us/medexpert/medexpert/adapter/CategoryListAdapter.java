@@ -47,7 +47,7 @@ public class CategoryListAdapter extends CursorAdapter {
         Glide.with(fragment).load(
                 context.getResources().getString(R.string.app_site_base_url) +
                 cursor.getString(cursor.getColumnIndex(CategoryDrugsTableHelper.IMAGE_COLUMN))).
-                asGif().into(holder.likeImage);
+                asGif().into(holder.drugImage);
         holder.drugPrice.setText("$5");
         int like = cursor.getInt(cursor.getColumnIndex(CategoryDrugsTableHelper.LIKED_COLUMN));
         if(like > 0) {
@@ -69,9 +69,13 @@ public class CategoryListAdapter extends CursorAdapter {
 
     @Override
     public Object getItem(int position) {
-        getCursor().moveToPosition(position);
-        return getCursor().getInt(getCursor().getColumnIndex(
-                CategoryDrugsTableHelper.ID_COLUMN));
+        if(position >= 0) {
+            getCursor().moveToPosition(position);
+            return getCursor().getInt(getCursor().getColumnIndex(
+                    CategoryDrugsTableHelper.ID_COLUMN));
+        } else {
+            return position;
+        }
     }
 
     private class ViewHolder {

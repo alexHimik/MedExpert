@@ -11,6 +11,7 @@ import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.PillInfoFragment;
 import us.medexpert.medexpert.fragments.RecentlyFragment;
 import us.medexpert.medexpert.fragments.SellersFragment;
+import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
 public class FragmentFactory {
@@ -24,7 +25,8 @@ public class FragmentFactory {
         ID_FAVORITES = 5,
         ID_RECENTLY = 6,
         ID_CATEGORY = 7,
-        ID_PILLINFO = 8
+        ID_PILLINFO = 8,
+        ID_SEARCH = 9
         ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {
@@ -54,6 +56,8 @@ public class FragmentFactory {
                 return new PillInfoFragment();
             case ID_CATEGORY:
                 return new CategoryDrugListFragment();
+            case ID_SEARCH:
+                return new SearchFragment();
             default: {
                 return null;
             }
