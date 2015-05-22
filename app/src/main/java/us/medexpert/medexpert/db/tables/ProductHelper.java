@@ -12,6 +12,7 @@ import us.medexpert.medexpert.db.entity.Product;
 
 public class ProductHelper {
     public static final String TABLE_NAME = "app_product";
+    public static final String TABLE_CATEG = "app_category";
     public static final String ID = "_id";
     public static final String TITLE = "title";
     public static final String LINK = "link";
@@ -24,8 +25,7 @@ public class ProductHelper {
     public static final String PRICE_COLUMN = "price";
 
 
-    public String getPrise(DataBaseHelper helper, int idProduct) {
-        Log.d("QWERT","ID="+idProduct);
+    public String getPrise(DataBaseHelper helper, int idProduct){
         String st = "$";
         String query = "select T1.product_package_id, T1.title, T1.priceCol, T1.pricePerPill, T2.product_id, T2.title as product_title "+
                 "from app_package T1, app_package_product T2 where T1.product_package_id=T2._id and T2.product_id='" + idProduct + "'";
