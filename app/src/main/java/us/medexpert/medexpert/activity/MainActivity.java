@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import us.medexpert.medexpert.R;
 //import us.medexpert.medexpert.fragments.BackStackDataDescriber;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.SortDialog;
 import us.medexpert.medexpert.fragments.BaseFragment;
 import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.tools.FragmentFactory;
@@ -148,6 +149,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.right_drawer_item:
                 handleFragmentSwitching(FragmentFactory.ID_SEARCH, null);
                 break;
+            // Karelov - START
+            case R.id.sort_bar_item:
+                SortDialog sortDialog = new SortDialog(this);
+                sortDialog.show();
+                break;
+            // Karelov - END
         }
 //        if(v.getId() == R.id.left_drawer_item_touch) {
 //            togleLeftDrawer();

@@ -42,7 +42,6 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
         Bundle data = getArguments();
         categoryName = data.getString(CATEGORY_NAME_KEY);
         categoryId = data.getInt(CATEGORY_ID_KEY);
@@ -51,13 +50,18 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         drugsList.setOnMenuItemClickListener(onMenuItemClickListener);
         drugsList.setMenuCreator(swipeMenuCreator);
         drugsList.setOnSwipeListener(onSwipeListener);
-
+        View customBar = getActionBarCustomView(inflater);
+        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         getLoaderManager().initLoader(CategoryDrugListLoader.ID, getArguments(), this);
         return drugsList;
     }
 
     @Override
     public void initActionBarItems() {
+        // Karelov - START
+        sortBarItem.setVisibility(View.VISIBLE);
+        sortBarItem.setOnClickListener(onClickListener);
+        // Karelov - END
         rightBarItem.setOnClickListener(onClickListener);
         leftItemTouch.setOnClickListener(onClickListener);
         ((RobotoTextView)centerBatItem).setText(categoryName);
@@ -122,6 +126,8 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             if(v.getId() == R.id.right_drawer_item) {
                 ((MainActivity)getActivity()).onClick(v);
             } else if(v.getId() == R.id.left_drawer_item_touch) {
+                ((MainActivity)getActivity()).onClick(v);
+            } else if(v.getId() == R.id.sort_bar_item) {
                 ((MainActivity)getActivity()).onClick(v);
             } else {
                 //TODO add handling if there will be additional bar items

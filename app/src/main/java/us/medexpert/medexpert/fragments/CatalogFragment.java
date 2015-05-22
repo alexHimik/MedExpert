@@ -45,10 +45,6 @@ public class CatalogFragment extends BaseFragment implements LoaderManager.Loade
 
     @Override
     public void initActionBarItems() {
-        // Karelov - START
-        sortBarItem.setVisibility(View.VISIBLE);
-        sortBarItem.setOnClickListener(clickListener);
-        // Karelov - END
         leftItemTouch.setOnClickListener(clickListener);
         rightBarItem.setOnClickListener(clickListener);
         ((RobotoTextView)centerBatItem).setText(getString(R.string.catalog_string));

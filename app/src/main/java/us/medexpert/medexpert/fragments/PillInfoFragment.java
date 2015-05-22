@@ -19,6 +19,7 @@ import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.WarningDialog;
 import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
@@ -125,6 +126,9 @@ public class PillInfoFragment extends BaseFragment {
         ProductHelper ph = new ProductHelper();
         Product pr = ph.getProduct(context, product_id);
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
+        // Karelov - START
+        v.setOnClickListener(btnFindSellersListener);
+        // Karelov - END
         RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
         String nam = st;
@@ -153,6 +157,14 @@ public class PillInfoFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             ((MainActivity)getActivity()).onClick(v);
+        }
+    };
+
+    private View.OnClickListener btnFindSellersListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            WarningDialog warningDialog = new WarningDialog(getActivity());
+            warningDialog.show();
         }
     };
 
