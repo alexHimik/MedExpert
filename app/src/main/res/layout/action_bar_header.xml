@@ -36,7 +36,7 @@
         />
 
     <ImageButton
-        android:id="@+id/sortBarItem"
+        android:id="@+id/sort_bar_item"
         android:layout_width="@dimen/action_bar_icons_size"
         android:layout_height="@dimen/action_bar_icons_size"
         android:layout_marginTop="@dimen/padding_16dp"
@@ -57,7 +57,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/action_bar_title_felt_padding"
         android:layout_toRightOf="@id/left_drawer_item_touch"
-        android:layout_toLeftOf="@id/sortBarItem"
+        android:layout_toLeftOf="@id/sort_bar_item"
         app:fontFamily="roboto"
         app:textWeight="normal"
         android:text="@string/name_APP"

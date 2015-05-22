@@ -25,10 +25,10 @@ public class FavoritesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View customBar = super.getActionBarCustomView(inflater);
-        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
+        ((MainActivity) getActivity()).getSupportActionBar().setCustomView(customBar);
 
         parent = inflater.inflate(R.layout.favorites, container, false);
-        ll = (LinearLayout)parent.findViewById(R.id.ll);
+        ll = (LinearLayout) parent.findViewById(R.id.ll);
         ll.setGravity(Gravity.CENTER_VERTICAL);
         View v = ((LayoutInflater) getActivity().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
@@ -38,22 +38,22 @@ public class FavoritesFragment extends BaseFragment {
 
     @Override
     public void initActionBarItems() {
+        // Karelov - START
+        sortBarItem.setVisibility(View.VISIBLE);
+        sortBarItem.setOnClickListener(barClickListener);
+        // Karelov - END
         rightBarItem.setVisibility(View.VISIBLE);
         rightBarItem.setOnClickListener(barClickListener);
         leftItemTouch.setOnClickListener(barClickListener);
         leftbarItem.setBackgroundResource(R.drawable.med_ic_white_hamburger);
-        ((RobotoTextView)centerBatItem).setText(getString(R.string.favorites_string));
+        ((RobotoTextView) centerBatItem).setText(getString(R.string.favorites_string));
     }
-
-
-
-
 
 
     private View.OnClickListener barClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity)getActivity()).onClick(v);
+            ((MainActivity) getActivity()).onClick(v);
         }
     };
 
