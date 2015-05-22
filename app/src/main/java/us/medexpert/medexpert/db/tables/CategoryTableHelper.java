@@ -50,6 +50,9 @@ public class CategoryTableHelper {
         List<Category> data = new ArrayList<>();
         String query = "select * from app_category order by view_count desc, title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+//        Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME,
+//                new String[] {ID_CLOUMN, VIEW_COUNT_COLUMN, TITLE_COLUMN, LINK_COLUMN},
+//                null, null, null, null, VIEW_COUNT_COLUMN);
 
 
         if(cursor.moveToFirst()) {
@@ -59,10 +62,20 @@ public class CategoryTableHelper {
                         CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
                 data.add(allOne);
             } while (cursor.moveToNext());
+//            Category allOne = new Category(cursor.getInt(cursor.getColumnIndex(CategoryTableHelper.ID_CLOUMN)),
+//                    cursor.getString(cursor.getColumnIndex(CategoryTableHelper.TITLE_COLUMN)),
+//                    CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
+//            data.add(allOne);
+//            while (cursor.moveToNext()) {
+//                Category all = new Category(cursor.getInt(cursor.getColumnIndex(CategoryTableHelper.ID_CLOUMN)),
+//                        cursor.getString(cursor.getColumnIndex(CategoryTableHelper.TITLE_COLUMN)),
+//                        CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
+//                data.add(all);
+//            }
         }
         return data;
     }
-
+    
     public List<SearchListEntity> getCategoriesForSearch(Context context, String catName) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         List<SearchListEntity> data = new ArrayList<>();
@@ -89,6 +102,17 @@ public class CategoryTableHelper {
             } while (categories.moveToNext());
         }
         return data;
+    }
+    
+    public String getCategoryName(Context context, int id_categor) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        String query = "select * from app_category where " + ID_CLOUMN + "='" + id_categor + "'";
+        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+        String result = "";
+        if(cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex(TITLE_COLUMN));
+        }
+        return result;
     }
 
     public void updateCategoryViewedCount(Context context, int categoryId) {

@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 
 import us.medexpert.medexpert.R;
 //import us.medexpert.medexpert.fragments.BackStackDataDescriber;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.fragments.BaseFragment;
 import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.tools.FragmentFactory;
@@ -43,8 +44,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         getWindow().setBackgroundDrawable(new ColorDrawable(
                 getResources().getColor(R.color.med_white)));
         initViews();
+
+        ProductHelper ph = new ProductHelper();
+        ph.getProductPlus(getBaseContext());
 //        handleFragmentSwitching(FragmentFactory.ID_PILLINFO, null);
-        resolveFirstStart();
+//        resolveFirstStart();
     }
 
     private void resolveFirstStart() {
