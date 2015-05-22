@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
 import us.medexpert.medexpert.R;
 
 //public abstract class BaseFragment extends Fragment implements BackStackDataDescriber {
@@ -19,6 +19,9 @@ public abstract class BaseFragment extends Fragment {
     protected View centerBatItem;
     protected View rightBarItem;
     protected View leftItemTouch;
+    // Karelov - START
+    protected View sortBarItem;
+    // Karelov - END
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public abstract class BaseFragment extends Fragment {
         rightBarItem = barLayout.findViewById(R.id.right_drawer_item);
         centerBatItem = barLayout.findViewById(R.id.action_bar_title);
         leftItemTouch = barLayout.findViewById(R.id.left_drawer_item_touch);
+        sortBarItem = barLayout.findViewById(R.id.sort_bar_item);
         ((ActionBarActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(
                 new ColorDrawable(getResources().getColor(R.color.med_blue)));
         initActionBarItems();
