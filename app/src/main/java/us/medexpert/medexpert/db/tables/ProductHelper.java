@@ -1,5 +1,6 @@
 package us.medexpert.medexpert.db.tables;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -28,8 +29,8 @@ public class ProductHelper {
 
     public void getProductPlus(Context context) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
-//        DataBaseHelper helper1 = DataBaseHelper.getInstance(context);
-//        DataBaseHelper helperW = DataBaseHelper.getInstance(context);
+        DataBaseHelper helper1 = DataBaseHelper.getInstance(context);
+        DataBaseHelper helperW = DataBaseHelper.getInstance(context);
         Product prod = null;
         String query, st;
         Cursor cursor;
@@ -51,23 +52,28 @@ public class ProductHelper {
         int i;
         if(cursor.moveToFirst()) {
             do {
-                Log.d("QWERT","T="+cursor.getString(cursor.getColumnIndex(TITLE)));
                 i = cursor.getInt(cursor.getColumnIndex(ID));
-                st = "INSERT INTO product (_id, category_id, title, description, link, image, price, fullDescription, liked, view_date, view_count) " +
-                        "values(" + i +", " +
-                        cursor.getInt(cursor.getColumnIndex(ID_CATEGORY)) + ", " +
-                        cursor.getString(cursor.getColumnIndex(TITLE)) + ", " +
-                        cursor.getString(cursor.getColumnIndex(DESCR)) + ", " +
-                        cursor.getString(cursor.getColumnIndex(LINK)) + ", " +
-                        cursor.getString(cursor.getColumnIndex(IMG)) + ", " +
+                String price = getPrise(helper1, i);
 
-                        cursor.getString(cursor.getColumnIndex(getPrise(helper, i))) + ", " +
-                        cursor.getString(cursor.getColumnIndex(F_DESCR)) + ", " +
-                        cursor.getInt(cursor.getColumnIndex(LIKED)) + ", " +
-                        cursor.getInt(cursor.getColumnIndex(V_D)) + ", " +
-                        cursor.getInt(cursor.getColumnIndex(V_C)) + ")";
-                Log.d("QWERT","Q="+st);
-                helper.getWritableDatabase().rawQuery(st, null);
+                ContentValues values = new ContentValues();
+                values.put("price", price);
+
+                helper.getWritableDatabase().update(TABLE_NAME, values, ID + "=?", new String[] {String.valueOf(i)});
+
+//                Log.d("QWERT","T="+cursor.getString(cursor.getColumnIndex(TITLE))+" II="+cursor.getInt(cursor.getColumnIndex(ID)));
+//                i = cursor.getInt(cursor.getColumnIndex(ID));
+//                st = "INSERT INTO product (_id, category_id, title, description, link, image, price, fullDescription, liked) " +
+//                        "values(" + i +", " +
+//                        cursor.getInt(cursor.getColumnIndex(ID_CATEGORY)) + ", '" +
+//                        cursor.getString(cursor.getColumnIndex(TITLE)) + "', '" +
+//                        cursor.getString(cursor.getColumnIndex(DESCR)) + "', '" +
+//                        cursor.getString(cursor.getColumnIndex(LINK)) + "', '" +
+//                        cursor.getString(cursor.getColumnIndex(IMG)) + "', '" +
+//                        getPrise(helper1, i) + "', '" +
+//                        cursor.getString(cursor.getColumnIndex(F_DESCR)) + "', " +
+//                        cursor.getInt(cursor.getColumnIndex(LIKED)) + ")";
+//                Log.d("QWERT","Q="+st);
+//                helperW.getWritableDatabase().rawQuery(st, null);
             } while (cursor.moveToNext());
          }
 
@@ -92,6 +98,7 @@ public class ProductHelper {
                 }
             } while (cursor.moveToNext());
         }
+        Log.d("QWERT","P="+st);
         return st;
     }
 

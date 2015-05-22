@@ -45,10 +45,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 getResources().getColor(R.color.med_white)));
         initViews();
 
-//        ProductHelper ph = new ProductHelper();
-//        ph.getProductPlus(getBaseContext());
+        ProductHelper ph = new ProductHelper();
+        ph.getProductPlus(getBaseContext());
 //        handleFragmentSwitching(FragmentFactory.ID_PILLINFO, null);
-        resolveFirstStart();
+//        resolveFirstStart();
     }
 
     private void resolveFirstStart() {
