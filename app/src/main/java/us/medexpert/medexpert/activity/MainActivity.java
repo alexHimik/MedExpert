@@ -59,7 +59,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         moveDrawerToTop();
         initActionBar();
         initDrawer();
-
     }
 
     private void moveDrawerToTop() {
@@ -146,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 togleLeftDrawer();
                 break;
             case R.id.right_drawer_item:
-                handleFragmentSwitching(SearchFragment.FRAGMENT_ID, null);
+                handleFragmentSwitching(FragmentFactory.ID_SEARCH, null);
                 break;
         }
 //        if(v.getId() == R.id.left_drawer_item_touch) {
@@ -163,13 +162,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if(args != null) {
             fragment.setArguments(args);
         }
-        showNewFragment(fragment, fragment.getTag());
-//        showNewFragment(fragment, ((BaseFragment)fragment).getFragmentTag());
+//        showNewFragment(fragment, fragment.getTag());
+        showNewFragment(fragment, ((BaseFragment)fragment).getFragmentTag());
     }
 
     private void showNewFragment(Fragment fragment, String fragmentTag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(((BaseFragment)fragment).getFragmentId() == SearchFragment.FRAGMENT_ID) {
+        if(((BaseFragment)fragment).getFragmentId() == FragmentFactory.ID_SEARCH) {
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         transaction.replace(R.id.main_content, fragment, fragmentTag);
@@ -178,32 +177,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
         transaction.commit();
     }
-
-//
-//    public void onEventMainThread(ErrorEvent errorEvent) {
-//        DialogTools.showInfoDialog(this, getString(R.string.error_dialog_title),
-//                errorEvent.getMessage());
-//    }
-//
-//    /** error handler for network responses from the Volley */
-//    @Override
-//    public void onErrorResponse(VolleyError error) {
-//        if(error.getCause() instanceof UnknownHostException) {
-//            DialogTools.showNetworkErrorDialog(this, getString(R.string.error_dialog_title),
-//                    getString(R.string.network_unreachable_alarm));
-//        }
-//
-//    }
-
-//    private void handleCategoryOrRubricSelection(int fragmentId, String dataKey, Serializable data) {
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(dataKey, data);
-//        if(drawerLayout.isDrawerOpen(drawerList)) {
-//            drawerLayout.closeDrawer(drawerList);
-//        }
-//        clearBackStack();
-//        handleFragmentSwitching(fragmentId, bundle);
-//    }
 
     public void togleLeftDrawer() {
         if(drawerLayout.isDrawerOpen(drawerList)) {

@@ -10,6 +10,7 @@ import us.medexpert.medexpert.fragments.FavoritesFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.PillInfoFragment;
 import us.medexpert.medexpert.fragments.RecentlyFragment;
+import us.medexpert.medexpert.fragments.SearchFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
 public class FragmentFactory {
@@ -50,6 +51,8 @@ public class FragmentFactory {
                 return new PillInfoFragment();
             case ID_CATEGORY:
                 return new CategoryDrugListFragment();
+            case ID_SEARCH:
+                return new SearchFragment();
             default: {
                 return null;
             }

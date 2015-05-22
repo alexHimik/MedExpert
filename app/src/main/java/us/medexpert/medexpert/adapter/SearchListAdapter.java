@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.ArrayList;
@@ -69,15 +71,38 @@ public class SearchListAdapter extends BaseAdapter {
                 item = inflater.inflate(R.layout.category_header_item, null);
                 RobotoTextView header = (RobotoTextView)item.findViewById(R.id.category_header_text);
                 header.setText(data.get(position).getName());
+                return item;
             }
             case ITEM_TYPE_CATEGORY: {
-
+                item = inflater.inflate(R.layout.search_category_item, null);
+                RobotoTextView name = (RobotoTextView)item.findViewById(R.id.search_category_main_text);
+                RobotoTextView amount = (RobotoTextView)item.findViewById(R.id._search_category_amount_text);
+                name.setText(data.get(position).getName());
+                amount.setText(data.get(position).getAmount());
+                return item;
             }
             case ITEM_TYPE_DRUG: {
+                item = inflater.inflate(R.layout.category_drug_item_layout, null);
+                RobotoTextView drugName = (RobotoTextView)item.findViewById(R.id.drug_name);
+                ImageView drugImage = (ImageView)item.findViewById(R.id.drug_image);
+                ImageView likeImage = (ImageView)item.findViewById(R.id.category_like_img);
+                RobotoTextView drugPrice = (RobotoTextView)item.findViewById(R.id.price);
+                RobotoTextView drugDescription = (RobotoTextView)item.findViewById(R.id.drug_description);
+                RobotoTextView genericText = (RobotoTextView)item.findViewById(R.id.generic_text);
 
+                drugName.setText(data.get(position).getName());
+                Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url)
+                        + data.get(position).getImage()).asGif().into(drugImage);
+                Glide.with(context).load(R.drawable.med_ic_pink_heart_checked).into(likeImage);
+                drugPrice.setText(data.get(position).getPrice());
+                drugDescription.setText(data.get(position).getDescription());
+                genericText.setText(data.get(position).getGeneric());
+                return item;
+            }
+            default: {
+                return convertView;
             }
         }
-        return null;
     }
 
     public List<SearchListEntity> getData() {

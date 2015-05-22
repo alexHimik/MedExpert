@@ -1,9 +1,11 @@
 package us.medexpert.medexpert.db.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 21.05.15.
  */
-public class SearchListEntity {
+public class SearchListEntity implements Serializable{
 
     private int id;
     private int type;

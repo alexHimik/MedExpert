@@ -63,11 +63,7 @@ public class CatalogFragment extends BaseFragment implements LoaderManager.Loade
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.right_drawer_item) {
-                //TODO handle issue with search widget or screen
-            } else {
-                ((MainActivity)getActivity()).onClick(v);
-            }
+            ((MainActivity)getActivity()).onClick(v);
         }
     };
 
