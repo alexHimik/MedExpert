@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/tutorial_btn_back" >
+    android:background="@drawable/tutorial_btn_back"
+    android:transitionGroup="false">
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/sort_dialog_title"
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fontFamily="roboto"
-        app:textWeight="medium"
+        app:textWeight="normal"
         android:textSize="20sp"
         android:textColor="@color/color_edittext"
         android:text="@string/sort_dialog_title"
@@ -31,13 +32,14 @@
         android:textColor="@color/about_text_color"
         android:background="@color/med_white"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
         android:gravity="left"
-        android:layout_marginRight="24dp" />
+        android:layout_marginRight="24dp"
+        android:choiceMode="singleChoice"
+        android:drawSelectorOnTop="false"
+        android:fastScrollEnabled="true"
+         />
 
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/separator_line_height"
-        />
 </LinearLayout>

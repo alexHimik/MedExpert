@@ -10,6 +10,7 @@ import us.medexpert.medexpert.fragments.FavoritesFragment;
 import us.medexpert.medexpert.fragments.HomeFragment;
 import us.medexpert.medexpert.fragments.PillInfoFragment;
 import us.medexpert.medexpert.fragments.RecentlyFragment;
+import us.medexpert.medexpert.fragments.SellersFragment;
 import us.medexpert.medexpert.fragments.TutorialFragment;
 
 public class FragmentFactory {
@@ -37,6 +38,10 @@ public class FragmentFactory {
                 return new HomeFragment();
             case ID_ABOUT:
                 return new AboutFragment();
+            // Karelov - START
+            case ID_SELLERS:
+                return new SellersFragment();
+            // Karelov - END
             case ID_TUTORIAL:
                 return new TutorialFragment();
             case ID_CATALOG:

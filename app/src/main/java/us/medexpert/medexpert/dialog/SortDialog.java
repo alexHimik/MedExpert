@@ -40,7 +40,6 @@ public class SortDialog extends Dialog {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-//        layout.addView(lv_sort);
 
         addContentView(layout, params);
     }
