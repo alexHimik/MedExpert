@@ -12,12 +12,14 @@ import us.medexpert.medexpert.db.entity.Product;
 
 public class ProductHelper {
     public static final String TABLE_NAME = "app_product";
+    public static final String TABLE_CATEG = "app_category";
     public static final String ID = "_id";
     public static final String TITLE = "title";
     public static final String LINK = "link";
     public static final String LIKED = "liked";
     public static final String ID_CATEGORY = "category_id";
     public static final String PRICE = "priceCol";
+    public static final String PRICE_MIN = "price";
     public static final String IMG = "image";
     public static final String DESCR = "description";
     public static final String F_DESCR = "fullDescription";
@@ -27,7 +29,6 @@ public class ProductHelper {
 
 
     public String getPrise(DataBaseHelper helper, int idProduct){
-        Log.d("QWERT","ID="+idProduct);
         String st = "$";
         String query = "select T1.product_package_id, T1.title, T1.priceCol, T1.pricePerPill, T2.product_id, T2.title as product_title "+
                 "from app_package T1, app_package_product T2 where T1.product_package_id=T2._id and T2.product_id='" + idProduct + "'";
@@ -45,7 +46,6 @@ public class ProductHelper {
                 }
             } while (cursor.moveToNext());
         }
-        Log.d("QWERT","P="+st);
         return st;
     }
 
@@ -82,6 +82,17 @@ public class ProductHelper {
         return prod;
     }
 
+//    public String getCategory(Context context, int id){
+//        String st = "";
+//        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+//        String query = "select * from " + TABLE_CATEG + " where " + ID + "='" + id + "'";
+//        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+//        if(cursor.moveToFirst()) {
+//            st = cursor.getString(cursor.getColumnIndex(TITLE));
+//        }
+//        return st;
+//    }
+
     public List<Product> getProductFavor(Context context) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         List<Product> data = new ArrayList<>();
@@ -98,7 +109,7 @@ public class ProductHelper {
                 prod.setImg(cursor.getString(cursor.getColumnIndex(IMG)));
                 prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED)));
                 prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCR)));
-                prod.setPrice(cursor.getString(cursor.getColumnIndex(PRICE)));
+                prod.setPrice(cursor.getString(cursor.getColumnIndex(PRICE_MIN)));
                 data.add(prod);
             }
             while (cursor.moveToNext());

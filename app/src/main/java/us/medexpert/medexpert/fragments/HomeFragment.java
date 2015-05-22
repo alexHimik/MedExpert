@@ -87,29 +87,24 @@ public class HomeFragment extends BaseFragment {
         }
         else {
             Product pr;
-            for (int i = 0; i<3; i++){
+            int ik = 3;
+            if (ik>listProd.size()) ik = listProd.size();
+            CategoryTableHelper ch = new CategoryTableHelper();
+            for (int i = 0; i<ik; i++){
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickFavor);
                 bl.setTag(""+i);
                 String st = pr.getName();
-                String nam = st;
-                int i2;
-                String stGener = "";
                 int i1 = st.indexOf("(");
                 if (i1>0) {
-                    i2 = st.indexOf("}",i1);
-                    if (i2 > i1) {
-                        nam = st.substring(0,i2+1);
-                        stGener = st.substring(i1+1,i2);
-                    }
-                    else stGener = st.substring(i1+1);
                     st = st.substring(0,i1).trim();
                 }
 
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
-                ((RobotoTextView) v.findViewById(R.id.gener)).setText(stGener);
+
+                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
                         getDrawable(R.drawable.med_ic_pink_heart_checked));
@@ -118,6 +113,8 @@ public class HomeFragment extends BaseFragment {
             }
         }
     }
+
+
 
     private void formRecently(){
         ((RelativeLayout) parent.findViewById(R.id.bl_recently)).setOnClickListener(onClick);

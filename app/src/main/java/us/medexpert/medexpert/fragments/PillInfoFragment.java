@@ -124,24 +124,16 @@ public class PillInfoFragment extends BaseFragment {
     public View setInfo(ViewGroup container){
         ProductHelper ph = new ProductHelper();
         Product pr = ph.getProduct(context, product_id);
-        View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab,container, false);
+        View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
         RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
         String nam = st;
-        int i2;
-        String stGener = "";
         int i1 = st.indexOf("(");
         if (i1>0) {
-            i2 = st.indexOf("}",i1);
-            if (i2 > i1) {
-                nam = st.substring(0,i2+1);
-                stGener = st.substring(i1+1,i2);
-            }
-            else stGener = st.substring(i1+1);
             st = st.substring(0,i1).trim();
         }
         ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
-        ((RobotoTextView) v.findViewById(R.id.gener)).setText(stGener);
+        ((RobotoTextView) v.findViewById(R.id.gener)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.name1)).setText(nam);
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
