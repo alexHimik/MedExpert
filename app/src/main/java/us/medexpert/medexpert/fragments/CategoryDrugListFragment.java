@@ -96,7 +96,15 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Cursor cursor =  listAdapter.getCursor();
+            cursor.moveToPosition(position);
+            Bundle data = new Bundle();
+            data.putString(PillInfoFragment.PRODUCT_NAME_KEY, cursor.getString(
+                    cursor.getColumnIndex(CategoryDrugsTableHelper.DRUG_PRICE_COLUMN)));
+            data.putInt(PillInfoFragment.PRODUCT_ID_KEY, cursor.getInt(cursor.getColumnIndex(
+                    CategoryDrugsTableHelper.ID_COLUMN)));
+            data.putInt(PillInfoFragment.CATEGORY_ID_KEY, categoryId);
+            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
         }
     };
 
@@ -104,7 +112,6 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             new SwipeMenuListView.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-
                     return false;
                 }
             };

@@ -46,7 +46,7 @@ public class PillInfoFragment extends BaseFragment {
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         context = getActivity().getBaseContext();
         Bundle data = getArguments();
-        product_name = data.getString(product_name);
+        product_name = data.getString(PRODUCT_NAME_KEY);
         product_id = data.getInt(PRODUCT_ID_KEY);
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
