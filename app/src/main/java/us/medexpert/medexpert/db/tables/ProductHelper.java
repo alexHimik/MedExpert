@@ -25,7 +25,7 @@ public class ProductHelper {
     public static final String LIKED_COLUMN = "liked";
     public static final String VIEW_COUNT_COLUMN = "view_count";
     public static final String DRUG_PRICE_COLUMN = "price";
-    public static final String VIEW_DATE_COLUMN = "view_date";
+    public static final String VIEW_DATE_COLUMN = "date_view";
 
     private Context context;
     private static ProductHelper instance;
@@ -175,6 +175,7 @@ public class ProductHelper {
                 " from " + TABLE_NAME + " where " + ID_COLUMN + "=?",
                 new String[] {String.valueOf(drugId)});
 
+        cursor.moveToFirst();
         int viewCount = cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN));
 
         ContentValues values = new ContentValues();
@@ -183,6 +184,23 @@ public class ProductHelper {
 
         helper.getWritableDatabase().update(TABLE_NAME, values, ID_COLUMN + "=?",
                 new String[] {String.valueOf(drugId)});
+    }
+
+    public List<Product> getLastViewedDrugs() {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
+                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
+
+        Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
+        List<Product> data = new ArrayList<>();
+        if(cursor.moveToFirst()) {
+            do {
+                data.add(setProduct(cursor));
+            } while (cursor.moveToNext());
+        }
+
+        return data;
     }
 
     private Product setProduct(Cursor cursor) {
