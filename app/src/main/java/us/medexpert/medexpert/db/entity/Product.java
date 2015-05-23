@@ -5,13 +5,14 @@ import java.util.Date;
 public class Product {
     private int id;
     private int id_category;
-    private String Name;
+    private String name;
     private String price;
     private String linc;
     private int liked;
     private String descr;
     private String img;
     private Date date_v;
+    private String nameCat;
 
 
     public Product() {
@@ -19,7 +20,7 @@ public class Product {
 
     public Product(int id, String n, String p, String l, int liked, String d, Date date, int c) {
         this.id = id;
-        this.Name = n;
+        this.name = n;
         this.price = p;
         this.linc = l;
         this.liked = liked;
@@ -37,11 +38,11 @@ public class Product {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getPrice() {
@@ -98,5 +99,13 @@ public class Product {
 
     public void setId_category(int id_category) {
         this.id_category = id_category;
+    }
+
+    public String getNameCat() {
+        return nameCat;
+    }
+
+    public void setNameCat(String nameCat) {
+        this.nameCat = nameCat;
     }
 }

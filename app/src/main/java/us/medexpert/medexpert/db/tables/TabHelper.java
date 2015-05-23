@@ -2,6 +2,7 @@ package us.medexpert.medexpert.db.tables;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,10 @@ public class TabHelper {
     public static final String ID_CATEGORY = "category_id";
     public static final String IMG = "image";
     public static final String DESCR = "description";
-    public static final String V_D = "view_date";
+    public static final String V_D = "date_view";
     public static final String V_C = "view_count";
     public static final String PRICE = "price";
 
-//    public static final String qAllCategory = "SELECT " + ID + ", " + TITLE + ", " + LINK +;
 
     public TabHelper(Context context){
         this.context = context;
@@ -147,16 +147,49 @@ public class TabHelper {
         return data;
     }
 
-    public Product setProduct(Cursor cursor) {
+    public List<Product> getFavor() {
+        List<Product> data = new ArrayList<>();
+        String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
+                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "FROM app_product T1, app_category T2 WHERE T1.liked>'0' AND T1.category_id = T2._id ORDER BY T1.title asc";
+        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                data.add(setProduct(cursor));
+            } while (cursor.moveToNext());
+        }
+        return data;
+    }
+
+    private Product setProduct(Cursor cursor) {
         Product prod = new Product();
         prod.setId(cursor.getInt(cursor.getColumnIndex(ID)));
         prod.setId_category(cursor.getInt(cursor.getColumnIndex(ID_CATEGORY)));
-        prod.setName(cursor.getString(cursor.getColumnIndex(TITLE)));
+        prod.setName(cursor.getString(cursor.getColumnIndex("prodt")));
         prod.setLinc(cursor.getString(cursor.getColumnIndex(LINK)));
         prod.setImg(cursor.getString(cursor.getColumnIndex(IMG)));
         prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED)));
         prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCR)));
         prod.setPrice(cursor.getString(cursor.getColumnIndex(PRICE)));
+        prod.setNameCat(cursor.getString(cursor.getColumnIndex("catt")));
+        Log.d("QWERT","N="+prod.getName()+"< P="+prod.getPrice()+"< C="+prod.getNameCat());
         return prod;
     }
+
+
+//    query = "select * from " + TABLE_NAME ;
+//    cursor = helper.getWritableDatabase().rawQuery(query, null);
+//    int i;
+//    if(cursor.moveToFirst()) {
+//        do {
+//            i = cursor.getInt(cursor.getColumnIndex(ID));
+//            String price = getPrise(helper1, i);
+//
+//            ContentValues values = new ContentValues();
+//            values.put("price", price);
+//
+//            helper.getWritableDatabase().update(TABLE_NAME, values, ID + "=?", new String[] {String.valueOf(i)});
+//
+//        } while (cursor.moveToNext());
+//    }
 }

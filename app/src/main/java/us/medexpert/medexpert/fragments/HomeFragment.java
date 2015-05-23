@@ -27,6 +27,7 @@ import us.medexpert.medexpert.db.entity.Category;
 import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.db.tables.TabHelper;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class HomeFragment extends BaseFragment {
@@ -37,6 +38,7 @@ public class HomeFragment extends BaseFragment {
     private Context context;
     private List<Category> listCatal;
     private List<Product> listProd;
+    private TabHelper tabHelper;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class HomeFragment extends BaseFragment {
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         context = getActivity().getBaseContext();
         parent = inflater.inflate(R.layout.home, container, false);
+        tabHelper = new TabHelper(context);
         formHome();
         return parent;
     }
@@ -76,8 +79,9 @@ public class HomeFragment extends BaseFragment {
     private void formFavorites(){
         parent.findViewById(R.id.bl_favorites).setOnClickListener(onClick);
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
-        ProductHelper ph = new ProductHelper();
-        listProd = ph.getProductFavor(context);
+//        ProductHelper ph = new ProductHelper();
+//        listProd = ph.getProductFavor(context);
+        listProd = tabHelper.getFavor();
         View v;
         if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
@@ -89,7 +93,7 @@ public class HomeFragment extends BaseFragment {
             Product pr;
             int ik = 3;
             if (ik>listProd.size()) ik = listProd.size();
-            CategoryTableHelper ch = new CategoryTableHelper();
+//            CategoryTableHelper ch = new CategoryTableHelper();
             for (int i = 0; i<ik; i++){
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
@@ -104,7 +108,8 @@ public class HomeFragment extends BaseFragment {
 
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
 
-                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
+//                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
+                ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
                         getDrawable(R.drawable.med_ic_pink_heart_checked));
