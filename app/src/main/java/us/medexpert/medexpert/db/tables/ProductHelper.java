@@ -3,6 +3,7 @@ package us.medexpert.medexpert.db.tables;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,10 +190,12 @@ public class ProductHelper {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
                 "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
-                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
+                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view asc";
 
         Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
         List<Product> data = new ArrayList<>();
+
+        Log.d("QWERT","*****************************************************************************");
         if(cursor.moveToFirst()) {
             do {
                 data.add(setProduct(cursor));
@@ -213,6 +216,9 @@ public class ProductHelper {
         prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
         prod.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
         prod.setNameCat(cursor.getString(cursor.getColumnIndex("catt")));
+        prod.setDate_v(cursor.getInt(cursor.getColumnIndex(VIEW_DATE_COLUMN)));
+
+        Log.d("QWERT","DD="+prod.getDate_v()+"<N="+prod.getName());
         return prod;
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import us.medexpert.medexpert.R;
 
+import com.bumptech.glide.Glide;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.List;
@@ -36,6 +38,7 @@ public class HomeFragment extends BaseFragment {
     private Context context;
     private List<Category> listCatal;
     private List<Product> listProd;
+//    private Fragment fragment;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +110,10 @@ public class HomeFragment extends BaseFragment {
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
-                        getDrawable(R.drawable.med_ic_pink_heart_checked));
+                        getDrawable(R.drawable.med_ic_pink_card_heart));
+
+                ImageView iv = (ImageView) v.findViewById(R.id.iv1);
+                Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).into(iv);
 
                 ll.addView(v);
             }
@@ -117,31 +123,31 @@ public class HomeFragment extends BaseFragment {
 
 
     private void formRecently(){
-        ((RelativeLayout) parent.findViewById(R.id.bl_recently)).setOnClickListener(onClick);
-        if (true) {
-            LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
-            ll.setGravity(Gravity.CENTER_VERTICAL);
-            View v = ((LayoutInflater) getActivity().getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
-            ll.addView(v);
-        }
-        else {
-            LinearLayout block_recent = (LinearLayout) parent.findViewById(R.id.block_recently);
-//            View view = ((LayoutInflater) getActivity().getSystemService(
-//                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_v, null);
-        }
-
-
-
-
-
+//        ((RelativeLayout) parent.findViewById(R.id.bl_recently)).setOnClickListener(onClick);
+//        if (true) {
+//            LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
+//            ll.setGravity(Gravity.CENTER_VERTICAL);
+//            View v = ((LayoutInflater) getActivity().getSystemService(
+//                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
+//            ll.addView(v);
+//        }
+//        else {
+//            LinearLayout block_recent = (LinearLayout) parent.findViewById(R.id.block_recently);
+////            View view = ((LayoutInflater) getActivity().getSystemService(
+////                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_v, null);
+//        }
+//
+//
+//
+//
+//
 
 
         parent.findViewById(R.id.bl_recently).setOnClickListener(onClick);
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
 
         ProductHelper ph = ProductHelper.getInstance(getActivity());
-        listProd = ph.getProductFavor();
+        listProd = ph.getLastViewedDrugs();
         View v;
         if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
@@ -169,8 +175,12 @@ public class HomeFragment extends BaseFragment {
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-                ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
-                        getDrawable(R.drawable.med_ic_pink_heart_checked));
+                if (pr.getLiked()>0) ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
+                        getDrawable(R.drawable.med_ic_pink_card_heart));
+                else ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
+                        getDrawable(R.drawable.med_ic_grey_heart_unchecked));
+                ImageView iv = (ImageView) v.findViewById(R.id.iv1);
+                Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).into(iv);
 
                 ll.addView(v);
             }

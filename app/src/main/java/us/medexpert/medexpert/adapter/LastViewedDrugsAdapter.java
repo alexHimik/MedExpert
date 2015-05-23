@@ -16,9 +16,6 @@ import java.util.List;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.Product;
 
-/**
- * Created by user on 23.05.15.
- */
 public class LastViewedDrugsAdapter extends BaseAdapter {
 
     private Fragment context;
