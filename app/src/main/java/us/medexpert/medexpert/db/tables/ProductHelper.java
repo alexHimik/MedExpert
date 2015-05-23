@@ -185,6 +185,23 @@ public class ProductHelper {
                 new String[] {String.valueOf(drugId)});
     }
 
+    public List<Product> getLastViewedDrugs() {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
+                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
+
+        Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
+        List<Product> data = new ArrayList<>();
+        if(cursor.moveToFirst()) {
+            do {
+                data.add(setProduct(cursor));
+            } while (cursor.moveToNext());
+        }
+
+        return data;
+    }
+
     private Product setProduct(Cursor cursor) {
         Product prod = new Product();
         prod.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
