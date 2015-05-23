@@ -104,8 +104,6 @@ public class HomeFragment extends BaseFragment {
                 }
 
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
-
-//                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
@@ -131,6 +129,51 @@ public class HomeFragment extends BaseFragment {
             LinearLayout block_recent = (LinearLayout) parent.findViewById(R.id.block_recently);
 //            View view = ((LayoutInflater) getActivity().getSystemService(
 //                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_v, null);
+        }
+
+
+
+
+
+
+
+        parent.findViewById(R.id.bl_recently).setOnClickListener(onClick);
+        LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
+
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        listProd = ph.getProductFavor();
+        View v;
+        if (listProd.size() == 0) {
+            ll.setGravity(Gravity.CENTER_VERTICAL);
+            v = ((LayoutInflater) getActivity().getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
+            ll.addView(v);
+        }
+        else {
+            Product pr;
+            int ik = listProd.size();
+            if (ik>2) ik = 2;
+//            CategoryTableHelper ch = new CategoryTableHelper();
+            for (int i = 0; i<ik; i++){
+                pr = listProd.get(i);
+                v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
+                RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
+                bl.setOnClickListener(onClickRecently);
+                bl.setTag(""+i);
+                String st = pr.getName();
+                int i1 = st.indexOf("(");
+                if (i1>0) {
+                    st = st.substring(0,i1).trim();
+                }
+
+                ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
+                ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
+                ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+                ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
+                        getDrawable(R.drawable.med_ic_pink_heart_checked));
+
+                ll.addView(v);
+            }
         }
     }
 
@@ -163,6 +206,18 @@ public class HomeFragment extends BaseFragment {
     };
 
     OnClickListener onClickFavor = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
+            Bundle data = new Bundle();
+            data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
+            data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());
+            data.putInt(PillInfoFragment.CATEGORY_ID_KEY, pr.getId_category());
+            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
+        }
+    };
+
+    OnClickListener onClickRecently = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));

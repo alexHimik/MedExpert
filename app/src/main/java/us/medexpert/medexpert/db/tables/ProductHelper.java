@@ -25,7 +25,7 @@ public class ProductHelper {
     public static final String LIKED_COLUMN = "liked";
     public static final String VIEW_COUNT_COLUMN = "view_count";
     public static final String DRUG_PRICE_COLUMN = "price";
-    public static final String VIEW_DATE_COLUMN = "view_date";
+    public static final String VIEW_DATE_COLUMN = "date_view";
 
     private Context context;
     private static ProductHelper instance;
@@ -174,7 +174,7 @@ public class ProductHelper {
         Cursor cursor = helper.getReadableDatabase().rawQuery("select " + VIEW_COUNT_COLUMN +
                 " from " + TABLE_NAME + " where " + ID_COLUMN + "=?",
                 new String[] {String.valueOf(drugId)});
-
+        cursor.moveToFirst();
         int viewCount = cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN));
 
         ContentValues values = new ContentValues();
