@@ -3,7 +3,6 @@ package us.medexpert.medexpert.db.tables;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,24 +99,14 @@ public class ProductHelper {
     public List<Product> getProductFavor() {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         List<Product> data = new ArrayList<>();
-        String query = "select * from " + TABLE_NAME + " where " + LIKED_COLUMN +
-                ">'0' order by " + TITLE_COLUMN + " asc";
+        String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
+                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "FROM app_product T1, app_category T2 WHERE T1.liked>'0' AND T1.category_id = T2._id ORDER BY T1.title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
-        Product prod;
         if(cursor.moveToFirst()) {
             do {
-                prod = new Product();
-                prod.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
-                prod.setId_category(cursor.getInt(cursor.getColumnIndex(CATEGORY_ID_COLUMN)));
-                prod.setName(cursor.getString(cursor.getColumnIndex(TITLE_COLUMN)));
-                prod.setLinc(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
-                prod.setImg(cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN)));
-                prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)));
-                prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
-                prod.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
-                data.add(prod);
-            }
-            while (cursor.moveToNext());
+                data.add(setProduct(cursor));
+            } while (cursor.moveToNext());
         }
         return data;
     }
@@ -194,5 +183,19 @@ public class ProductHelper {
 
         helper.getWritableDatabase().update(TABLE_NAME, values, ID_COLUMN + "=?",
                 new String[] {String.valueOf(drugId)});
+    }
+
+    private Product setProduct(Cursor cursor) {
+        Product prod = new Product();
+        prod.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
+        prod.setId_category(cursor.getInt(cursor.getColumnIndex(CATEGORY_ID_COLUMN)));
+        prod.setName(cursor.getString(cursor.getColumnIndex("prodt")));
+        prod.setLinc(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
+        prod.setImg(cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN)));
+        prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)));
+        prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
+        prod.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
+        prod.setNameCat(cursor.getString(cursor.getColumnIndex("catt")));
+        return prod;
     }
 }

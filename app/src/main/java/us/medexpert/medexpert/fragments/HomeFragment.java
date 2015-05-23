@@ -31,7 +31,6 @@ import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class HomeFragment extends BaseFragment {
     public static final String TAG = "HomeFragment";
-    public static final int FRAGMENT_ID = 0;
 
     private View parent;
     private Context context;
@@ -76,11 +75,10 @@ public class HomeFragment extends BaseFragment {
     private void formFavorites(){
         parent.findViewById(R.id.bl_favorites).setOnClickListener(onClick);
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
+
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         listProd = ph.getProductFavor();
-//        ProductHelper ph = new ProductHelper();
-//        listProd = ph.getProductFavor(context);
-        listProd = tabHelper.getFavor();
+
         View v;
         if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
