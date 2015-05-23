@@ -88,8 +88,9 @@ public class HomeFragment extends BaseFragment {
         else {
             Product pr;
             int ik = 3;
-            if (ik>listProd.size()) ik = listProd.size();
+            if (ik > listProd.size()) ik = listProd.size();
             CategoryTableHelper ch = new CategoryTableHelper();
+
             for (int i = 0; i<ik; i++){
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
