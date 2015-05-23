@@ -43,8 +43,14 @@ public class CategoryListAdapter extends CursorAdapter {
         }
         holder = (ViewHolder)view.getTag();
         String name = cursor.getString(cursor.getColumnIndex(ProductHelper.TITLE_COLUMN));
-        String justName = name.substring(0, name.indexOf("(") - 1);
-        holder.drugName.setText(justName);
+
+        if(name.indexOf("(") != -1) {
+            String justName = name.substring(0, name.indexOf("(") - 1);
+            holder.drugName.setText(justName);
+        } else {
+            holder.drugName.setText(name);
+        }
+
         Glide.with(fragment).load(
                 context.getResources().getString(R.string.app_site_base_url) +
                 cursor.getString(cursor.getColumnIndex(ProductHelper.IMAGE_COLUMN))).
@@ -60,7 +66,10 @@ public class CategoryListAdapter extends CursorAdapter {
 
         holder.drugDescription.setText(cursor.getString(
                 cursor.getColumnIndex(ProductHelper.DESCRIPTION_COLUMN)));
-        holder.genericText.setText(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+
+        if(name.indexOf("(") != -1) {
+            holder.genericText.setText(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+        }
     }
 
     @Override

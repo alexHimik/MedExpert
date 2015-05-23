@@ -42,7 +42,7 @@ public class PillInfoFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View customBar = super.getActionBarCustomView(inflater);
+        View customBar = getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         context = getActivity().getBaseContext();
         Bundle data = getArguments();
@@ -51,9 +51,8 @@ public class PillInfoFragment extends BaseFragment {
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
         category_name = ch.getCategoryName(context, category_id);
-
+        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
-
         return parent;
     }
 
@@ -69,7 +68,6 @@ public class PillInfoFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         viewPager = (ViewPager)view.findViewById(R.id.screen_pager);
         viewPager.setAdapter(new SamplePagerAdapter());
         tabLayout = (SlidingTabLayout)view.findViewById(R.id.screen_tabs);
@@ -136,14 +134,13 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-        if (pr.getLiked()>0) ((ImageView) v.findViewById(R.id.iv2)).
+        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
     }
 
     public View setPackage(ViewGroup container){
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
-
         return v;
     }
 

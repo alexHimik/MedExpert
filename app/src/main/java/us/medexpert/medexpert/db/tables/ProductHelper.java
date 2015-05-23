@@ -156,12 +156,25 @@ public class ProductHelper {
                 SearchListEntity entity = new SearchListEntity();
                 entity.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
                 String name = cursor.getString(cursor.getColumnIndex(TITLE_COLUMN));
-                String justName = name.substring(0, name.indexOf("(") - 1);
-                entity.setName(justName);
+
+                if(name.indexOf("(") != -1) {
+                    String justName = name.substring(0, name.indexOf("(") - 1);
+                    entity.setName(justName);
+                } else {
+                    entity.setName(name);
+                }
+
                 entity.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
                 entity.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
                 entity.setImage(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
-                entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+                entity.setCategoryId(cursor.getInt(cursor.getColumnIndex(CATEGORY_ID_COLUMN)));
+
+                if(name.indexOf("(") != -1) {
+                    entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+                } else {
+                    entity.setGeneric("");
+                }
+
                 entity.setFavorite(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)) > 0);
                 entity.setType(SearchListAdapter.ITEM_TYPE_DRUG);
                 data.add(entity);
@@ -175,6 +188,7 @@ public class ProductHelper {
         Cursor cursor = helper.getReadableDatabase().rawQuery("select " + VIEW_COUNT_COLUMN +
                 " from " + TABLE_NAME + " where " + ID_COLUMN + "=?",
                 new String[] {String.valueOf(drugId)});
+
         cursor.moveToFirst();
         int viewCount = cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN));
 
