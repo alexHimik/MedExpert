@@ -78,6 +78,9 @@ public class HomeFragment extends BaseFragment {
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         listProd = ph.getProductFavor();
+//        ProductHelper ph = new ProductHelper();
+//        listProd = ph.getProductFavor(context);
+        listProd = tabHelper.getFavor();
         View v;
         if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
@@ -88,9 +91,8 @@ public class HomeFragment extends BaseFragment {
         else {
             Product pr;
             int ik = 3;
-            if (ik > listProd.size()) ik = listProd.size();
-            CategoryTableHelper ch = new CategoryTableHelper();
-
+            if (ik>listProd.size()) ik = listProd.size();
+//            CategoryTableHelper ch = new CategoryTableHelper();
             for (int i = 0; i<ik; i++){
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
@@ -105,7 +107,8 @@ public class HomeFragment extends BaseFragment {
 
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
 
-                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
+//                ((RobotoTextView) v.findViewById(R.id.gener)).setText(ch.getCategoryName(context, pr.getId_category()));
+                ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
                         getDrawable(R.drawable.med_ic_pink_heart_checked));

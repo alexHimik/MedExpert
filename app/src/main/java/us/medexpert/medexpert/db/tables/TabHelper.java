@@ -27,9 +27,10 @@ public class TabHelper {
     public static final String ID_CATEGORY = "category_id";
     public static final String IMG = "image";
     public static final String DESCR = "description";
-    public static final String V_D = "view_date";
+    public static final String V_D = "date_view";
     public static final String V_C = "view_count";
     public static final String PRICE = "price";
+
 
     public TabHelper(Context context){
         this.context = context;
@@ -127,6 +128,20 @@ public class TabHelper {
     public List<Product> getProductFavor() {
         List<Product> data = new ArrayList<>();
         String query = "select * from " + TABLE_PRODUCT + " where " + LIKED + ">'0' order by " + TITLE + " asc";
+        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                data.add(setProduct(cursor));
+            } while (cursor.moveToNext());
+        }
+        return data;
+    }
+
+    public List<Product> getFavor() {
+        List<Product> data = new ArrayList<>();
+        String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
+                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "FROM app_product T1, app_category T2 WHERE T1.liked>'0' AND T1.category_id = T2._id ORDER BY T1.title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
         if(cursor.moveToFirst()) {
             do {
