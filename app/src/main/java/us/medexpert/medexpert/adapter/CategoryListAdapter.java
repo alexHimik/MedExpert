@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import us.medexpert.medexpert.R;
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
+import us.medexpert.medexpert.db.entity.Product;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 
 /**
  * Created by user on 19.05.15.
@@ -41,16 +42,16 @@ public class CategoryListAdapter extends CursorAdapter {
             view.setTag(holder);
         }
         holder = (ViewHolder)view.getTag();
-        String name = cursor.getString(cursor.getColumnIndex(CategoryDrugsTableHelper.TITLE_COLUMN));
+        String name = cursor.getString(cursor.getColumnIndex(ProductHelper.TITLE_COLUMN));
         String justName = name.substring(0, name.indexOf("(") - 1);
         holder.drugName.setText(justName);
         Glide.with(fragment).load(
                 context.getResources().getString(R.string.app_site_base_url) +
-                cursor.getString(cursor.getColumnIndex(CategoryDrugsTableHelper.IMAGE_COLUMN))).
+                cursor.getString(cursor.getColumnIndex(ProductHelper.IMAGE_COLUMN))).
                 asGif().into(holder.drugImage);
         holder.drugPrice.setText(cursor.getString(cursor.getColumnIndex(
-                CategoryDrugsTableHelper.DRUG_PRICE_COLUMN)));
-        int like = cursor.getInt(cursor.getColumnIndex(CategoryDrugsTableHelper.LIKED_COLUMN));
+                ProductHelper.DRUG_PRICE_COLUMN)));
+        int like = cursor.getInt(cursor.getColumnIndex(ProductHelper.LIKED_COLUMN));
         if(like > 0) {
             Glide.with(fragment).load(R.drawable.med_ic_pink_heart_checked).into(holder.likeImage);
         } else {
@@ -58,7 +59,7 @@ public class CategoryListAdapter extends CursorAdapter {
         }
 
         holder.drugDescription.setText(cursor.getString(
-                cursor.getColumnIndex(CategoryDrugsTableHelper.DESCRIPTION_COLUMN)));
+                cursor.getColumnIndex(ProductHelper.DESCRIPTION_COLUMN)));
         holder.genericText.setText(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
     }
 
@@ -73,7 +74,7 @@ public class CategoryListAdapter extends CursorAdapter {
         if(position >= 0) {
             getCursor().moveToPosition(position);
             return getCursor().getInt(getCursor().getColumnIndex(
-                    CategoryDrugsTableHelper.ID_COLUMN));
+                    ProductHelper.ID_COLUMN));
         } else {
             return position;
         }

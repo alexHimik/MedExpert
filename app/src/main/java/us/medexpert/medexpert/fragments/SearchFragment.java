@@ -22,8 +22,8 @@ import java.util.List;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.adapter.SearchListAdapter;
 import us.medexpert.medexpert.db.entity.SearchListEntity;
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 public class SearchFragment extends BaseFragment {
@@ -131,11 +131,10 @@ public class SearchFragment extends BaseFragment {
         @Override
         public void run() {
             CategoryTableHelper categoryTableHelper = new CategoryTableHelper();
-            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
+            ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
             List<SearchListEntity> categories = categoryTableHelper.getCategoriesForSearch(
                     getActivity(), query);
-            List<SearchListEntity> drugs = categoryDrugsTableHelper.getDrugsForSearch(
-                    getActivity(), query);
+            List<SearchListEntity> drugs = categoryDrugsTableHelper.getDrugsForSearch(query);
             List<SearchListEntity> result = new ArrayList<>();
             SearchListEntity catHeader = new SearchListEntity();
             catHeader.setId(-1);

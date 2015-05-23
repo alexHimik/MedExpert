@@ -1,5 +1,6 @@
 package us.medexpert.medexpert.db.tables;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -29,8 +30,6 @@ public class TabHelper {
     public static final String V_D = "view_date";
     public static final String V_C = "view_count";
     public static final String PRICE = "price";
-
-//    public static final String qAllCategory = "SELECT " + ID + ", " + TITLE + ", " + LINK +;
 
     public TabHelper(Context context){
         this.context = context;
@@ -110,19 +109,9 @@ public class TabHelper {
         Cursor cursor = helper.getWritableDatabase().query(TABLE_CATEGORY, new String[] {V_C},
                 ID + "=?", new String[] {String.valueOf(categoryId)}, null, null, null);
         cursor.moveToFirst();
-        StringBuilder builder = new StringBuilder();
-        builder.append("update ");
-        builder.append(TABLE_CATEGORY);
-        builder.append(" set ");
-        builder.append(V_C);
-        builder.append("='");
-        builder.append(cursor.getInt(cursor.getColumnIndex(V_C)) + 1);
-        builder.append("' where ");
-        builder.append(ID);
-        builder.append("=");
-        builder.append(categoryId);
-        builder.append(";");
-        helper.getWritableDatabase().execSQL(builder.toString());
+        ContentValues values = new ContentValues();
+        values.put(V_C, cursor.getInt(cursor.getColumnIndex(V_C)) + 1);
+        helper.getWritableDatabase().update(TABLE_CATEGORY, values, ID + "=?", new String[] {String.valueOf(categoryId)});
     }
 
     public Product getProduct(int idProduct) {

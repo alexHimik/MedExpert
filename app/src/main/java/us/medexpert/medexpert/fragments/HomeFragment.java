@@ -76,8 +76,8 @@ public class HomeFragment extends BaseFragment {
     private void formFavorites(){
         parent.findViewById(R.id.bl_favorites).setOnClickListener(onClick);
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
-        ProductHelper ph = new ProductHelper();
-        listProd = ph.getProductFavor(context);
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        listProd = ph.getProductFavor();
         View v;
         if (listProd.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);

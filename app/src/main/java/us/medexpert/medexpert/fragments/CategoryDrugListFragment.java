@@ -22,7 +22,7 @@ import com.devspark.robototextview.widget.RobotoTextView;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.CategoryListAdapter;
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.loader.CategoryDrugListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
@@ -100,9 +100,9 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             cursor.moveToPosition(position);
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, cursor.getString(
-                    cursor.getColumnIndex(CategoryDrugsTableHelper.DRUG_PRICE_COLUMN)));
+                    cursor.getColumnIndex(ProductHelper.DRUG_PRICE_COLUMN)));
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, cursor.getInt(cursor.getColumnIndex(
-                    CategoryDrugsTableHelper.ID_COLUMN)));
+                    ProductHelper.ID_COLUMN)));
             data.putInt(PillInfoFragment.CATEGORY_ID_KEY, categoryId);
             ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
         }
@@ -151,8 +151,8 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         @Override
         public void onSwipeEnd(int position) {
             int drugId = (int)listAdapter.getItem(position);
-            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
-            categoryDrugsTableHelper.addDrugToFavorites(getActivity(), drugId);
+            ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
+            categoryDrugsTableHelper.addDrugToFavorites(drugId);
         }
     };
 }

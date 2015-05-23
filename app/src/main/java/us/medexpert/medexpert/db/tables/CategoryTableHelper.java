@@ -1,5 +1,6 @@
 package us.medexpert.medexpert.db.tables;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -50,9 +51,6 @@ public class CategoryTableHelper {
         List<Category> data = new ArrayList<>();
         String query = "select * from app_category order by view_count desc, title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
-//        Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME,
-//                new String[] {ID_CLOUMN, VIEW_COUNT_COLUMN, TITLE_COLUMN, LINK_COLUMN},
-//                null, null, null, null, VIEW_COUNT_COLUMN);
 
 
         if(cursor.moveToFirst()) {
@@ -62,16 +60,6 @@ public class CategoryTableHelper {
                         CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
                 data.add(allOne);
             } while (cursor.moveToNext());
-//            Category allOne = new Category(cursor.getInt(cursor.getColumnIndex(CategoryTableHelper.ID_CLOUMN)),
-//                    cursor.getString(cursor.getColumnIndex(CategoryTableHelper.TITLE_COLUMN)),
-//                    CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
-//            data.add(allOne);
-//            while (cursor.moveToNext()) {
-//                Category all = new Category(cursor.getInt(cursor.getColumnIndex(CategoryTableHelper.ID_CLOUMN)),
-//                        cursor.getString(cursor.getColumnIndex(CategoryTableHelper.TITLE_COLUMN)),
-//                        CatalogFragmentListAdapter.CATALOG_CATEGORY_TYPE_ITEM);
-//                data.add(all);
-//            }
         }
         return data;
     }
@@ -120,18 +108,10 @@ public class CategoryTableHelper {
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME, new String[] {VIEW_COUNT_COLUMN},
                 ID_CLOUMN + "=?", new String[] {String.valueOf(categoryId)}, null, null, null);
         cursor.moveToFirst();
-        StringBuilder builder = new StringBuilder();
-        builder.append("update ");
-        builder.append(TABLE_NAME);
-        builder.append(" set ");
-        builder.append(VIEW_COUNT_COLUMN);
-        builder.append("='");
-        builder.append(cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN)) + 1);
-        builder.append("' where ");
-        builder.append(ID_CLOUMN);
-        builder.append("=");
-        builder.append(categoryId);
-        builder.append(";");
-        helper.getWritableDatabase().execSQL(builder.toString());
+
+        ContentValues values = new ContentValues();
+        values.put(VIEW_COUNT_COLUMN, cursor.getInt(cursor.getColumnIndex(VIEW_COUNT_COLUMN)) + 1);
+        helper.getWritableDatabase().update(TABLE_NAME, values, ID_CLOUMN + "=?",
+                new String[] {String.valueOf(categoryId)});
     }
 }

@@ -51,9 +51,6 @@ public class PillInfoFragment extends BaseFragment {
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
         category_name = ch.getCategoryName(context, category_id);
-//        product_name = "QWERT YUI";
-//        product_id = 472;
-//        category_name = "Name Category";
 
         parent = inflater.inflate(R.layout.pill_info, container, false);
 
@@ -73,13 +70,14 @@ public class PillInfoFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         viewPager = (ViewPager)view.findViewById(R.id.screen_pager);
         viewPager.setAdapter(new SamplePagerAdapter());
         tabLayout = (SlidingTabLayout)view.findViewById(R.id.screen_tabs);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.med_blue));
-//        tabLayout.setTextColor(0x000000,0x999999);
         tabLayout.setViewPager(viewPager);
+
+        ProductHelper productHelper = ProductHelper.getInstance(getActivity());
+        productHelper.updateDrugViewedDate(product_id);
     }
 
     // Adapter
@@ -122,8 +120,8 @@ public class PillInfoFragment extends BaseFragment {
     }
 
     public View setInfo(ViewGroup container){
-        ProductHelper ph = new ProductHelper();
-        Product pr = ph.getProduct(context, product_id);
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        Product pr = ph.getProduct(product_id);
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
         RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
