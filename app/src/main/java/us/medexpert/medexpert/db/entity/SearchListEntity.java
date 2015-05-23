@@ -15,6 +15,7 @@ public class SearchListEntity implements Serializable{
     private String generic;
     private String description;
     private String price;
+    private int categoryId;
     private boolean favorite;
 
     public int getId() {
@@ -87,5 +88,13 @@ public class SearchListEntity implements Serializable{
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

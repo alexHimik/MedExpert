@@ -42,7 +42,6 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
         Bundle data = getArguments();
         categoryName = data.getString(CATEGORY_NAME_KEY);
         categoryId = data.getInt(CATEGORY_ID_KEY);
@@ -51,7 +50,8 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         drugsList.setOnMenuItemClickListener(onMenuItemClickListener);
         drugsList.setMenuCreator(swipeMenuCreator);
         drugsList.setOnSwipeListener(onSwipeListener);
-
+        View customBar = getActionBarCustomView(inflater);
+        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         getLoaderManager().initLoader(CategoryDrugListLoader.ID, getArguments(), this);
         return drugsList;
     }

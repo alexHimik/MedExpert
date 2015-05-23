@@ -49,9 +49,8 @@ public class CategoryTableHelper {
     public List<Category> getPopularCategories(Context context) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         List<Category> data = new ArrayList<>();
-        String query = "select * from app_category order by view_count desc, title asc";
+        String query = "select * from app_category where view_count > 0 order by view_count desc, title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
-
 
         if(cursor.moveToFirst()) {
             do {

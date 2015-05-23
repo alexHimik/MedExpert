@@ -155,12 +155,25 @@ public class ProductHelper {
                 SearchListEntity entity = new SearchListEntity();
                 entity.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
                 String name = cursor.getString(cursor.getColumnIndex(TITLE_COLUMN));
-                String justName = name.substring(0, name.indexOf("(") - 1);
-                entity.setName(justName);
+
+                if(name.indexOf("(") != -1) {
+                    String justName = name.substring(0, name.indexOf("(") - 1);
+                    entity.setName(justName);
+                } else {
+                    entity.setName(name);
+                }
+
                 entity.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
                 entity.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
                 entity.setImage(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
-                entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+                entity.setCategoryId(cursor.getInt(cursor.getColumnIndex(CATEGORY_ID_COLUMN)));
+
+                if(name.indexOf("(") != -1) {
+                    entity.setGeneric(name.substring(name.indexOf("(") + 1, name.indexOf(")")));
+                } else {
+                    entity.setGeneric("");
+                }
+
                 entity.setFavorite(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)) > 0);
                 entity.setType(SearchListAdapter.ITEM_TYPE_DRUG);
                 data.add(entity);
@@ -190,7 +203,7 @@ public class ProductHelper {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
                 "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
-                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
+                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id AND T1.view_count > 0 ORDER BY T1.date_view desc";
 
         Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
         List<Product> data = new ArrayList<>();
