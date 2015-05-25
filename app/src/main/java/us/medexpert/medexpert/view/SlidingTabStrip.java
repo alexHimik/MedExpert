@@ -96,12 +96,10 @@ class SlidingTabStrip extends LinearLayout {
     }
 
     void setTextColor(int txt, int sel) {
-        Log.d("QWERT","T="+txt);
         TEXT_COLOR = txt;
         TEXT_SELECTED_COLOR = sel;
     }
     void setSelector(int h, int c) {
-        Log.d("QWERT","H="+h);
         SELECTED_INDICATOR_THICKNESS_DIPS = h;
         DEFAULT_SELECTED_INDICATOR_COLOR = c;
         mDefaultTabColorizer.setIndicatorColors(DEFAULT_SELECTED_INDICATOR_COLOR);

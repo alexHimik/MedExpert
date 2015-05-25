@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="24dp"
+    android:paddingTop="32dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="12dp">
+    <com.devspark.robototextview.widget.RobotoTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/home_30"
+        app:fontFamily="roboto"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1.5mg"
+        android:paddingBottom="24dp"
+        android:id="@+id/name_dos"
+        android:inputMethod="name_dos" />
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridV" />
+</LinearLayout>

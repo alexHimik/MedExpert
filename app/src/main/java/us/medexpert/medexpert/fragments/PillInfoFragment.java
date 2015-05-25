@@ -8,16 +8,21 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.List;
+
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
-import us.medexpert.medexpert.db.entity.Product;
+import us.medexpert.medexpert.db.entity.*;
+import us.medexpert.medexpert.db.entity.Package;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.view.SlidingTabLayout;
@@ -39,6 +44,7 @@ public class PillInfoFragment extends BaseFragment {
     private int category_id;
     private String category_name;
     private Context context;
+    public LayoutParams lp_W_W, lp_M_W;
 
     @Nullable
     @Override
@@ -141,9 +147,59 @@ public class PillInfoFragment extends BaseFragment {
     }
 
     public View setPackage(ViewGroup container){
+        lp_W_W = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp_M_W = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        View v_grid;
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
+        LinearLayout ll = (LinearLayout) v.findViewById(R.id.layout_package);
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        List<Package> listPack = ph.getPackage(product_id);
+        Package pc = new Package();
+        String st, typePack,dosa, dosa1;
+        dosa1="****";
+        int im = listPack.size();
+        for (int i = 0; i<im; i++){
+            pc = listPack.get(i);
+            st = pc.getTitle();
+            int j1 = st.indexOf(" ");
+            int j2 = st.indexOf("x");
+            typePack = st.substring(j1,j2).trim();
+            dosa = st.substring(j2).trim();
+            if (!dosa1.equals(dosa)){
+//                v_grid = getActivity().getLayoutInflater().inflate(R.layout.pill_package_item, null);
+//                ll.addView(v_grid);
+//                RobotoTextView name_dos = (RobotoTextView) v_grid.findViewById(R.id.name_dos);
+//                GridView gv = (GridView) v_grid.findViewById(R.id.gridV);
+//                name_dos.setText(dosa);
+
+
+                dosa1 = dosa;
+
+
+  //              la.addView(newRobTV(lp_W_W, "pn.getTitle()", R.style.home_30, 0));
+            }
+        }
+
 //        GridLayout gl = new GridLayout();
         return v;
+    }
+
+    public LinearLayout newLayout(Context context, LayoutParams lp){
+        LinearLayout line1 = new LinearLayout(context);
+        line1.setLayoutParams(lp);
+//        int padT = (int) context.getResources().getDimension(R.dimen.news_padding_img);
+//        line1.setPadding(0,padT,0,0);
+        line1.setOrientation(LinearLayout.HORIZONTAL);
+        return line1;
+    }
+
+    public RobotoTextView newRobTV(LayoutParams lp, String txt, int style, int bg){
+        RobotoTextView tv = new RobotoTextView(getActivity());
+        tv.setLayoutParams(lp);
+        tv.setText(txt);
+        if (style >0) tv.setTextAppearance(getActivity(), style);
+        if (bg>0) tv.setBackgroundResource(bg);
+        return tv;
     }
 
     private View.OnClickListener barClickListener = new View.OnClickListener() {
