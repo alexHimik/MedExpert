@@ -1,32 +1,38 @@
 package us.medexpert.medexpert.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
-import us.medexpert.medexpert.adapter.FavorAdapter;
 import us.medexpert.medexpert.adapter.LastViewedDrugsAdapter;
 import us.medexpert.medexpert.db.entity.Product;
-import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.SortDialog;
 import us.medexpert.medexpert.loader.LastViwedDrugsLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
+import us.medexpert.medexpert.tools.comparator.AscDrugDateComparator;
+import us.medexpert.medexpert.tools.comparator.AscDrugNameNameComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugDateComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugNameComparator;
 
 public class RecentlyFragment extends BaseFragment
         implements ListView.OnItemClickListener, LoaderManager.LoaderCallbacks<List<Product>> {
@@ -35,8 +41,6 @@ public class RecentlyFragment extends BaseFragment
 
     private View parent;
     private LinearLayout ll;
-    private Context context;
-    private List<Product> listProd;
     private LayoutInflater inflat;
     private ViewGroup contain;
     private LastViewedDrugsAdapter listAdapter;
@@ -52,10 +56,20 @@ public class RecentlyFragment extends BaseFragment
         ll = (LinearLayout) parent.findViewById(R.id.ll);
 
         getLoaderManager().initLoader(LastViwedDrugsLoader.ID, null, this);
-
-
-
         return parent;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(sortReceiver,
+                new IntentFilter(SortDialog.SORT_ITEMS_EVENT));
+    }
+
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(sortReceiver);
+        super.onDestroy();
     }
 
     @Override
@@ -100,15 +114,12 @@ public class RecentlyFragment extends BaseFragment
     @Override
     public void onLoadFinished(Loader<List<Product>> loader, List<Product> data) {
         if(data != null && data.size() > 0) {
-//            ListView listView = new ListView(getActivity());
             ListView lv = (ListView) inflat.inflate(R.layout.favor_list, contain, false);
             listAdapter = new LastViewedDrugsAdapter(this);
             listAdapter.getItems().addAll(data);
             lv.setAdapter(listAdapter);
             lv.setOnItemClickListener(this);
             ll.addView(lv);
-
-            //TODO add list to the root layout
         } else {
             View v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
@@ -131,4 +142,34 @@ public class RecentlyFragment extends BaseFragment
         data.putInt(PillInfoFragment.CATEGORY_ID_KEY, pr.getId_category());
         ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
     }
+
+    private BroadcastReceiver sortReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+                    case SortDialog.SORT_BY_NAME_ASC: {
+                        Collections.sort(listAdapter.getItems(), new AscDrugNameNameComparator());
+                        listAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                    case SortDialog.SORT_BY_NAME_DESC: {
+                        Collections.sort(listAdapter.getItems(), new DescDrugNameComparator());
+                        listAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_ASC: {
+                        Collections.sort(listAdapter.getItems(), new AscDrugDateComparator());
+                        listAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_DESC: {
+                        Collections.sort(listAdapter.getItems(), new DescDrugDateComparator());
+                        listAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
+            }
+        }
+    };
 }
