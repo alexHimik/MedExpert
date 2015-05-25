@@ -12,8 +12,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
@@ -25,6 +23,7 @@ import us.medexpert.medexpert.db.entity.*;
 import us.medexpert.medexpert.db.entity.Package;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.WarningDialog;
 import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
@@ -38,26 +37,25 @@ public class PillInfoFragment extends BaseFragment {
     private View parent;
     private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] title = new String[] {"INFO","PACKAGE"};
+    private String[] title = new String[] {" INFO ","PACKAGE"};
     private int product_id;
     private String product_name;
     private int category_id;
     private String category_name;
     private Context context;
     public LayoutParams lp_W_W, lp_M_W;
+    private String currentDrugLink;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View customBar = getActionBarCustomView(inflater);
-        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
-        context = getActivity().getBaseContext();
         Bundle data = getArguments();
         product_name = data.getString(PRODUCT_NAME_KEY);
         product_id = data.getInt(PRODUCT_ID_KEY);
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
-        category_name = ch.getCategoryName(context, category_id);
+        category_name = ch.getCategoryName(getActivity(), category_id);
+        View customBar = getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
         return parent;
@@ -106,8 +104,7 @@ public class PillInfoFragment extends BaseFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = null;
-            // Inflate a new layout from our resources
-            switch (position){
+            switch (position) {
                 case 0:
                     view = setInfo(container);
                     break;
@@ -127,8 +124,8 @@ public class PillInfoFragment extends BaseFragment {
     public View setInfo(ViewGroup container){
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         Product pr = ph.getProduct(product_id);
+        currentDrugLink = pr.getLinc();
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
-        RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
         String nam = st;
         int i1 = st.indexOf("(");
@@ -141,7 +138,13 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
+
+        RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
+        if (btnFindSellers != null) {
+            btnFindSellers.setOnClickListener(btnFindSellersListener);
+        }
+
+       if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
     }
@@ -209,6 +212,13 @@ public class PillInfoFragment extends BaseFragment {
         }
     };
 
+    private View.OnClickListener btnFindSellersListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            WarningDialog warningDialog = new WarningDialog(getActivity(), currentDrugLink);
+            warningDialog.show();
+        }
+    };
 
     @Override
     public String getFragmentTag() {

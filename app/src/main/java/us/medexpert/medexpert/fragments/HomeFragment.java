@@ -142,6 +142,8 @@ public class HomeFragment extends BaseFragment {
 //            CategoryTableHelper ch = new CategoryTableHelper();
             for (int i = 0; i<ik; i++){
                 pr = listProd_R.get(i);
+            for (int i = 0; i<ik; i++) {
+                pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickRecently);
@@ -151,6 +153,7 @@ public class HomeFragment extends BaseFragment {
                 if (i1>0) {
                     st = st.substring(0,i1).trim();
                 }
+
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());

@@ -12,8 +12,4 @@
         <item name="colorAccent">@color/med_blue</item>
     </style>
 
-    <style name="sort_dialog" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/med_blue</item>
-    </style>
-
 </resources>

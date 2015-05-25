@@ -4,6 +4,7 @@ public class Category {
 
     private int id;
     private String catName;
+    private String firstLetter;
     private int type;
 
     public Category() {
@@ -37,5 +38,13 @@ public class Category {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getFirstLetter() {
+        return firstLetter;
+    }
+
+    public void setFirstLetter(String firstLetter) {
+        this.firstLetter = firstLetter;
     }
 }

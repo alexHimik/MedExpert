@@ -120,6 +120,7 @@
                 android:textColor="@color/med_white"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="FIND SELLERS"
+                android:clickable="true"
                 android:background="@drawable/button_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:id="@+id/btn_sellers" />

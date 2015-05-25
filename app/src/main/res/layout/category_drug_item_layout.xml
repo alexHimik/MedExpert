@@ -86,7 +86,6 @@
         android:singleLine="true"
         android:ellipsize="end"
         android:layout_marginRight="@dimen/padding_8dp"
-        android:layout_marginBottom="@dimen/padding_6dp"
         android:textColor="@color/side_bar_category_text"
         android:textSize="@dimen/category_drug_name_text_size"
         app:fontFamily="roboto"

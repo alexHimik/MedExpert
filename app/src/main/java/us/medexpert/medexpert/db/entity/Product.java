@@ -1,8 +1,7 @@
 package us.medexpert.medexpert.db.entity;
 
-import java.util.Date;
-
 public class Product {
+
     private int id;
     private int id_category;
     private String name;
@@ -13,7 +12,6 @@ public class Product {
     private String img;
     private long date_v;
     private String nameCat;
-
 
     public Product() {
     }
