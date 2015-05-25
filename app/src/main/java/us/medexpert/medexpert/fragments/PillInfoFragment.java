@@ -12,6 +12,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
@@ -59,6 +60,7 @@ public class PillInfoFragment extends BaseFragment {
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
         return parent;
+
     }
 
     @Override
