@@ -65,7 +65,11 @@ public class FavorAdapter extends BaseAdapter {
          ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
          ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
          ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
-                 getDrawable(R.drawable.med_ic_pink_heart_checked));
+                 getDrawable(R.drawable.med_ic_pink_card_heart));
+         ImageView iv = (ImageView) v.findViewById(R.id.iv1);
+         Glide.with(context).load(
+                 context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).
+                 asGif().into(iv);
          return v;
     }
 

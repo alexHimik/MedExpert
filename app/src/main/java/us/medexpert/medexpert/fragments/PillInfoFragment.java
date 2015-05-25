@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -141,6 +142,7 @@ public class PillInfoFragment extends BaseFragment {
 
     public View setPackage(ViewGroup container){
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
+//        GridLayout gl = new GridLayout();
         return v;
     }
 

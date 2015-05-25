@@ -44,6 +44,7 @@ public class RecentlyFragment extends BaseFragment
 
         getLoaderManager().initLoader(LastViwedDrugsLoader.ID, null, this);
 
+
         return parent;
     }
 
