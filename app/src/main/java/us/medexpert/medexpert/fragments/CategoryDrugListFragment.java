@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -187,25 +189,64 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         @Override
         public void onReceive(Context context, Intent intent) {
             if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+                final ProductHelper helper = ProductHelper.getInstance(getActivity());
                 switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
                     case SortDialog.SORT_BY_NAME_ASC: {
-
+                        sortHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.obj = helper.getAllCategoryDrugs(categoryId);
+                                sortHandler.sendMessage(msg);
+                            }
+                        });
                         break;
                     }
                     case SortDialog.SORT_BY_NAME_DESC: {
-
+                        sortHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.obj = helper.getAllCategoryDrugsDesc(categoryId);
+                                sortHandler.sendMessage(msg);
+                            }
+                        });
                         break;
                     }
                     case SortDialog.SORT_BY_POP_ASC: {
-
+                        sortHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.obj = helper.getAllCategoryDrugsByDate(categoryId);
+                                sortHandler.sendMessage(msg);
+                            }
+                        });
                         break;
                     }
                     case SortDialog.SORT_BY_POP_DESC: {
-
+                        sortHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.obj = helper.getAllCategoryDrugsByDateDesc(categoryId);
+                                sortHandler.sendMessage(msg);
+                            }
+                        });
                         break;
                     }
                 }
             }
+        }
+    };
+
+    private Handler sortHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Cursor cursor = (Cursor)msg.obj;
+            listAdapter = new CategoryListAdapter(
+                    CategoryDrugListFragment.this, cursor, false);
+            drugsList.setAdapter(listAdapter);
         }
     };
 }

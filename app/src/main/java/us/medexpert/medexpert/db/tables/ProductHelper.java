@@ -122,6 +122,30 @@ public class ProductHelper {
         return cursor;
     }
 
+    public Cursor getAllCategoryDrugsDesc(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by title desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
+    public Cursor getAllCategoryDrugsByDate(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by date_view desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
+    public Cursor getAllCategoryDrugsByDateDesc(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by date_view desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
     public void addDrugToFavorites(int drugId) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME, new String[] {LIKED_COLUMN},
