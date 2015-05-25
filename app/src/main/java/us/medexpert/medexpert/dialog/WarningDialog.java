@@ -14,6 +14,7 @@ import com.devspark.robototextview.widget.RobotoTextView;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.fragments.SellersFragment;
+import us.medexpert.medexpert.tools.FragmentFactory;
 
 /**
  * Created by user on 18.05.15.
@@ -63,7 +64,7 @@ public class WarningDialog extends Dialog {
             // Karelov - START
             Bundle args = new Bundle();
             args.putString("url", "http://www.google.com");
-            mainActivity.handleFragmentSwitching(SellersFragment.FRAGMENT_ID, args);
+            mainActivity.handleFragmentSwitching(FragmentFactory.ID_SELLERS, args);
             // Karelov - END
         }
     };
