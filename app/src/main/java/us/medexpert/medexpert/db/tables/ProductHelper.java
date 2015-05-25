@@ -202,14 +202,20 @@ public class ProductHelper {
 
     public List<Package> getPackage(int id) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
-        String query = "SELECT * FROM app_package WHERE product_package_id = " + id + " ORDER BY title asc";
+        String query = "select T1.title, T1.count, T1.product_package_id "+
+                "from app_package T1, app_package_product T2 where T1.product_package_id=T2._id and T2.product_id=" + id + " ORDER BY T1.product_package_id asc, count asc";
+        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
 
-        Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
+//
+//        String query = "SELECT * FROM app_package WHERE product_package_id = " + id + " ORDER BY product_pack asc, count asc";
+//
+//        Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
         List<Package> data = new ArrayList<>();
-        Package pc = new Package();
+        Package pc;
         if(cursor.moveToFirst()) {
             do {
-                pc.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
+                pc = new Package();
+//                pc.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
                 pc.setTitle(cursor.getString(cursor.getColumnIndex(TITLE_COLUMN)));
                 pc.setCount(cursor.getInt(cursor.getColumnIndex(COUNT_COLUMN)));
                 data.add(pc);

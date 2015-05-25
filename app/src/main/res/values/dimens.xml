@@ -12,6 +12,8 @@
 
     <dimen name="separator_line_height">1dp</dimen>
 
+    <dimen name="med_pad_32">32dp</dimen>
+    <dimen name="med_pad_24">24dp</dimen>
     <!-- Home -->
     <dimen name="home_h_catal">60dp</dimen>
     <dimen name="home_pad_16">16dp</dimen>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class PillInfoFragment extends BaseFragment {
     private int category_id;
     private String category_name;
     private Context context;
-    public LayoutParams lp_W_W, lp_M_W;
+    public LayoutParams lp_W_W;
     private String currentDrugLink;
 
     @Nullable
@@ -54,6 +55,7 @@ public class PillInfoFragment extends BaseFragment {
         product_name = data.getString(PRODUCT_NAME_KEY);
         product_id = data.getInt(PRODUCT_ID_KEY);
         category_id = data.getInt(CATEGORY_ID_KEY);
+        context = getActivity().getBaseContext();
         CategoryTableHelper ch = new CategoryTableHelper();
         category_name = ch.getCategoryName(getActivity(), category_id);
         View customBar = getActionBarCustomView(inflater);
@@ -153,7 +155,6 @@ public class PillInfoFragment extends BaseFragment {
 
     public View setPackage(ViewGroup container){
         lp_W_W = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp_M_W = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        View v_grid;
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
         LinearLayout ll = (LinearLayout) v.findViewById(R.id.layout_package);
@@ -163,26 +164,42 @@ public class PillInfoFragment extends BaseFragment {
         String st, typePack,dosa, dosa1;
         dosa1="****";
         int im = listPack.size();
+        int iline= 0;
+        int pad32 = (int) getResources().getDimension(R.dimen.med_pad_32);
+        int pad24 = (int) getResources().getDimension(R.dimen.med_pad_24);
+        LinearLayout lineCount = null;
+        View rect;
+        RobotoTextView rv_count;
+        RobotoTextView rv_type_pack;
         for (int i = 0; i<im; i++){
             pc = listPack.get(i);
+            Log.d("QWERT","T="+pc.getTitle()+" C="+pc.getCount());
             st = pc.getTitle();
             int j1 = st.indexOf(" ");
             int j2 = st.indexOf("x");
             typePack = st.substring(j1,j2).trim();
-            dosa = st.substring(j2).trim();
-            if (!dosa1.equals(dosa)){
-//                v_grid = getActivity().getLayoutInflater().inflate(R.layout.pill_package_item, null);
-//                ll.addView(v_grid);
-//                RobotoTextView name_dos = (RobotoTextView) v_grid.findViewById(R.id.name_dos);
-//                GridView gv = (GridView) v_grid.findViewById(R.id.gridV);
-//                name_dos.setText(dosa);
-
-
+            dosa = st.substring(j2+1).trim();
+            if (!dosa1.equals(dosa)) {
+                RobotoTextView rv = newRobTV(lp_W_W, dosa, R.style.home_30, 0);
+                rv.setPadding(0,pad32,0,pad24);
+                ll.addView(rv);
                 dosa1 = dosa;
-
-
-  //              la.addView(newRobTV(lp_W_W, "pn.getTitle()", R.style.home_30, 0));
+                lineCount = newLayout(context, lp_W_W);
+                ll.addView(lineCount);
+                iline = 0;
             }
+            if (iline>3){
+                lineCount = newLayout(context, lp_W_W);
+                ll.addView(lineCount);
+                iline = 0;
+            }
+            rect = getActivity().getLayoutInflater().inflate(R.layout.pill_grid_item, null);
+            rv_count = (RobotoTextView) rect.findViewById(R.id.count);
+            rv_type_pack = (RobotoTextView) rect.findViewById(R.id.type_pack);
+            rv_count.setText(""+pc.getCount());
+            rv_type_pack.setText(typePack);
+            lineCount.addView(rect);
+            iline++;
         }
 
 //        GridLayout gl = new GridLayout();
@@ -192,11 +209,11 @@ public class PillInfoFragment extends BaseFragment {
     public LinearLayout newLayout(Context context, LayoutParams lp){
         LinearLayout line1 = new LinearLayout(context);
         line1.setLayoutParams(lp);
-//        int padT = (int) context.getResources().getDimension(R.dimen.news_padding_img);
-//        line1.setPadding(0,padT,0,0);
         line1.setOrientation(LinearLayout.HORIZONTAL);
         return line1;
     }
+
+
 
     public RobotoTextView newRobTV(LayoutParams lp, String txt, int style, int bg){
         RobotoTextView tv = new RobotoTextView(getActivity());

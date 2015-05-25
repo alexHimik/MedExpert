@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="78dp"
-    android:layout_height="78dp"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:padding="1dp"
-    android:background="#f5f5f5">
-    <com.devspark.robototextview.widget.RobotoTextView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/home_24_66"
-        app:fontFamily="roboto"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="30"
-        android:paddingBottom="6dp"
-        android:id="@+id/count"
-        android:paddingTop="10dp" />
-    <com.devspark.robototextview.widget.RobotoTextView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/home_20_99"
-        app:fontFamily="roboto"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="tablets"
-        android:id="@+id/type_pack" />
+    android:padding="1dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:gravity="center_horizontal"
+        android:background="#e5e5e5">
+
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_24_66"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="30"
+            android:paddingBottom="6dp"
+            android:id="@+id/count"
+            android:paddingTop="10dp" />
+
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_20_99"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="tablets"
+            android:id="@+id/type_pack" />
+    </LinearLayout>
+
 </LinearLayout>
