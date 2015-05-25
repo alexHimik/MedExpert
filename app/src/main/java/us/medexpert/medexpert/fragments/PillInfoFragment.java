@@ -30,11 +30,12 @@ public class PillInfoFragment extends BaseFragment {
     private View parent;
     private SlidingTabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] title = new String[] {"INFO","PACKAGE"};
+    private String[] title = new String[] {" INFO ","PACKAGE"};
     private int product_id;
     private String product_name;
     private int category_id;
     private String category_name;
+    private String currentDrugLink;
 
     @Nullable
     @Override
@@ -94,8 +95,7 @@ public class PillInfoFragment extends BaseFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = null;
-            // Inflate a new layout from our resources
-            switch (position){
+            switch (position) {
                 case 0:
                     view = setInfo(container);
                     break;
@@ -115,6 +115,7 @@ public class PillInfoFragment extends BaseFragment {
     public View setInfo(ViewGroup container){
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         Product pr = ph.getProduct(product_id);
+        currentDrugLink = pr.getLinc();
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
         String st = pr.getName();
         String nam = st;
@@ -128,12 +129,12 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-        // Karelov - START
+
         RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
         if (btnFindSellers != null) {
             btnFindSellers.setOnClickListener(btnFindSellersListener);
         }
-        // Karelov - END
+
        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
@@ -152,16 +153,13 @@ public class PillInfoFragment extends BaseFragment {
         }
     };
 
-    // Karelov - START
     private View.OnClickListener btnFindSellersListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            WarningDialog warningDialog = new WarningDialog(getActivity());
+            WarningDialog warningDialog = new WarningDialog(getActivity(), currentDrugLink);
             warningDialog.show();
         }
     };
-    // Karelov - END
-
 
     @Override
     public String getFragmentTag() {

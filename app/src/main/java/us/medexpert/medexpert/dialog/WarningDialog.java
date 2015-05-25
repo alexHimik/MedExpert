@@ -20,12 +20,13 @@ import us.medexpert.medexpert.tools.FragmentFactory;
  * Created by user on 18.05.15.
  */
 public class WarningDialog extends Dialog {
-    // Karelov - START
-    MainActivity mainActivity;
-    // Karelov - END
 
-    public WarningDialog(Context context) {
+    private MainActivity mainActivity;
+    private String link;
+
+    public WarningDialog(Context context, String link) {
         super(context, R.style.TransparentProgressDialog);
+        this.link = link;
         WindowManager.LayoutParams wlmp = getWindow().getAttributes();
         wlmp.gravity = Gravity.CENTER_HORIZONTAL;
 
@@ -39,11 +40,9 @@ public class WarningDialog extends Dialog {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        // Karelov - START
         RobotoTextView tv = (RobotoTextView) layout.findViewById(R.id.attention_continue);
         tv.setOnClickListener(clickListener);
         mainActivity = (MainActivity) context;
-        // Karelov - END
 
         addContentView(layout, params);
     }
@@ -61,11 +60,10 @@ public class WarningDialog extends Dialog {
         @Override
         public void onClick(View v) {
             dismiss();
-            // Karelov - START
             Bundle args = new Bundle();
-            args.putString("url", "http://www.google.com");
+            args.putString("url", mainActivity.getResources().getString(R.string.app_site_base_url)
+             + link);
             mainActivity.handleFragmentSwitching(FragmentFactory.ID_SELLERS, args);
-            // Karelov - END
         }
     };
 

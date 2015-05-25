@@ -60,7 +60,11 @@ public class SellersFragment extends BaseFragment {
     private View.OnClickListener barClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity) getActivity()).onClick(v);
+            if(v.getId() == R.id.left_drawer_item_touch) {
+                ((MainActivity)getActivity()).onBackPressed();
+            } else {
+                ((MainActivity) getActivity()).onClick(v);
+            }
         }
     };
 
