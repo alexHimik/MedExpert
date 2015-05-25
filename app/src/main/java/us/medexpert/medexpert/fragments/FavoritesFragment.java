@@ -35,7 +35,7 @@ import us.medexpert.medexpert.tools.FragmentFactory;
 import us.medexpert.medexpert.tools.comparator.AscDrugNameNameComparator;
 import us.medexpert.medexpert.tools.comparator.DescDrugNameComparator;
 
-public class FavoritesFragment extends BaseFragment  implements ListView.OnItemClickListener{
+public class FavoritesFragment extends BaseFragment implements ListView.OnItemClickListener {
     public static final String TAG = "FavoritesFragment";
     public static final int FRAGMENT_ID = 5;
 
@@ -43,6 +43,9 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     private SwipeMenuListView lv;
     private List<Product> listProd;
     private FavorAdapter favorAdapter;
+    // Karelov - START
+    private int mSortPosition;
+    // Karelov - END
 
     @Nullable
     @Override
@@ -54,14 +57,13 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
         View v;
         if (listProd.size() == 0) {
             parent = inflater.inflate(R.layout.favorites, container, false);
-            LinearLayout ll = (LinearLayout)parent.findViewById(R.id.ll);
+            LinearLayout ll = (LinearLayout) parent.findViewById(R.id.ll);
             ll.setGravity(Gravity.CENTER_VERTICAL);
             v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
             ll.addView(v);
             return parent;
-        }
-        else {
+        } else {
             lv = (SwipeMenuListView) inflater.inflate(R.layout.favor_list, container, false);
             favorAdapter = new FavorAdapter(this, listProd);
             lv.setAdapter(favorAdapter);
@@ -104,13 +106,24 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
         data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
         data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());
         data.putInt(PillInfoFragment.CATEGORY_ID_KEY, pr.getId_category());
-        ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
+        ((MainActivity) getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
     }
 
     private View.OnClickListener barClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity) getActivity()).onClick(v);
+            switch (v.getId()) {
+                case R.id.left_drawer_item_touch:
+                    ((MainActivity) getActivity()).onClick(v);
+                    break;
+                case R.id.right_drawer_item:
+                    ((MainActivity) getActivity()).onClick(v);
+                    break;
+                case R.id.sort_bar_item:
+                    SortDialog sortDialog = new SortDialog((MainActivity) getActivity(), mSortPosition);
+                    sortDialog.show();
+                    break;
+            }
         }
     };
 
@@ -142,7 +155,7 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
 
         @Override
         public void onSwipeEnd(int position) {
-            if(position != -1) {
+            if (position != -1) {
                 ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
                 categoryDrugsTableHelper.removeDrugFromFavorites(
                         favorAdapter.getItem(position).getId());
@@ -163,8 +176,12 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     private BroadcastReceiver sortReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
-                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+            if (SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+                int position = intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1);
+                if (position >= 0) {
+                    mSortPosition = position;
+                }
+                switch (position) {
                     case SortDialog.SORT_BY_NAME_ASC: {
                         Collections.sort(favorAdapter.getItems(), new AscDrugNameNameComparator());
                         favorAdapter.notifyDataSetChanged();
