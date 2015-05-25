@@ -58,6 +58,10 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
 
     @Override
     public void initActionBarItems() {
+        // Karelov - START
+        sortBarItem.setVisibility(View.VISIBLE);
+        sortBarItem.setOnClickListener(onClickListener);
+        // Karelov - END
         rightBarItem.setOnClickListener(onClickListener);
         leftItemTouch.setOnClickListener(onClickListener);
         ((RobotoTextView)centerBatItem).setText(categoryName);
@@ -122,6 +126,8 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             if(v.getId() == R.id.right_drawer_item) {
                 ((MainActivity)getActivity()).onClick(v);
             } else if(v.getId() == R.id.left_drawer_item_touch) {
+                ((MainActivity)getActivity()).onClick(v);
+            } else if(v.getId() == R.id.sort_bar_item) {
                 ((MainActivity)getActivity()).onClick(v);
             } else {
                 //TODO add handling if there will be additional bar items

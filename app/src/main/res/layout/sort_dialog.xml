@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fontFamily="roboto"
-        app:textWeight="normal"
+        app:textWeight="medium"
         android:textSize="20sp"
         android:textColor="@color/color_edittext"
         android:text="@string/sort_dialog_title"

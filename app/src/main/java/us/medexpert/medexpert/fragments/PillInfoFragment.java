@@ -16,6 +16,7 @@ import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.WarningDialog;
 import us.medexpert.medexpert.view.SlidingTabLayout;
 
 
@@ -127,7 +128,13 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
+        // Karelov - START
+        RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
+        if (btnFindSellers != null) {
+            btnFindSellers.setOnClickListener(btnFindSellersListener);
+        }
+        // Karelov - END
+       if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
     }
@@ -144,6 +151,16 @@ public class PillInfoFragment extends BaseFragment {
             ((MainActivity)getActivity()).onClick(v);
         }
     };
+
+    // Karelov - START
+    private View.OnClickListener btnFindSellersListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            WarningDialog warningDialog = new WarningDialog(getActivity());
+            warningDialog.show();
+        }
+    };
+    // Karelov - END
 
 
     @Override

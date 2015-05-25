@@ -63,7 +63,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginRight="28dp"
         android:layout_marginBottom="24dp"
-         />
+        android:clickable="true" />
     <View
         android:layout_width="wrap_content"
         android:layout_height="@dimen/separator_line_height"

@@ -2,19 +2,27 @@ package us.medexpert.medexpert.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.devspark.robototextview.widget.RobotoTextView;
+
 import us.medexpert.medexpert.R;
+import us.medexpert.medexpert.activity.MainActivity;
+import us.medexpert.medexpert.fragments.SellersFragment;
+import us.medexpert.medexpert.tools.FragmentFactory;
 
 /**
  * Created by user on 18.05.15.
  */
 public class WarningDialog extends Dialog {
-
+    // Karelov - START
+    MainActivity mainActivity;
+    // Karelov - END
 
     public WarningDialog(Context context) {
         super(context, R.style.TransparentProgressDialog);
@@ -25,11 +33,17 @@ public class WarningDialog extends Dialog {
         setTitle(null);
         setCancelable(true);
 
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.warning_dialog, null);
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.warning_dialog, null);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        // Karelov - START
+        RobotoTextView tv = (RobotoTextView) layout.findViewById(R.id.attention_continue);
+        tv.setOnClickListener(clickListener);
+        mainActivity = (MainActivity) context;
+        // Karelov - END
 
         addContentView(layout, params);
     }
@@ -47,6 +61,13 @@ public class WarningDialog extends Dialog {
         @Override
         public void onClick(View v) {
             dismiss();
+            // Karelov - START
+            Bundle args = new Bundle();
+            args.putString("url", "http://www.google.com");
+            mainActivity.handleFragmentSwitching(FragmentFactory.ID_SELLERS, args);
+            // Karelov - END
         }
     };
+
+
 }
