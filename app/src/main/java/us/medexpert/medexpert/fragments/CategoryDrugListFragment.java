@@ -1,12 +1,15 @@
 package us.medexpert.medexpert.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +22,19 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.Collections;
+
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.CategoryListAdapter;
 import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.dialog.SortDialog;
 import us.medexpert.medexpert.loader.CategoryDrugListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
+import us.medexpert.medexpert.tools.comparator.AscDrugDateComparator;
+import us.medexpert.medexpert.tools.comparator.AscDrugNameNameComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugDateComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugNameComparator;
 
 /**
  * Created by user on 20.05.15.
@@ -57,11 +67,22 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(sortReceiver,
+                new IntentFilter(SortDialog.SORT_ITEMS_EVENT));
+    }
+
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(sortReceiver);
+        super.onDestroy();
+    }
+
+    @Override
     public void initActionBarItems() {
-        // Karelov - START
         sortBarItem.setVisibility(View.VISIBLE);
         sortBarItem.setOnClickListener(onClickListener);
-        // Karelov - END
         rightBarItem.setOnClickListener(onClickListener);
         leftItemTouch.setOnClickListener(onClickListener);
         ((RobotoTextView)centerBatItem).setText(categoryName);
@@ -159,6 +180,32 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             int drugId = (int)listAdapter.getItem(position);
             ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
             categoryDrugsTableHelper.addDrugToFavorites(drugId);
+        }
+    };
+
+    private BroadcastReceiver sortReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+                    case SortDialog.SORT_BY_NAME_ASC: {
+
+                        break;
+                    }
+                    case SortDialog.SORT_BY_NAME_DESC: {
+
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_ASC: {
+
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_DESC: {
+
+                        break;
+                    }
+                }
+            }
         }
     };
 }
