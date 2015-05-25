@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -13,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -20,13 +23,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import us.medexpert.medexpert.R;
+import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.SearchListAdapter;
 import us.medexpert.medexpert.db.entity.SearchListEntity;
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
+import us.medexpert.medexpert.db.tables.ProductHelper;
+import us.medexpert.medexpert.loader.DefaultSearchDataLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
-public class SearchFragment extends BaseFragment {
+public class SearchFragment extends BaseFragment
+        implements LoaderManager.LoaderCallbacks<List<SearchListEntity>> {
 
     public static final String TAG = "SearchFragment";
 
@@ -40,6 +46,8 @@ public class SearchFragment extends BaseFragment {
         getActionBarCustomView(inflater);
         listAdapter = new SearchListAdapter(getActivity());
         contentList.setAdapter(listAdapter);
+        contentList.setOnItemClickListener(onItemClickListener);
+        getLoaderManager().initLoader(DefaultSearchDataLoader.ID, null, this);
         return contentList;
     }
 
@@ -82,11 +90,56 @@ public class SearchFragment extends BaseFragment {
     private View.OnClickListener backListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.right_drawer_item) {
+            if(v.getId() == R.id.search_clear) {
                 ((EditText)centerBatItem).setText("");
             }
         }
     };
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            SearchListEntity entity = listAdapter.getItem(position);
+            Bundle data = new Bundle();
+            switch (entity.getType()) {
+                case SearchListAdapter.ITEM_TYPE_CATEGORY: {
+                    data.putString(CategoryDrugListFragment.CATEGORY_NAME_KEY, entity.getName());
+                    data.putInt(CategoryDrugListFragment.CATEGORY_ID_KEY, entity.getId());
+                    ((MainActivity)getActivity()).handleFragmentSwitching(
+                            FragmentFactory.ID_CATEGORY ,data);
+                    break;
+                }
+                case SearchListAdapter.ITEM_TYPE_DRUG: {
+                    data.putString(PillInfoFragment.PRODUCT_NAME_KEY, entity.getName());
+                    data.putInt(PillInfoFragment.PRODUCT_ID_KEY, entity.getId());
+                    data.putInt(PillInfoFragment.CATEGORY_ID_KEY, entity.getCategoryId());
+                    ((MainActivity)getActivity()).handleFragmentSwitching(
+                            FragmentFactory.ID_PILLINFO, data);
+                    break;
+                }
+            }
+        }
+    };
+
+    @Override
+    public Loader<List<SearchListEntity>> onCreateLoader(int id, Bundle args) {
+        if(id == DefaultSearchDataLoader.ID) {
+            return new DefaultSearchDataLoader(getActivity());
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<SearchListEntity>> loader, List<SearchListEntity> data) {
+        Message msg = Message.obtain();
+        msg.obj = data;
+        searchHandler.sendMessage(msg);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<SearchListEntity>> loader) {
+        //do nothing here
+    }
 
     private TextWatcher searchInputListener = new TextWatcher() {
         @Override
@@ -131,11 +184,10 @@ public class SearchFragment extends BaseFragment {
         @Override
         public void run() {
             CategoryTableHelper categoryTableHelper = new CategoryTableHelper();
-            CategoryDrugsTableHelper categoryDrugsTableHelper = new CategoryDrugsTableHelper();
+            ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
             List<SearchListEntity> categories = categoryTableHelper.getCategoriesForSearch(
                     getActivity(), query);
-            List<SearchListEntity> drugs = categoryDrugsTableHelper.getDrugsForSearch(
-                    getActivity(), query);
+            List<SearchListEntity> drugs = categoryDrugsTableHelper.getDrugsForSearch(query);
             List<SearchListEntity> result = new ArrayList<>();
             SearchListEntity catHeader = new SearchListEntity();
             catHeader.setId(-1);

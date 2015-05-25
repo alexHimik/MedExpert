@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class PillInfoFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View customBar = super.getActionBarCustomView(inflater);
+        View customBar = getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         context = getActivity().getBaseContext();
         Bundle data = getArguments();
@@ -52,12 +53,8 @@ public class PillInfoFragment extends BaseFragment {
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
         category_name = ch.getCategoryName(context, category_id);
-//        product_name = "QWERT YUI";
-//        product_id = 472;
-//        category_name = "Name Category";
-
+        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
-
         return parent;
     }
 
@@ -73,14 +70,14 @@ public class PillInfoFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         viewPager = (ViewPager)view.findViewById(R.id.screen_pager);
         viewPager.setAdapter(new SamplePagerAdapter());
         tabLayout = (SlidingTabLayout)view.findViewById(R.id.screen_tabs);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.med_blue));
-//        tabLayout.setTextColor(0x000000,0x999999);
         tabLayout.setViewPager(viewPager);
+
+        ProductHelper productHelper = ProductHelper.getInstance(getActivity());
+        productHelper.updateDrugViewedDate(product_id);
     }
 
     // Adapter
@@ -123,8 +120,8 @@ public class PillInfoFragment extends BaseFragment {
     }
 
     public View setInfo(ViewGroup container){
-        ProductHelper ph = new ProductHelper();
-        Product pr = ph.getProduct(context, product_id);
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        Product pr = ph.getProduct(product_id);
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
         RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
@@ -145,14 +142,14 @@ public class PillInfoFragment extends BaseFragment {
             btnFindSellers.setOnClickListener(btnFindSellersListener);
         }
         // Karelov - END
-        if (pr.getLiked()>0) ((ImageView) v.findViewById(R.id.iv2)).
+       if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
     }
 
     public View setPackage(ViewGroup container){
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
-
+//        GridLayout gl = new GridLayout();
         return v;
     }
 

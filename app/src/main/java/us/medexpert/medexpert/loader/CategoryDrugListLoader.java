@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.AsyncTaskLoader;
 
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
+import us.medexpert.medexpert.db.tables.ProductHelper;
 
 
 /**
@@ -35,8 +35,8 @@ public class CategoryDrugListLoader extends AsyncTaskLoader<Cursor> {
 
     @Override
     public Cursor loadInBackground() {
-        CategoryDrugsTableHelper helper = new CategoryDrugsTableHelper();
-        lastRecentData = helper.getAllCategoryDrugs(context, categoryId);
+        ProductHelper helper = ProductHelper.getInstance(context);
+        lastRecentData = helper.getAllCategoryDrugs(categoryId);
         return lastRecentData;
     }
 }

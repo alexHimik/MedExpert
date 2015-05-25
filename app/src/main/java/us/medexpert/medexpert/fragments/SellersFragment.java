@@ -1,33 +1,19 @@
 package us.medexpert.medexpert.fragments;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
-import us.medexpert.medexpert.adapter.CategoryListAdapter;
-import us.medexpert.medexpert.db.tables.CategoryDrugsTableHelper;
-import us.medexpert.medexpert.loader.CategoryDrugListLoader;
 import us.medexpert.medexpert.tools.FragmentFactory;
 
 /**
@@ -36,7 +22,6 @@ import us.medexpert.medexpert.tools.FragmentFactory;
 public class SellersFragment extends BaseFragment {
 
     public static final String TAG = "SellersFragment";
-    public static final int FRAGMENT_ID = 2;
 
     private View parent;
     private LinearLayout ll;
@@ -86,7 +71,7 @@ public class SellersFragment extends BaseFragment {
 
     @Override
     public int getFragmentId() {
-        return FRAGMENT_ID;
+        return FragmentFactory.ID_SELLERS;
     }
 
     private class MyWebViewClient extends WebViewClient {

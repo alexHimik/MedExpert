@@ -5,21 +5,22 @@ import java.util.Date;
 public class Product {
     private int id;
     private int id_category;
-    private String Name;
+    private String name;
     private String price;
     private String linc;
     private int liked;
     private String descr;
     private String img;
-    private Date date_v;
+    private long date_v;
+    private String nameCat;
 
 
     public Product() {
     }
 
-    public Product(int id, String n, String p, String l, int liked, String d, Date date, int c) {
+    public Product(int id, String n, String p, String l, int liked, String d, long date, int c) {
         this.id = id;
-        this.Name = n;
+        this.name = n;
         this.price = p;
         this.linc = l;
         this.liked = liked;
@@ -37,11 +38,11 @@ public class Product {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getPrice() {
@@ -84,11 +85,11 @@ public class Product {
         this.img = img;
     }
 
-    public Date getDate_v() {
+    public long getDate_v() {
         return date_v;
     }
 
-    public void setDate_v(Date date_v) {
+    public void setDate_v(long date_v) {
         this.date_v = date_v;
     }
 
@@ -98,5 +99,13 @@ public class Product {
 
     public void setId_category(int id_category) {
         this.id_category = id_category;
+    }
+
+    public String getNameCat() {
+        return nameCat;
+    }
+
+    public void setNameCat(String nameCat) {
+        this.nameCat = nameCat;
     }
 }
