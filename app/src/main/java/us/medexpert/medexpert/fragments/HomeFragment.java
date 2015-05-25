@@ -99,7 +99,7 @@ public class HomeFragment extends BaseFragment {
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickFavor);
-                bl.setTag(""+i);
+                v.setTag(""+i);
                 String st = pr.getName();
                 int i1 = st.indexOf("(");
                 if (i1>0) {
@@ -165,13 +165,13 @@ public class HomeFragment extends BaseFragment {
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickRecently);
-                bl.setTag(""+i);
+                v.setTag(""+i);
                 String st = pr.getName();
                 int i1 = st.indexOf("(");
                 if (i1>0) {
                     st = st.substring(0,i1).trim();
                 }
-
+Log.d("QWERT","LL I="+i+" ID="+pr.getId()+" N="+pr.getName());
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
@@ -219,6 +219,7 @@ public class HomeFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
+            Log.d("QWERT","Pos="+Integer.valueOf(v.getTag().toString())+" ID="+pr.getId());
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());
