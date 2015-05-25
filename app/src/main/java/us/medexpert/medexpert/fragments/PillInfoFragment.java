@@ -126,9 +126,6 @@ public class PillInfoFragment extends BaseFragment {
         ProductHelper ph = new ProductHelper();
         Product pr = ph.getProduct(context, product_id);
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
-        // Karelov - START
-        v.setOnClickListener(btnFindSellersListener);
-        // Karelov - END
         RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
         String nam = st;
@@ -142,6 +139,12 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+        // Karelov - START
+        RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
+        if (btnFindSellers != null) {
+            btnFindSellers.setOnClickListener(btnFindSellersListener);
+        }
+        // Karelov - END
         if (pr.getLiked()>0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
         return v;
@@ -160,6 +163,7 @@ public class PillInfoFragment extends BaseFragment {
         }
     };
 
+    // Karelov - START
     private View.OnClickListener btnFindSellersListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -167,6 +171,7 @@ public class PillInfoFragment extends BaseFragment {
             warningDialog.show();
         }
     };
+    // Karelov - END
 
 
     @Override
