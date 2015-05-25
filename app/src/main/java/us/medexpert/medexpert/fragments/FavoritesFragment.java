@@ -46,9 +46,7 @@ public class FavoritesFragment extends BaseFragment implements ListView.OnItemCl
     private SwipeMenuListView lv;
     private List<Product> listProd;
     private FavorAdapter favorAdapter;
-    // Karelov - START
     private int mSortPosition;
-    // Karelov - END
 
     @Nullable
     @Override
