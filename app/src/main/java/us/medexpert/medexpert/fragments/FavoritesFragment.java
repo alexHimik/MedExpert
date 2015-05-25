@@ -1,18 +1,20 @@
 package us.medexpert.medexpert.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -20,6 +22,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import us.medexpert.medexpert.R;
@@ -27,8 +30,10 @@ import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.adapter.FavorAdapter;
 import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.ProductHelper;
-import us.medexpert.medexpert.db.tables.TabHelper;
+import us.medexpert.medexpert.dialog.SortDialog;
 import us.medexpert.medexpert.tools.FragmentFactory;
+import us.medexpert.medexpert.tools.comparator.AscDrugNameNameComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugNameComparator;
 
 public class FavoritesFragment extends BaseFragment  implements ListView.OnItemClickListener{
     public static final String TAG = "FavoritesFragment";
@@ -36,10 +41,7 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
 
     private View parent;
     private SwipeMenuListView lv;
-    private Context context;
     private List<Product> listProd;
-    private LinearLayout ll;
-    private TabHelper tabHelper;
     private FavorAdapter favorAdapter;
 
     @Nullable
@@ -47,7 +49,6 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View customBar = super.getActionBarCustomView(inflater);
         ((MainActivity) getActivity()).getSupportActionBar().setCustomView(customBar);
-        context = getActivity().getBaseContext();
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         listProd = ph.getProductFavor();
         View v;
@@ -83,6 +84,18 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
         ((RobotoTextView) centerBatItem).setText(getString(R.string.favorites_string));
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(sortReceiver,
+                new IntentFilter(SortDialog.SORT_ITEMS_EVENT));
+    }
+
+    @Override
+    public void onDestroy() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(sortReceiver);
+        super.onDestroy();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -146,4 +159,32 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     public int getFragmentId() {
         return FRAGMENT_ID;
     }
+
+    private BroadcastReceiver sortReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+                    case SortDialog.SORT_BY_NAME_ASC: {
+                        Collections.sort(favorAdapter.getItems(), new AscDrugNameNameComparator());
+                        favorAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                    case SortDialog.SORT_BY_NAME_DESC: {
+                        Collections.sort(favorAdapter.getItems(), new DescDrugNameComparator());
+                        favorAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_ASC: {
+
+                        break;
+                    }
+                    case SortDialog.SORT_BY_POP_DESC: {
+
+                        break;
+                    }
+                }
+            }
+        }
+    };
 }

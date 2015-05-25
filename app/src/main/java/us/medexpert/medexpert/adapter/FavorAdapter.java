@@ -22,7 +22,6 @@ import us.medexpert.medexpert.db.entity.Product;
 public class FavorAdapter extends BaseAdapter {
     private Fragment context;
     private List<Product> items;
-//    private boolean useRedItems;
 
     public FavorAdapter(Fragment context, List<Product> items) {
         this.context = context;
@@ -55,7 +54,7 @@ public class FavorAdapter extends BaseAdapter {
 
          String st = pr.getName();
          int i1 = st.indexOf("(");
-         if (i1>0) {
+         if (i1 > 0) {
              st = st.substring(0,i1).trim();
          }
 
@@ -70,5 +69,13 @@ public class FavorAdapter extends BaseAdapter {
                  context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).
                  asGif().into(iv);
          return v;
+    }
+
+    public List<Product> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Product> items) {
+        this.items = items;
     }
 }
