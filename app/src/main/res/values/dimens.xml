@@ -39,7 +39,7 @@
 
     <!--action bar values-->
     <dimen name="action_bar_title_felt_padding">32dp</dimen>
-    <dimen name="action_bar_title_text_size">14sp</dimen>
+    <dimen name="action_bar_title_text_size">20sp</dimen>
     <dimen name="action_bar_icons_size">24dp</dimen>
     <dimen name="action_bar_left_item_touch_size">32dp</dimen>
 
@@ -75,6 +75,7 @@
     <dimen name="catalog_main_item_top_margin">20dp</dimen>
     <dimen name="catalog_header_item_font_size">14sp</dimen>
     <dimen name="catalog_main_item_font_size">18sp</dimen>
+    <dimen name="catalog_inner_header_top_margin">48dp</dimen>
 
     <!--Category tutorial-->
     <dimen name="catalog_tutorial_image_block_width">312dp</dimen>

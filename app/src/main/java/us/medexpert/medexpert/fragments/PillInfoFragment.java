@@ -1,6 +1,5 @@
 package us.medexpert.medexpert.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -8,10 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
@@ -38,20 +34,17 @@ public class PillInfoFragment extends BaseFragment {
     private String product_name;
     private int category_id;
     private String category_name;
-    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View customBar = getActionBarCustomView(inflater);
-        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
-        context = getActivity().getBaseContext();
         Bundle data = getArguments();
         product_name = data.getString(PRODUCT_NAME_KEY);
         product_id = data.getInt(PRODUCT_ID_KEY);
         category_id = data.getInt(CATEGORY_ID_KEY);
         CategoryTableHelper ch = new CategoryTableHelper();
-        category_name = ch.getCategoryName(context, category_id);
+        category_name = ch.getCategoryName(getActivity(), category_id);
+        View customBar = getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
         return parent;
@@ -122,7 +115,6 @@ public class PillInfoFragment extends BaseFragment {
         ProductHelper ph = ProductHelper.getInstance(getActivity());
         Product pr = ph.getProduct(product_id);
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_tab, container, false);
-        RobotoTextView name = (RobotoTextView) v.findViewById(R.id.name);
         String st = pr.getName();
         String nam = st;
         int i1 = st.indexOf("(");

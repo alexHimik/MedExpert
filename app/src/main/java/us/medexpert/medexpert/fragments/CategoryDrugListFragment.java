@@ -100,7 +100,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             cursor.moveToPosition(position);
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, cursor.getString(
-                    cursor.getColumnIndex(ProductHelper.DRUG_PRICE_COLUMN)));
+                    cursor.getColumnIndex(ProductHelper.TITLE_COLUMN)));
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, cursor.getInt(cursor.getColumnIndex(
                     ProductHelper.ID_COLUMN)));
             data.putInt(PillInfoFragment.CATEGORY_ID_KEY, categoryId);

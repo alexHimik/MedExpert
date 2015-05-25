@@ -160,7 +160,7 @@ public class HomeFragment extends BaseFragment {
             int ik = listProd.size();
             if (ik>2) ik = 2;
 //            CategoryTableHelper ch = new CategoryTableHelper();
-            for (int i = 0; i<ik; i++){
+            for (int i = 0; i<ik; i++) {
                 pr = listProd.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
@@ -171,7 +171,7 @@ public class HomeFragment extends BaseFragment {
                 if (i1>0) {
                     st = st.substring(0,i1).trim();
                 }
-Log.d("QWERT","LL I="+i+" ID="+pr.getId()+" N="+pr.getName());
+
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
@@ -219,7 +219,6 @@ Log.d("QWERT","LL I="+i+" ID="+pr.getId()+" N="+pr.getName());
         @Override
         public void onClick(View v) {
             Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
-            Log.d("QWERT","Pos="+Integer.valueOf(v.getTag().toString())+" ID="+pr.getId());
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());

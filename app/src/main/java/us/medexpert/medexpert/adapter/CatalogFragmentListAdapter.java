@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
@@ -20,7 +21,6 @@ import us.medexpert.medexpert.db.entity.Category;
 public class CatalogFragmentListAdapter extends BaseAdapter {
 
     private List<Category> items;
-    private Context context;
     private LayoutInflater inflater;
 
     private static final int VIEW_TYPES_COUNT = 2;
@@ -29,7 +29,6 @@ public class CatalogFragmentListAdapter extends BaseAdapter {
     public static final int CATALOG_CATEGORY_TYPE_ITEM = 1;
 
     public CatalogFragmentListAdapter(Context context, List data) {
-        this.context = context;
         this.items = data;
         inflater = (LayoutInflater)context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
@@ -62,19 +61,22 @@ public class CatalogFragmentListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View view = null;
         if(items.get(position).getType() == CATALOG_CATEGORY_TYPE_HEADER) {
-            View header = inflater.inflate(R.layout.category_header_item, null);
-            ((RobotoTextView)header.findViewById(R.id.category_header_text)).setText(items.get(position).getCatName());
-            return header;
+            view = inflater.inflate(R.layout.category_header_item, null);
+            if(position > 0) {
+                view = inflater.inflate(R.layout.category_header_item_type_2, null);
+            }
+            ((RobotoTextView)view.findViewById(R.id.category_header_text)).setText(items.get(position).getCatName());
         } else {
-            View item = inflater.inflate(R.layout.category_main_item, null);
-            RobotoTextView letter = (RobotoTextView)item.findViewById(R.id.category_letter_text);
-            RobotoTextView mane = (RobotoTextView)item.findViewById(R.id.category_main_text);
-            letter.setText(items.get(position).getCatName().substring(0, 1));
+            view = inflater.inflate(R.layout.category_main_item, null);
+            RobotoTextView letter = (RobotoTextView)view.findViewById(R.id.category_letter_text);
+            RobotoTextView mane = (RobotoTextView)view.findViewById(R.id.category_main_text);
+            letter.setText(items.get(position).getFirstLetter());
             mane.setText(items.get(position).getCatName());
-            item.setTag(items.get(position).getId());
-            return item;
+            view.setTag(items.get(position).getId());
         }
+        return view;
     }
 
     public List getItems() {
@@ -90,11 +92,19 @@ public class CatalogFragmentListAdapter extends BaseAdapter {
         List<Category> result = new ArrayList<>();
         result.add(new Category(-1, context.getString(R.string.catalog_popular_categories_header_txt), CATALOG_CATEGORY_TYPE_HEADER));
         for(Category c : topCategories) {
+            c.setFirstLetter(" ");
             result.add(c);
         }
         result.add(new Category(-1, context.getString(R.string.catalog_all_categories_header_txt),
                 CATALOG_CATEGORY_TYPE_HEADER));
+        String lastLetter = "";
         for(Category c : allCategories) {
+            if(!c.getCatName().substring(0, 1).equals(lastLetter)) {
+                c.setFirstLetter(c.getCatName().substring(0, 1));
+            } else {
+                c.setFirstLetter(" ");
+            }
+            lastLetter = c.getCatName().substring(0, 1);
             result.add(c);
         }
 

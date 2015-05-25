@@ -11,30 +11,6 @@
         android:clickable="false"
         android:paddingBottom="@dimen/side_setting_pad_36"
         android:orientation="vertical">
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/side_pad_48"
-                android:clickable="true"
-            android:id="@+id/side_setting"
-                android:background="@drawable/menu_selector"
-                android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="@dimen/settings_icon_size"
-                android:layout_height="@dimen/settings_icon_size"
-                android:src="@drawable/med_ic_grey_settings"
-                android:layout_marginLeft="@dimen/side_setting_pad_36" />
-            <com.devspark.robototextview.widget.RobotoTextView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/side_text"
-                android:layout_marginLeft="@dimen/side_pad_28"
-                app:fontFamily="roboto"
-                app:textWeight="normal"
-                android:text="@string/settings_string"
-                android:layout_gravity="center_vertical" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
