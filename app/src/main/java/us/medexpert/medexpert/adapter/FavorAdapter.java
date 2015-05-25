@@ -24,10 +24,9 @@ public class FavorAdapter extends BaseAdapter {
     private List<Product> items;
 //    private boolean useRedItems;
 
-    public FavorAdapter(Fragment context, List<Product> items, boolean useRedItems) {
+    public FavorAdapter(Fragment context, List<Product> items) {
         this.context = context;
         this.items = items;
-//        this.useRedItems = useRedItems;
     }
 
     @Override
@@ -72,12 +71,4 @@ public class FavorAdapter extends BaseAdapter {
                  asGif().into(iv);
          return v;
     }
-
-//    public boolean isRedItemUsing() {
-//        return useRedItems;
-//    }
-//
-//    public void setRedItemsUsing(boolean flag) {
-//        useRedItems  = flag;
-//    }
 }

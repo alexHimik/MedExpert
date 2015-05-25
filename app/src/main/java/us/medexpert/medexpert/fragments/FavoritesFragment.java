@@ -3,6 +3,7 @@ package us.medexpert.medexpert.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.List;
@@ -30,7 +35,7 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     public static final int FRAGMENT_ID = 5;
 
     private View parent;
-    private ListView lv;
+    private SwipeMenuListView lv;
     private Context context;
     private List<Product> listProd;
     private LinearLayout ll;
@@ -40,7 +45,6 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View customBar = super.getActionBarCustomView(inflater);
         ((MainActivity) getActivity()).getSupportActionBar().setCustomView(customBar);
         context = getActivity().getBaseContext();
@@ -57,20 +61,21 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
             return parent;
         }
         else {
-            lv = (ListView) inflater.inflate(R.layout.favor_list, container, false);
-            favorAdapter = new FavorAdapter(this, listProd, true);
+            lv = (SwipeMenuListView) inflater.inflate(R.layout.favor_list, container, false);
+            favorAdapter = new FavorAdapter(this, listProd);
             lv.setAdapter(favorAdapter);
             lv.setOnItemClickListener(this);
+            lv.setOnMenuItemClickListener(onMenuItemClickListener);
+            lv.setMenuCreator(menuCreator);
+            lv.setOnSwipeListener(onSwipeListener);
             return lv;
         }
     }
 
     @Override
     public void initActionBarItems() {
-        // Karelov - START
         sortBarItem.setVisibility(View.VISIBLE);
         sortBarItem.setOnClickListener(barClickListener);
-        // Karelov - END
         rightBarItem.setVisibility(View.VISIBLE);
         rightBarItem.setOnClickListener(barClickListener);
         leftItemTouch.setOnClickListener(barClickListener);
@@ -96,6 +101,41 @@ public class FavoritesFragment extends BaseFragment  implements ListView.OnItemC
         }
     };
 
+    private SwipeMenuListView.OnMenuItemClickListener onMenuItemClickListener = new SwipeMenuListView.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+            return false;
+        }
+    };
+
+    private SwipeMenuCreator menuCreator = new SwipeMenuCreator() {
+        @Override
+        public void create(SwipeMenu menu) {
+            SwipeMenuItem item = new SwipeMenuItem(getActivity());
+            item.setBackground(R.color.color_light_grey);
+            item.setIcon(R.drawable.med_ic_white_big_heart_broken);
+            item.setWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    getResources().getDimension(R.dimen.favorite_item_width),
+                    getResources().getDisplayMetrics()));
+            menu.addMenuItem(item);
+        }
+    };
+
+    private SwipeMenuListView.OnSwipeListener onSwipeListener = new SwipeMenuListView.OnSwipeListener() {
+        @Override
+        public void onSwipeStart(int position) {
+
+        }
+
+        @Override
+        public void onSwipeEnd(int position) {
+            if(position != -1) {
+                ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
+                categoryDrugsTableHelper.removeDrugFromFavorites(
+                        favorAdapter.getItem(position).getId());
+            }
+        }
+    };
 
     @Override
     public String getFragmentTag() {
