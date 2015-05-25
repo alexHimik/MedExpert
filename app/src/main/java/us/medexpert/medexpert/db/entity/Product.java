@@ -11,14 +11,14 @@ public class Product {
     private int liked;
     private String descr;
     private String img;
-    private Date date_v;
+    private long date_v;
     private String nameCat;
 
 
     public Product() {
     }
 
-    public Product(int id, String n, String p, String l, int liked, String d, Date date, int c) {
+    public Product(int id, String n, String p, String l, int liked, String d, long date, int c) {
         this.id = id;
         this.name = n;
         this.price = p;
@@ -85,11 +85,11 @@ public class Product {
         this.img = img;
     }
 
-    public Date getDate_v() {
+    public long getDate_v() {
         return date_v;
     }
 
-    public void setDate_v(Date date_v) {
+    public void setDate_v(long date_v) {
         this.date_v = date_v;
     }
 

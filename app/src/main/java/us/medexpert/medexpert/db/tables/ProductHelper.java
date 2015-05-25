@@ -227,6 +227,7 @@ public class ProductHelper {
         prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
         prod.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
         prod.setNameCat(cursor.getString(cursor.getColumnIndex("catt")));
+        prod.setDate_v(cursor.getLong(cursor.getColumnIndex(VIEW_DATE_COLUMN)));
         return prod;
     }
 }
