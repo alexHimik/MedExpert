@@ -27,41 +27,14 @@
             android:layout_marginBottom="@dimen/home_pad_24"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="3dp">
-                <com.devspark.robototextview.widget.RobotoTextView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/home_30"
-                    app:fontFamily="roboto"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Actonel"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="@dimen/home_pad_10"
-                    android:layout_marginBottom="@dimen/home_pad_10"
-                    android:id="@+id/name" />
-                <com.devspark.robototextview.widget.RobotoTextView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/home_12_99_bold"
-                    app:fontFamily="roboto"
-                    android:text="MUSCLE RELAXERS"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="@dimen/home_pad_12"
-                    android:id="@+id/gener" />
-            </LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="true"
+                android:id="@+id/pr">
                 <com.devspark.robototextview.widget.RobotoTextView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="wrap_content"
@@ -94,6 +67,36 @@
                     android:src="@drawable/med_ic_pink_card_heart"
                     android:id="@+id/iv2" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/pr"
+                android:paddingLeft="2dp">
+                <com.devspark.robototextview.widget.RobotoTextView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/home_30"
+                    app:fontFamily="roboto"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Actonel"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/home_pad_10"
+                    android:layout_marginBottom="@dimen/home_pad_10"
+                    android:id="@+id/name" />
+                <com.devspark.robototextview.widget.RobotoTextView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/home_12_99_bold"
+                    app:fontFamily="roboto"
+                    android:text="MUSCLE RELAXERS"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/home_pad_12"
+                    android:id="@+id/gener" />
             </LinearLayout>
 
         </RelativeLayout>

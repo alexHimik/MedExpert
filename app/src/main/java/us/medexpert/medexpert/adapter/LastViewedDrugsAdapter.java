@@ -2,6 +2,7 @@ package us.medexpert.medexpert.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,15 +56,6 @@ public class LastViewedDrugsAdapter extends BaseAdapter {
         if (i1>0) {
             st = st.substring(0,i1).trim();
         }
-//
-//        ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
-//
-//        ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
-//        ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-//        ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
-//                getDrawable(R.drawable.med_ic_pink_heart_checked));
-
-
 
         ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
         ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());

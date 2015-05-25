@@ -1,19 +1,28 @@
 package us.medexpert.medexpert.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.devspark.robototextview.widget.RobotoTextView;
 
+import java.util.List;
+
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
-import us.medexpert.medexpert.db.entity.Product;
+import us.medexpert.medexpert.db.entity.*;
+import us.medexpert.medexpert.db.entity.Package;
 import us.medexpert.medexpert.db.tables.CategoryTableHelper;
 import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.dialog.WarningDialog;
@@ -35,6 +44,8 @@ public class PillInfoFragment extends BaseFragment {
     private String product_name;
     private int category_id;
     private String category_name;
+    private Context context;
+    public LayoutParams lp_W_W;
     private String currentDrugLink;
 
     @Nullable
@@ -44,12 +55,14 @@ public class PillInfoFragment extends BaseFragment {
         product_name = data.getString(PRODUCT_NAME_KEY);
         product_id = data.getInt(PRODUCT_ID_KEY);
         category_id = data.getInt(CATEGORY_ID_KEY);
+        context = getActivity().getBaseContext();
         CategoryTableHelper ch = new CategoryTableHelper();
         category_name = ch.getCategoryName(getActivity(), category_id);
         View customBar = getActionBarCustomView(inflater);
         ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
         parent = inflater.inflate(R.layout.pill_info, container, false);
         return parent;
+
     }
 
     @Override
@@ -141,9 +154,74 @@ public class PillInfoFragment extends BaseFragment {
     }
 
     public View setPackage(ViewGroup container){
+        lp_W_W = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        View v_grid;
         View v = getActivity().getLayoutInflater().inflate(R.layout.pill_info_package,container, false);
+        LinearLayout ll = (LinearLayout) v.findViewById(R.id.layout_package);
+        ProductHelper ph = ProductHelper.getInstance(getActivity());
+        List<Package> listPack = ph.getPackage(product_id);
+        Package pc = new Package();
+        String st, typePack,dosa, dosa1;
+        dosa1="****";
+        int im = listPack.size();
+        int iline= 0;
+        int pad32 = (int) getResources().getDimension(R.dimen.med_pad_32);
+        int pad24 = (int) getResources().getDimension(R.dimen.med_pad_24);
+        LinearLayout lineCount = null;
+        View rect;
+        RobotoTextView rv_count;
+        RobotoTextView rv_type_pack;
+        for (int i = 0; i<im; i++){
+            pc = listPack.get(i);
+            Log.d("QWERT","T="+pc.getTitle()+" C="+pc.getCount());
+            st = pc.getTitle();
+            int j1 = st.indexOf(" ");
+            int j2 = st.indexOf("x");
+            typePack = st.substring(j1,j2).trim();
+            dosa = st.substring(j2+1).trim();
+            if (!dosa1.equals(dosa)) {
+                RobotoTextView rv = newRobTV(lp_W_W, dosa, R.style.home_30, 0);
+                rv.setPadding(0,pad32,0,pad24);
+                ll.addView(rv);
+                dosa1 = dosa;
+                lineCount = newLayout(context, lp_W_W);
+                ll.addView(lineCount);
+                iline = 0;
+            }
+            if (iline>3){
+                lineCount = newLayout(context, lp_W_W);
+                ll.addView(lineCount);
+                iline = 0;
+            }
+            rect = getActivity().getLayoutInflater().inflate(R.layout.pill_grid_item, null);
+            rv_count = (RobotoTextView) rect.findViewById(R.id.count);
+            rv_type_pack = (RobotoTextView) rect.findViewById(R.id.type_pack);
+            rv_count.setText(""+pc.getCount());
+            rv_type_pack.setText(typePack);
+            lineCount.addView(rect);
+            iline++;
+        }
+
 //        GridLayout gl = new GridLayout();
         return v;
+    }
+
+    public LinearLayout newLayout(Context context, LayoutParams lp){
+        LinearLayout line1 = new LinearLayout(context);
+        line1.setLayoutParams(lp);
+        line1.setOrientation(LinearLayout.HORIZONTAL);
+        return line1;
+    }
+
+
+
+    public RobotoTextView newRobTV(LayoutParams lp, String txt, int style, int bg){
+        RobotoTextView tv = new RobotoTextView(getActivity());
+        tv.setLayoutParams(lp);
+        tv.setText(txt);
+        if (style >0) tv.setTextAppearance(getActivity(), style);
+        if (bg>0) tv.setBackgroundResource(bg);
+        return tv;
     }
 
     private View.OnClickListener barClickListener = new View.OnClickListener() {

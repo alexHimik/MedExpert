@@ -1,6 +1,7 @@
 package us.medexpert.medexpert.fragments;
 
 
+
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -37,8 +38,9 @@ public class HomeFragment extends BaseFragment {
     private View parent;
     private Context context;
     private List<Category> listCatal;
-    private List<Product> listProd;
-//    private Fragment fragment;
+    private List<Product> listProd_F;
+    private List<Product> listProd_R;
+    //    private Fragment fragment;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,10 +82,10 @@ public class HomeFragment extends BaseFragment {
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_favorites);
 
         ProductHelper ph = ProductHelper.getInstance(getActivity());
-        listProd = ph.getProductFavor();
+        listProd_F = ph.getProductFavor();
 
         View v;
-        if (listProd.size() == 0) {
+        if (listProd_F.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
             v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.favor_item_img, null);
@@ -92,20 +94,19 @@ public class HomeFragment extends BaseFragment {
         else {
             Product pr;
             int ik = 3;
-            if (ik>listProd.size()) ik = listProd.size();
+            if (ik>listProd_F.size()) ik = listProd_F.size();
 //            CategoryTableHelper ch = new CategoryTableHelper();
             for (int i = 0; i<ik; i++){
-                pr = listProd.get(i);
+                pr = listProd_F.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickFavor);
-                v.setTag(""+i);
+                bl.setTag(""+i);
                 String st = pr.getName();
                 int i1 = st.indexOf("(");
                 if (i1>0) {
                     st = st.substring(0,i1).trim();
                 }
-
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
@@ -123,33 +124,13 @@ public class HomeFragment extends BaseFragment {
 
 
     private void formRecently(){
-//        ((RelativeLayout) parent.findViewById(R.id.bl_recently)).setOnClickListener(onClick);
-//        if (true) {
-//            LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
-//            ll.setGravity(Gravity.CENTER_VERTICAL);
-//            View v = ((LayoutInflater) getActivity().getSystemService(
-//                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
-//            ll.addView(v);
-//        }
-//        else {
-//            LinearLayout block_recent = (LinearLayout) parent.findViewById(R.id.block_recently);
-////            View view = ((LayoutInflater) getActivity().getSystemService(
-////                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_v, null);
-//        }
-//
-//
-//
-//
-//
-
-
         parent.findViewById(R.id.bl_recently).setOnClickListener(onClick);
         LinearLayout ll = (LinearLayout)parent.findViewById(R.id.block_recently);
 
         ProductHelper ph = ProductHelper.getInstance(getActivity());
-        listProd = ph.getLastViewedDrugs();
+        listProd_R = ph.getLastViewedDrugs();
         View v;
-        if (listProd.size() == 0) {
+        if (listProd_R.size() == 0) {
             ll.setGravity(Gravity.CENTER_VERTICAL);
             v = ((LayoutInflater) getActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.recently_item_img, null);
@@ -157,21 +138,20 @@ public class HomeFragment extends BaseFragment {
         }
         else {
             Product pr;
-            int ik = listProd.size();
+            int ik = listProd_R.size();
             if (ik>2) ik = 2;
 //            CategoryTableHelper ch = new CategoryTableHelper();
-            for (int i = 0; i<ik; i++) {
-                pr = listProd.get(i);
+            for (int i = 0; i<ik; i++){
+                pr = listProd_R.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickRecently);
-                v.setTag(""+i);
+                bl.setTag(""+i);
                 String st = pr.getName();
                 int i1 = st.indexOf("(");
                 if (i1>0) {
                     st = st.substring(0,i1).trim();
                 }
-
                 ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
                 ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
@@ -218,7 +198,8 @@ public class HomeFragment extends BaseFragment {
     OnClickListener onClickFavor = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
+            RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
+            Product pr = listProd_F.get(Integer.valueOf(bl.getTag().toString()));
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());
@@ -230,7 +211,7 @@ public class HomeFragment extends BaseFragment {
     OnClickListener onClickRecently = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Product pr = listProd.get(Integer.valueOf(v.getTag().toString()));
+            Product pr = listProd_R.get(Integer.valueOf(v.getTag().toString()));
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, pr.getName());
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, pr.getId());

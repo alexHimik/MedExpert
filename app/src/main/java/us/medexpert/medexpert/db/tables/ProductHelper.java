@@ -9,8 +9,8 @@ import java.util.List;
 
 import us.medexpert.medexpert.adapter.SearchListAdapter;
 import us.medexpert.medexpert.db.DataBaseHelper;
-import us.medexpert.medexpert.db.entity.Product;
-import us.medexpert.medexpert.db.entity.SearchListEntity;
+import us.medexpert.medexpert.db.entity.*;
+import us.medexpert.medexpert.db.entity.Package;
 
 public class ProductHelper {
 
@@ -24,6 +24,7 @@ public class ProductHelper {
     public static final String DESCRIPTION_COLUMN = "description";
     public static final String LIKED_COLUMN = "liked";
     public static final String VIEW_COUNT_COLUMN = "view_count";
+    public static final String COUNT_COLUMN = "count";
     public static final String DRUG_PRICE_COLUMN = "price";
     public static final String VIEW_DATE_COLUMN = "date_view";
 
@@ -121,6 +122,30 @@ public class ProductHelper {
         return cursor;
     }
 
+    public Cursor getAllCategoryDrugsDesc(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by title desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
+    public Cursor getAllCategoryDrugsByDate(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by date_view desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
+    public Cursor getAllCategoryDrugsByDateDesc(int categoryId) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        Cursor cursor = helper.getWritableDatabase().rawQuery(
+                "select * from app_product where category_id=? order by date_view desc;",
+                new String[] {String.valueOf(categoryId)});
+        return cursor;
+    }
+
     public void addDrugToFavorites(int drugId) {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME, new String[] {LIKED_COLUMN},
@@ -199,18 +224,45 @@ public class ProductHelper {
                 new String[] {String.valueOf(drugId)});
     }
 
+    public List<Package> getPackage(int id) {
+        DataBaseHelper helper = DataBaseHelper.getInstance(context);
+        String query = "select T1.title, T1.count, T1.product_package_id "+
+                "from app_package T1, app_package_product T2 where T1.product_package_id=T2._id and T2.product_id=" + id + " ORDER BY T1.product_package_id asc, count asc";
+        Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
+
+//
+//        String query = "SELECT * FROM app_package WHERE product_package_id = " + id + " ORDER BY product_pack asc, count asc";
+//
+//        Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
+        List<Package> data = new ArrayList<>();
+        Package pc;
+        if(cursor.moveToFirst()) {
+            do {
+                pc = new Package();
+//                pc.setId(cursor.getInt(cursor.getColumnIndex(ID_COLUMN)));
+                pc.setTitle(cursor.getString(cursor.getColumnIndex(TITLE_COLUMN)));
+                pc.setCount(cursor.getInt(cursor.getColumnIndex(COUNT_COLUMN)));
+                data.add(pc);
+            } while (cursor.moveToNext());
+        }
+
+        return data;
+    }
+
     public List<Product> getLastViewedDrugs() {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
                 "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
-                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id AND T1.view_count > 0 ORDER BY T1.date_view desc";
+                "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
 
         Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
         List<Product> data = new ArrayList<>();
         if(cursor.moveToFirst()) {
+            int i = 0;
             do {
                 data.add(setProduct(cursor));
-            } while (cursor.moveToNext());
+                i++;
+            } while (cursor.moveToNext() & (i<50));
         }
 
         return data;

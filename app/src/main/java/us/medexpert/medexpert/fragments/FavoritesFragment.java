@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,7 +33,9 @@ import us.medexpert.medexpert.db.entity.Product;
 import us.medexpert.medexpert.db.tables.ProductHelper;
 import us.medexpert.medexpert.dialog.SortDialog;
 import us.medexpert.medexpert.tools.FragmentFactory;
+import us.medexpert.medexpert.tools.comparator.AscDrugDateComparator;
 import us.medexpert.medexpert.tools.comparator.AscDrugNameNameComparator;
+import us.medexpert.medexpert.tools.comparator.DescDrugDateComparator;
 import us.medexpert.medexpert.tools.comparator.DescDrugNameComparator;
 
 public class FavoritesFragment extends BaseFragment implements ListView.OnItemClickListener {
@@ -193,11 +196,13 @@ public class FavoritesFragment extends BaseFragment implements ListView.OnItemCl
                         break;
                     }
                     case SortDialog.SORT_BY_POP_ASC: {
-
+                        Collections.sort(favorAdapter.getItems(), new AscDrugDateComparator());
+                        favorAdapter.notifyDataSetChanged();
                         break;
                     }
                     case SortDialog.SORT_BY_POP_DESC: {
-
+                        Collections.sort(favorAdapter.getItems(), new DescDrugDateComparator());
+                        favorAdapter.notifyDataSetChanged();
                         break;
                     }
                 }
