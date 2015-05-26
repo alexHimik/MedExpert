@@ -100,6 +100,7 @@ public class HomeFragment extends BaseFragment {
                 pr = listProd_F.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
+                bl.setClickable(true);
                 bl.setOnClickListener(onClickFavor);
                 bl.setTag(""+i);
                 String st = pr.getName();

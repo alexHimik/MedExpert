@@ -42,7 +42,7 @@
             android:layout_toLeftOf="@+id/iv2"
             android:layout_toRightOf="@+id/iv"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="28dp"
             android:paddingBottom="36dp">
             <com.devspark.robototextview.widget.RobotoTextView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -52,7 +52,6 @@
                 app:fontFamily="roboto"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Actonel"
-                android:layout_marginTop="@dimen/home_pad_10"
                 android:layout_marginBottom="@dimen/home_pad_10"
                 android:paddingBottom="10dp"
                 android:id="@+id/name" />
@@ -87,7 +86,6 @@
                     app:fontFamily="roboto"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="from"
-                    android:layout_marginRight="8dp"
                     android:paddingTop="30dp" />
                 <com.devspark.robototextview.widget.RobotoTextView
                     xmlns:app="http://schemas.android.com/apk/res-auto"

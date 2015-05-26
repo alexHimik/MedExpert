@@ -173,7 +173,6 @@ public class PillInfoFragment extends BaseFragment {
         RobotoTextView rv_type_pack;
         for (int i = 0; i<im; i++){
             pc = listPack.get(i);
-            Log.d("QWERT","T="+pc.getTitle()+" C="+pc.getCount());
             st = pc.getTitle();
             int j1 = st.indexOf(" ");
             int j2 = st.indexOf("x");
