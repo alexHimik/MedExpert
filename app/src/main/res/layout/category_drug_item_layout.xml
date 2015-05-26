@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/med_white">
-    
+
     <ImageView
         android:id="@+id/drug_image"
         android:layout_width="@dimen/category_drug_image_size"
@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/category_drug_from_text_top_margin"
         android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
-        android:layout_marginBottom="@dimen/category_drug_from_text_bottom_margin"
+        android:layout_marginBottom="-6dp"
         android:textColor="@color/color_light_grey"
         android:textSize="@dimen/category_drug_from_text_size"
         app:fontFamily="roboto"
@@ -40,13 +40,13 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/from_text"
         android:layout_marginRight="@dimen/category_drug_from_text_right_margin"
-        android:layout_marginBottom="@dimen/padding_4dp"
+        android:layout_marginBottom="0dp"
         android:textColor="@color/side_bar_category_text"
         android:textSize="@dimen/category_drug_price_text_size"
         app:fontFamily="roboto"
         app:textWeight="medium"
         android:text="$45.5"
-        />
+        android:paddingTop="6dp" />
 
     <com.devspark.robototextview.widget.RobotoTextView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -134,5 +134,5 @@
         android:layout_below="@id/drug_description"
         android:background="@color/separator_grey_color">
 
-        </View>
+    </View>
 </RelativeLayout>
