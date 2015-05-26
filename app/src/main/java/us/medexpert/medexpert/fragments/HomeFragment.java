@@ -178,7 +178,6 @@ public class HomeFragment extends BaseFragment {
         star[2] = (ImageView) v.findViewById(R.id.star3);
         star[3] = (ImageView) v.findViewById(R.id.star4);
         star[4] = (ImageView) v.findViewById(R.id.star5);
-//        int rat = (int) pr.getDrugRate();
         for (int s=0; s<5;s++){
             if (s<rat) star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_yellow_star));
             else star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_grey_star));

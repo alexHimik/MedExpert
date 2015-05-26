@@ -22,6 +22,7 @@ import us.medexpert.medexpert.db.entity.Product;
 public class FavorAdapter extends BaseAdapter {
     private Fragment context;
     private List<Product> items;
+    ImageView[] star = new ImageView [5];
 
     public FavorAdapter(Fragment context, List<Product> items) {
         this.context = context;
@@ -68,7 +69,20 @@ public class FavorAdapter extends BaseAdapter {
          Glide.with(context).load(
                  context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).
                  asGif().into(iv);
+         setRating(v, star,Math.round(pr.getDrugRate()));
          return v;
+    }
+
+    private void setRating(View v, ImageView[] star, int rat){
+        star[0] = (ImageView) v.findViewById(R.id.star1);
+        star[1] = (ImageView) v.findViewById(R.id.star2);
+        star[2] = (ImageView) v.findViewById(R.id.star3);
+        star[3] = (ImageView) v.findViewById(R.id.star4);
+        star[4] = (ImageView) v.findViewById(R.id.star5);
+        for (int s=0; s<5;s++){
+            if (s<rat) star[s].setImageDrawable(context.getResources().getDrawable(R.drawable.med_ic_yellow_star));
+            else star[s].setImageDrawable(context.getResources().getDrawable(R.drawable.med_ic_grey_star));
+        }
     }
 
     public List<Product> getItems() {

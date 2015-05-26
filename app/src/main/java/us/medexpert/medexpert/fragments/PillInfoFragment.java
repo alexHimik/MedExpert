@@ -47,6 +47,7 @@ public class PillInfoFragment extends BaseFragment {
     private Context context;
     public LayoutParams lp_W_W;
     private String currentDrugLink;
+    ImageView[] star = new ImageView [5];
 
     @Nullable
     @Override
@@ -148,10 +149,24 @@ public class PillInfoFragment extends BaseFragment {
         if (btnFindSellers != null) {
             btnFindSellers.setOnClickListener(btnFindSellersListener);
         }
+        setRating(v, star,Math.round(pr.getDrugRate()));
 
        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
+
         return v;
+    }
+
+    private void setRating(View v, ImageView[] star, int rat){
+        star[0] = (ImageView) v.findViewById(R.id.star1);
+        star[1] = (ImageView) v.findViewById(R.id.star2);
+        star[2] = (ImageView) v.findViewById(R.id.star3);
+        star[3] = (ImageView) v.findViewById(R.id.star4);
+        star[4] = (ImageView) v.findViewById(R.id.star5);
+        for (int s=0; s<5;s++){
+            if (s<rat) star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_yellow_star));
+            else star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_grey_star));
+        }
     }
 
     public View setPackage(ViewGroup container){

@@ -93,6 +93,7 @@ public class ProductHelper {
             prod.setImg(cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN)));
             prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)));
             prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
+            prod.setDrugRate(cursor.getFloat(cursor.getColumnIndex(DRUG_RATE_COLUMN)));
             st = cursor.getString(cursor.getColumnIndex(FULL_DESCR));
             String rr = "\\r\\n";
             String nn = "\\n";
