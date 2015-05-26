@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import us.medexpert.medexpert.adapter.SearchListAdapter;
 import us.medexpert.medexpert.db.DataBaseHelper;
@@ -27,6 +28,7 @@ public class ProductHelper {
     public static final String COUNT_COLUMN = "count";
     public static final String DRUG_PRICE_COLUMN = "price";
     public static final String VIEW_DATE_COLUMN = "date_view";
+    public static final String DRUG_RATE_COLUMN = "drug_rate";
 
     private Context context;
     private static ProductHelper instance;
@@ -101,7 +103,7 @@ public class ProductHelper {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         List<Product> data = new ArrayList<>();
         String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
-                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "T1.date_view, T1.view_count, T1.price, T1.drug_rate, T2.title as catt " +
                 "FROM app_product T1, app_category T2 WHERE T1.liked>'0' AND T1.category_id = T2._id ORDER BY T1.title asc";
         Cursor cursor = helper.getWritableDatabase().rawQuery(query, null);
         if(cursor.moveToFirst()) {
@@ -116,7 +118,7 @@ public class ProductHelper {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         Cursor cursor = helper.getWritableDatabase().query(TABLE_NAME,
                 new String[] {ID_COLUMN, CATEGORY_ID_COLUMN, IMAGE_COLUMN,
-                        TITLE_COLUMN, LIKED_COLUMN, DESCRIPTION_COLUMN, DRUG_PRICE_COLUMN},
+                        TITLE_COLUMN, LIKED_COLUMN, DESCRIPTION_COLUMN, DRUG_PRICE_COLUMN, DRUG_RATE_COLUMN},
                 CATEGORY_ID_COLUMN + "=?", new String[]{String.valueOf(categoryId)},
                 TITLE_COLUMN, null, TITLE_COLUMN);
         return cursor;
@@ -252,7 +254,7 @@ public class ProductHelper {
     public List<Product> getLastViewedDrugs() {
         DataBaseHelper helper = DataBaseHelper.getInstance(context);
         String query = "SELECT T1._id, T1.title as prodt, T1.link, T1.liked, T1.category_id, T1.image, T1.description, " +
-                "T1.date_view, T1.view_count, T1.price, T2.title as catt " +
+                "T1.date_view, T1.view_count, T1.price, T1.drug_rate, T2.title as catt " +
                 "FROM app_product T1, app_category T2 WHERE T1.category_id = T2._id ORDER BY T1.date_view desc";
 
         Cursor cursor = helper.getReadableDatabase().rawQuery(query, null);
@@ -262,7 +264,7 @@ public class ProductHelper {
             do {
                 data.add(setProduct(cursor));
                 i++;
-            } while (cursor.moveToNext() & (i<50));
+            } while (cursor.moveToNext() & (i < 50));
         }
 
         return data;
@@ -280,6 +282,7 @@ public class ProductHelper {
         prod.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
         prod.setNameCat(cursor.getString(cursor.getColumnIndex("catt")));
         prod.setDate_v(cursor.getLong(cursor.getColumnIndex(VIEW_DATE_COLUMN)));
+        prod.setDrugRate(cursor.getFloat(cursor.getColumnIndex(DRUG_RATE_COLUMN)));
         return prod;
     }
 }

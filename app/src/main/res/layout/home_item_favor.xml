@@ -97,6 +97,13 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginBottom="@dimen/home_pad_12"
                     android:id="@+id/gener" />
+                <RatingBar
+                    android:id="@+id/drug_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:stepSize="0.5"
+                    style="@style/pills_rating_bar_style"/>
             </LinearLayout>
 
         </RelativeLayout>
