@@ -30,7 +30,7 @@ public class SortDialog extends Dialog {
     private Context activity;
     private ListView lv_sort;
 
-    public SortDialog(Context context) {
+    public SortDialog(Context context, int position) {
         super(context, R.style.TransparentProgressDialog);
         activity = context;
         WindowManager.LayoutParams wlmp = getWindow().getAttributes();
@@ -50,6 +50,7 @@ public class SortDialog extends Dialog {
                 R.layout.simple_list_item_single_choice_left);
         lv_sort.setAdapter(adapter);
         lv_sort.setOnItemClickListener(onItemClickListener);
+        lv_sort.setItemChecked(position, true);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -59,7 +60,6 @@ public class SortDialog extends Dialog {
     @Override
     public void show() {
         super.show();
-        lv_sort.setSelection(0);
         WindowManager.LayoutParams wlmp = getWindow().getAttributes();
         wlmp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wlmp.height = WindowManager.LayoutParams.WRAP_CONTENT;

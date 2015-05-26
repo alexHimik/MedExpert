@@ -44,6 +44,7 @@ public class RecentlyFragment extends BaseFragment
     private LayoutInflater inflat;
     private ViewGroup contain;
     private LastViewedDrugsAdapter listAdapter;
+    private int mSortPosition;
 
     @Nullable
     @Override
@@ -87,7 +88,18 @@ public class RecentlyFragment extends BaseFragment
     private View.OnClickListener barClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ((MainActivity) getActivity()).onClick(v);
+            switch (v.getId()) {
+                case R.id.left_drawer_item_touch:
+                    ((MainActivity) getActivity()).onClick(v);
+                    break;
+                case R.id.right_drawer_item:
+                    ((MainActivity) getActivity()).onClick(v);
+                    break;
+                case R.id.sort_bar_item:
+                    SortDialog sortDialog = new SortDialog((MainActivity) getActivity(), mSortPosition);
+                    sortDialog.show();
+                    break;
+            }
         }
     };
 
@@ -147,7 +159,11 @@ public class RecentlyFragment extends BaseFragment
         @Override
         public void onReceive(Context context, Intent intent) {
             if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
-                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+                int position = intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1);
+                if (position >= 0) {
+                    mSortPosition = position;
+                }
+                switch (position) {
                     case SortDialog.SORT_BY_NAME_ASC: {
                         Collections.sort(listAdapter.getItems(), new AscDrugNameNameComparator());
                         listAdapter.notifyDataSetChanged();

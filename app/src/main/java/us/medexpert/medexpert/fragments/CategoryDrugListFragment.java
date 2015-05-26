@@ -51,6 +51,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private int categoryId;
     private SwipeMenuListView drugsList;
     private CategoryListAdapter listAdapter;
+    private int mSortPosition;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -151,7 +152,8 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             } else if(v.getId() == R.id.left_drawer_item_touch) {
                 ((MainActivity)getActivity()).onClick(v);
             } else if(v.getId() == R.id.sort_bar_item) {
-                ((MainActivity)getActivity()).onClick(v);
+                SortDialog sortDialog = new SortDialog((MainActivity) getActivity(), mSortPosition);
+                sortDialog.show();
             } else {
                 //TODO add handling if there will be additional bar items
             }
@@ -190,7 +192,11 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         public void onReceive(Context context, Intent intent) {
             if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
                 final ProductHelper helper = ProductHelper.getInstance(getActivity());
-                switch (intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1)) {
+                int position = intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1);
+                if (position >= 0) {
+                    mSortPosition = position;
+                }
+                switch (position) {
                     case SortDialog.SORT_BY_NAME_ASC: {
                         sortHandler.post(new Runnable() {
                             @Override
