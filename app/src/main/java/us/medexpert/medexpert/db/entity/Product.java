@@ -13,11 +13,13 @@ public class Product {
     private long date_v;
     private String nameCat;
     private String fulldescr;
+    private float drugRate;
 
     public Product() {
     }
 
-    public Product(int id, String n, String p, String l, int liked, String d, long date, int c) {
+    public Product(int id, String n, String p, String l, int liked, String d,
+                   long date, int c) {
         this.id = id;
         this.name = n;
         this.price = p;
@@ -114,5 +116,13 @@ public class Product {
 
     public void setFulldescr(String fulldescr) {
         this.fulldescr = fulldescr;
+    }
+
+    public float getDrugRate() {
+        return drugRate;
+    }
+
+    public void setDrugRate(float drugRate) {
+        this.drugRate = drugRate;
     }
 }

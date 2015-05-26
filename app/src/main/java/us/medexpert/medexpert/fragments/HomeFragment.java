@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -114,6 +115,7 @@ public class HomeFragment extends BaseFragment {
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
                         getDrawable(R.drawable.med_ic_pink_card_heart));
+                ((RatingBar)v.findViewById(R.id.drug_rating)).setRating(pr.getDrugRate());
 
                 ImageView iv = (ImageView) v.findViewById(R.id.iv1);
                 Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).into(iv);
