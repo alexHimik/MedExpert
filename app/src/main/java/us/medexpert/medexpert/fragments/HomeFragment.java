@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class HomeFragment extends BaseFragment {
     private List<Category> listCatal;
     private List<Product> listProd_F;
     private List<Product> listProd_R;
+    ImageView[] star = new ImageView [5];
     //    private Fragment fragment;
     @Nullable
     @Override
@@ -98,6 +100,7 @@ public class HomeFragment extends BaseFragment {
             int ik = 3;
             if (ik>listProd_F.size()) ik = listProd_F.size();
 //            CategoryTableHelper ch = new CategoryTableHelper();
+//            ImageView[] star = new ImageView [5];
             for (int i = 0; i<ik; i++){
                 pr = listProd_F.get(i);
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
@@ -115,10 +118,12 @@ public class HomeFragment extends BaseFragment {
                 ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
                 ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(getResources().
                         getDrawable(R.drawable.med_ic_pink_card_heart));
+//                ((RatingBar)v.findViewById(R.id.drug_rating)).setRating(pr.getDrugRate());
 
                 ImageView iv = (ImageView) v.findViewById(R.id.iv1);
                 BitmapPool pool = Glide.get(context).getBitmapPool();
                 Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).bitmapTransform(new CropCircleTransformation(pool)).into(iv);
+                setRating(v, star, Math.round(pr.getDrugRate()));
 
                 ll.addView(v);
             }
@@ -150,7 +155,7 @@ public class HomeFragment extends BaseFragment {
                 v = getActivity().getLayoutInflater().inflate(R.layout.home_item_favor, null);
                 RelativeLayout bl = (RelativeLayout) v.findViewById(R.id.bl_favorits_one);
                 bl.setOnClickListener(onClickRecently);
-                bl.setTag(""+i);
+                bl.setTag("" + i);
                 String st = pr.getName();
                 int i1 = st.indexOf("(");
                 if (i1>0) {
@@ -166,9 +171,22 @@ public class HomeFragment extends BaseFragment {
                 ImageView iv = (ImageView) v.findViewById(R.id.iv1);
                 BitmapPool pool = Glide.get(context).getBitmapPool();
                 Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).bitmapTransform(new CropCircleTransformation(pool)).into(iv);
+                setRating(v, star,Math.round(pr.getDrugRate()));
 
                 ll.addView(v);
             }
+        }
+    }
+
+    private void setRating(View v, ImageView[] star, int rat){
+        star[0] = (ImageView) v.findViewById(R.id.star1);
+        star[1] = (ImageView) v.findViewById(R.id.star2);
+        star[2] = (ImageView) v.findViewById(R.id.star3);
+        star[3] = (ImageView) v.findViewById(R.id.star4);
+        star[4] = (ImageView) v.findViewById(R.id.star5);
+        for (int s=0; s<5;s++){
+            if (s<rat) star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_yellow_star));
+            else star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_grey_star));
         }
     }
 

@@ -50,6 +50,7 @@ public class PillInfoFragment extends BaseFragment {
     private Context context;
     public LayoutParams lp_W_W;
     private String currentDrugLink;
+    ImageView[] star = new ImageView [5];
 
     @Nullable
     @Override
@@ -145,11 +146,13 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+        ((RobotoTextView) v.findViewById(R.id.full_descr)).setText(pr.getFulldescr());
 
         RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
         if (btnFindSellers != null) {
             btnFindSellers.setOnClickListener(btnFindSellersListener);
         }
+        setRating(v, star,Math.round(pr.getDrugRate()));
 
         ImageView iv = (ImageView) v.findViewById(R.id.iv);
         BitmapPool pool = Glide.get(context).getBitmapPool();
@@ -157,7 +160,20 @@ public class PillInfoFragment extends BaseFragment {
 
        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
+
         return v;
+    }
+
+    private void setRating(View v, ImageView[] star, int rat){
+        star[0] = (ImageView) v.findViewById(R.id.star1);
+        star[1] = (ImageView) v.findViewById(R.id.star2);
+        star[2] = (ImageView) v.findViewById(R.id.star3);
+        star[3] = (ImageView) v.findViewById(R.id.star4);
+        star[4] = (ImageView) v.findViewById(R.id.star5);
+        for (int s=0; s<5;s++){
+            if (s<rat) star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_yellow_star));
+            else star[s].setImageDrawable(getResources().getDrawable(R.drawable.med_ic_grey_star));
+        }
     }
 
     public View setPackage(ViewGroup container){

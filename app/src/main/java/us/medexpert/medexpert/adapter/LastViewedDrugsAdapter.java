@@ -10,13 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.Product;
 
@@ -24,6 +22,7 @@ public class LastViewedDrugsAdapter extends BaseAdapter {
 
     private Fragment context;
     private List<Product> items = new ArrayList<>();
+    ImageView[] star = new ImageView [5];
 
     public LastViewedDrugsAdapter(Fragment context) {
         this.context = context;
@@ -67,12 +66,23 @@ public class LastViewedDrugsAdapter extends BaseAdapter {
         else ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
                 getDrawable(R.drawable.med_ic_grey_heart_unchecked));
         ImageView iv = (ImageView) v.findViewById(R.id.iv1);
-        BitmapPool pool = Glide.get(context.getActivity()).getBitmapPool();
-        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).bitmapTransform(new CropCircleTransformation(pool)).into(iv);
-
+        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).into(iv);
+        setRating(v, star, Math.round(pr.getDrugRate()));
         return v;
     }
-
+    
+    private void setRating(View v, ImageView[] star, int rat){
+        star[0] = (ImageView) v.findViewById(R.id.star1);
+        star[1] = (ImageView) v.findViewById(R.id.star2);
+        star[2] = (ImageView) v.findViewById(R.id.star3);
+        star[3] = (ImageView) v.findViewById(R.id.star4);
+        star[4] = (ImageView) v.findViewById(R.id.star5);
+        for (int s=0; s<5;s++){
+            if (s<rat) star[s].setImageDrawable(context.getResources().getDrawable(R.drawable.med_ic_yellow_star));
+            else star[s].setImageDrawable(context.getResources().getDrawable(R.drawable.med_ic_grey_star));
+        }
+    }
+    
     public List<Product> getItems() {
         return items;
     }

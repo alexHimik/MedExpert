@@ -70,6 +70,37 @@
                     android:text="Generic"
                     android:paddingRight="8dp"
                     android:id="@+id/gener" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star1"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star2"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star3"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star4"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star5"
+                        android:src="@drawable/med_ic_yellow_star" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -171,9 +202,29 @@
             app:fontFamily="roboto"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Generic Advair Diskus is used for long-term treatment of asthma and chronic obstructive pulmonary disease (COPD) in certain patients. "
-            android:id="@+id/descr" />
-        </LinearLayout>
-        </LinearLayout>
+            android:id="@+id/descr"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/line"></LinearLayout>
+        <com.devspark.robototextview.widget.RobotoTextView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/home_14_66"
+            app:fontFamily="roboto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Generic Advair Diskus is used for\\r\\n long-term treatment of asthma and chronic obstructive pulmonary disease (COPD) in certain patients. "
+            android:id="@+id/full_descr"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+    </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

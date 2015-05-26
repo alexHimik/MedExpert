@@ -97,6 +97,38 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginBottom="@dimen/home_pad_12"
                     android:id="@+id/gener" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star1"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star2"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star3"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star4"
+                        android:src="@drawable/med_ic_yellow_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/star5"
+                        android:src="@drawable/med_ic_yellow_star" />
+                </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>
