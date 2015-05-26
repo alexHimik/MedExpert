@@ -190,7 +190,7 @@ public class ProductHelper {
 
                 entity.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
                 entity.setPrice(cursor.getString(cursor.getColumnIndex(DRUG_PRICE_COLUMN)));
-                entity.setImage(cursor.getString(cursor.getColumnIndex(LINK_COLUMN)));
+                entity.setImage(cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN)));
                 entity.setCategoryId(cursor.getInt(cursor.getColumnIndex(CATEGORY_ID_COLUMN)));
 
                 if(name.indexOf("(") != -1) {

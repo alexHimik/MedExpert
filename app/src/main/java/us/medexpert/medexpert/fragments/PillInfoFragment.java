@@ -15,10 +15,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.activity.MainActivity;
 import us.medexpert.medexpert.db.entity.*;
@@ -147,6 +150,10 @@ public class PillInfoFragment extends BaseFragment {
         if (btnFindSellers != null) {
             btnFindSellers.setOnClickListener(btnFindSellersListener);
         }
+
+        ImageView iv = (ImageView) v.findViewById(R.id.iv);
+        BitmapPool pool = Glide.get(context).getBitmapPool();
+        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).bitmapTransform(new CropCircleTransformation(pool)).into(iv);
 
        if (pr.getLiked() > 0) ((ImageView) v.findViewById(R.id.iv2)).
                 setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));

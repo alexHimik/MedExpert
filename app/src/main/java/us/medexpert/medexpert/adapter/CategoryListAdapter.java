@@ -10,7 +10,9 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.Product;
@@ -50,11 +52,12 @@ public class CategoryListAdapter extends CursorAdapter {
         } else {
             holder.drugName.setText(name);
         }
+        BitmapPool pool = Glide.get(context).getBitmapPool();
 
         Glide.with(fragment).load(
                 context.getResources().getString(R.string.app_site_base_url) +
-                cursor.getString(cursor.getColumnIndex(ProductHelper.IMAGE_COLUMN))).
-                asGif().into(holder.drugImage);
+                        cursor.getString(cursor.getColumnIndex(ProductHelper.IMAGE_COLUMN))).
+                bitmapTransform(new CropCircleTransformation(pool)).into(holder.drugImage);
         holder.drugPrice.setText(cursor.getString(cursor.getColumnIndex(
                 ProductHelper.DRUG_PRICE_COLUMN)));
         int like = cursor.getInt(cursor.getColumnIndex(ProductHelper.LIKED_COLUMN));

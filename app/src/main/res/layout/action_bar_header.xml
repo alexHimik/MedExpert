@@ -56,6 +56,7 @@
         android:ellipsize="end"
         style="@style/action_bar_title"
         android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/sort_bar_item"
         android:layout_marginLeft="@dimen/catalog_default_left_margin"
         app:fontFamily="roboto"
         app:textWeight="medium"

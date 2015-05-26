@@ -160,6 +160,7 @@ public class FavoritesFragment extends BaseFragment implements ListView.OnItemCl
                 ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
                 categoryDrugsTableHelper.removeDrugFromFavorites(
                         favorAdapter.getItem(position).getId());
+                lv.getmTouchView().smoothCloseMenu();
             }
         }
     };

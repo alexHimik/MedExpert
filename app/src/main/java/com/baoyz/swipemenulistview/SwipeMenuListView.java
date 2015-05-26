@@ -229,4 +229,12 @@ public class SwipeMenuListView extends ListView {
 
 		void onSwipeEnd(int position);
 	}
+
+	public SwipeMenuLayout getmTouchView() {
+		return mTouchView;
+	}
+
+	public void setmTouchView(SwipeMenuLayout mTouchView) {
+		this.mTouchView = mTouchView;
+	}
 }

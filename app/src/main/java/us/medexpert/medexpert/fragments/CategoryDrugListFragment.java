@@ -184,6 +184,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             int drugId = (int)listAdapter.getItem(position);
             ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
             categoryDrugsTableHelper.addDrugToFavorites(drugId);
+            drugsList.getmTouchView().smoothCloseMenu();
         }
     };
 

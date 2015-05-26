@@ -12,10 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.Product;
 
@@ -43,32 +45,32 @@ public class FavorAdapter extends BaseAdapter {
         return position;
     }
 
-     @Override
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-         View v = convertView;
-         Product pr = items.get(position);
-         if (v == null) {
-             v = ((LayoutInflater) context.getActivity().getSystemService(
-                     Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_favor, null);
-         }
+        View v = convertView;
+        Product pr = items.get(position);
+        if (v == null) {
+            v = ((LayoutInflater) context.getActivity().getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.home_item_favor, null);
+        }
 
-         String st = pr.getName();
-         int i1 = st.indexOf("(");
-         if (i1 > 0) {
-             st = st.substring(0,i1).trim();
-         }
+        String st = pr.getName();
+        int i1 = st.indexOf("(");
+        if (i1 > 0) {
+            st = st.substring(0, i1).trim();
+        }
 
-         ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
+        ((RobotoTextView) v.findViewById(R.id.name)).setText(st);
 
-         ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
-         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
-         ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
-                 getDrawable(R.drawable.med_ic_pink_card_heart));
-         ImageView iv = (ImageView) v.findViewById(R.id.iv1);
-         Glide.with(context).load(
-                 context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).
-                 asGif().into(iv);
-         return v;
+        ((RobotoTextView) v.findViewById(R.id.gener)).setText(pr.getNameCat());
+        ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+        ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
+                getDrawable(R.drawable.med_ic_pink_card_heart));
+        ImageView iv = (ImageView) v.findViewById(R.id.iv1);
+        BitmapPool pool = Glide.get(context.getActivity()).getBitmapPool();
+        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg())
+                .bitmapTransform(new CropCircleTransformation(pool)).into(iv);
+        return v;
     }
 
     public List<Product> getItems() {

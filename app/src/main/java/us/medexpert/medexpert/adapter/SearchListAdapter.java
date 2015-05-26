@@ -8,11 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.SearchListEntity;
 
@@ -94,8 +96,10 @@ public class SearchListAdapter extends BaseAdapter {
                 RobotoTextView genericText = (RobotoTextView)item.findViewById(R.id.generic_text);
 
                 drugName.setText(data.get(position).getName());
+                BitmapPool pool = Glide.get(context).getBitmapPool();
+
                 Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url)
-                        + data.get(position).getImage()).asGif().into(drugImage);
+                        + data.get(position).getImage()).bitmapTransform(new CropCircleTransformation(pool)).into(drugImage);
                 if(data.get(position).isFavorite()) {
                     Glide.with(context).load(R.drawable.med_ic_pink_heart_checked).into(likeImage);
                 }

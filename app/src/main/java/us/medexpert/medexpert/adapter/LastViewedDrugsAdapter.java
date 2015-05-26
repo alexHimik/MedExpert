@@ -10,11 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.medexpert.medexpert.R;
 import us.medexpert.medexpert.db.entity.Product;
 
@@ -65,7 +67,8 @@ public class LastViewedDrugsAdapter extends BaseAdapter {
         else ((ImageView) v.findViewById(R.id.iv2)).setImageDrawable(context.getResources().
                 getDrawable(R.drawable.med_ic_grey_heart_unchecked));
         ImageView iv = (ImageView) v.findViewById(R.id.iv1);
-        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).into(iv);
+        BitmapPool pool = Glide.get(context.getActivity()).getBitmapPool();
+        Glide.with(context).load(context.getResources().getString(R.string.app_site_base_url) + pr.getImg()).bitmapTransform(new CropCircleTransformation(pool)).into(iv);
 
         return v;
     }

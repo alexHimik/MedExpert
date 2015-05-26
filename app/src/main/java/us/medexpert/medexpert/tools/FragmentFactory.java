@@ -17,16 +17,16 @@ import us.medexpert.medexpert.fragments.TutorialFragment;
 public class FragmentFactory {
     public static final String data = "data";
     public static final int
-        ID_HOME = 0,
-        ID_CATALOG = 1,
-        ID_SELLERS = 2,
-        ID_ABOUT = 3,
-        ID_TUTORIAL = 4,
-        ID_FAVORITES = 5,
-        ID_RECENTLY = 6,
-        ID_CATEGORY = 7,
-        ID_PILLINFO = 8,
-        ID_SEARCH = 9
+        ID_HOME = 1,
+        ID_CATALOG = 2,
+        ID_SELLERS = 3,
+        ID_ABOUT = 4,
+        ID_TUTORIAL = 5,
+        ID_FAVORITES = 6,
+        ID_RECENTLY = 7,
+        ID_CATEGORY = 8,
+        ID_PILLINFO = 9,
+        ID_SEARCH = 10
         ;
 
     public static Fragment getFragment(FragmentManager fm, int fragmentId) {
