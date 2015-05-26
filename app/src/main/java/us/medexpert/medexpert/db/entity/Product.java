@@ -12,6 +12,7 @@ public class Product {
     private String img;
     private long date_v;
     private String nameCat;
+    private String fulldescr;
 
     public Product() {
     }
@@ -105,5 +106,13 @@ public class Product {
 
     public void setNameCat(String nameCat) {
         this.nameCat = nameCat;
+    }
+
+    public String getFulldescr() {
+        return fulldescr;
+    }
+
+    public void setFulldescr(String fulldescr) {
+        this.fulldescr = fulldescr;
     }
 }

@@ -22,6 +22,7 @@ public class ProductHelper {
     public static final String IMAGE_COLUMN = "image";
     public static final String TITLE_COLUMN = "title";
     public static final String DESCRIPTION_COLUMN = "description";
+    public static final String FULL_DESCR = "fullDescription";
     public static final String LIKED_COLUMN = "liked";
     public static final String VIEW_COUNT_COLUMN = "view_count";
     public static final String COUNT_COLUMN = "count";
@@ -90,6 +91,20 @@ public class ProductHelper {
             prod.setImg(cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN)));
             prod.setLiked(cursor.getInt(cursor.getColumnIndex(LIKED_COLUMN)));
             prod.setDescr(cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN)));
+            st = cursor.getString(cursor.getColumnIndex(FULL_DESCR));
+            String rr = "\\r\\n";
+            String nn = "\\n";
+            String st2 = "\n";
+            int k;
+            do {
+                k = st.indexOf(rr);
+                if (k>-1) st = st.replace(rr,st2);
+            }while (k>-1);
+            do {
+                k = st.indexOf(nn);
+                if (k>-1) st = st.replace(nn,st2);
+            }while (k>-1);
+            prod.setFulldescr(st);
             if (pr < 1000000000f) prod.setPrice("$" + Float.toString(pr));
             else prod.setPrice("$");
         }

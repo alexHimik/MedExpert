@@ -142,6 +142,7 @@ public class PillInfoFragment extends BaseFragment {
         ((RobotoTextView) v.findViewById(R.id.categor)).setText(category_name);
         ((RobotoTextView) v.findViewById(R.id.descr)).setText(pr.getDescr());
         ((RobotoTextView) v.findViewById(R.id.price)).setText(pr.getPrice());
+        ((RobotoTextView) v.findViewById(R.id.full_descr)).setText(pr.getFulldescr());
 
         RobotoTextView btnFindSellers = (RobotoTextView) v.findViewById(R.id.btn_sellers);
         if (btnFindSellers != null) {
