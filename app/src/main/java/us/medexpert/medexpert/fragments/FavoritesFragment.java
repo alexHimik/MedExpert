@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -161,6 +162,9 @@ public class FavoritesFragment extends BaseFragment implements ListView.OnItemCl
                 categoryDrugsTableHelper.removeDrugFromFavorites(
                         favorAdapter.getItem(position).getId());
                 lv.getmTouchView().smoothCloseMenu();
+                View view = lv.getChildAt(position);
+                ImageView imageView = (ImageView) view.findViewById(R.id.iv2);
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.med_ic_grey_heart_unchecked));
             }
         }
     };

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -58,13 +59,13 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         Bundle data = getArguments();
         categoryName = data.getString(CATEGORY_NAME_KEY);
         categoryId = data.getInt(CATEGORY_ID_KEY);
-        drugsList = (SwipeMenuListView)inflater.inflate(R.layout.category_drugs_fragment, container, false);
+        drugsList = (SwipeMenuListView) inflater.inflate(R.layout.category_drugs_fragment, container, false);
         drugsList.setOnItemClickListener(onItemClickListener);
         drugsList.setOnMenuItemClickListener(onMenuItemClickListener);
         drugsList.setMenuCreator(swipeMenuCreator);
         drugsList.setOnSwipeListener(onSwipeListener);
         View customBar = getActionBarCustomView(inflater);
-        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(customBar);
+        ((MainActivity) getActivity()).getSupportActionBar().setCustomView(customBar);
         getLoaderManager().initLoader(CategoryDrugListLoader.ID, getArguments(), this);
         return drugsList;
     }
@@ -88,7 +89,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
         sortBarItem.setOnClickListener(onClickListener);
         rightBarItem.setOnClickListener(onClickListener);
         leftItemTouch.setOnClickListener(onClickListener);
-        ((RobotoTextView)centerBatItem).setText(categoryName);
+        ((RobotoTextView) centerBatItem).setText(categoryName);
     }
 
     @Override
@@ -110,7 +111,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Loader loader = null;
-        if(id == CategoryDrugListLoader.ID) {
+        if (id == CategoryDrugListLoader.ID) {
             loader = new CategoryDrugListLoader(getActivity(), categoryId);
         }
         return loader;
@@ -124,7 +125,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Cursor cursor =  listAdapter.getCursor();
+            Cursor cursor = listAdapter.getCursor();
             cursor.moveToPosition(position);
             Bundle data = new Bundle();
             data.putString(PillInfoFragment.PRODUCT_NAME_KEY, cursor.getString(
@@ -132,7 +133,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             data.putInt(PillInfoFragment.PRODUCT_ID_KEY, cursor.getInt(cursor.getColumnIndex(
                     ProductHelper.ID_COLUMN)));
             data.putInt(PillInfoFragment.CATEGORY_ID_KEY, categoryId);
-            ((MainActivity)getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
+            ((MainActivity) getActivity()).handleFragmentSwitching(FragmentFactory.ID_PILLINFO, data);
         }
     };
 
@@ -147,11 +148,11 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.right_drawer_item) {
-                ((MainActivity)getActivity()).onClick(v);
-            } else if(v.getId() == R.id.left_drawer_item_touch) {
-                ((MainActivity)getActivity()).onClick(v);
-            } else if(v.getId() == R.id.sort_bar_item) {
+            if (v.getId() == R.id.right_drawer_item) {
+                ((MainActivity) getActivity()).onClick(v);
+            } else if (v.getId() == R.id.left_drawer_item_touch) {
+                ((MainActivity) getActivity()).onClick(v);
+            } else if (v.getId() == R.id.sort_bar_item) {
                 SortDialog sortDialog = new SortDialog((MainActivity) getActivity(), mSortPosition);
                 sortDialog.show();
             } else {
@@ -166,7 +167,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
             SwipeMenuItem item = new SwipeMenuItem(getActivity());
             item.setBackground(R.color.tutorial_pink);
             item.setIcon(R.drawable.med_ic_white_big_heart);
-            item.setWidth((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            item.setWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                     getResources().getDimension(R.dimen.favorite_item_width),
                     getResources().getDisplayMetrics()));
             menu.addMenuItem(item);
@@ -181,17 +182,22 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
 
         @Override
         public void onSwipeEnd(int position) {
-            int drugId = (int)listAdapter.getItem(position);
-            ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
-            categoryDrugsTableHelper.addDrugToFavorites(drugId);
-            drugsList.getmTouchView().smoothCloseMenu();
+            if (position != -1) {
+                int drugId = (int) listAdapter.getItem(position);
+                ProductHelper categoryDrugsTableHelper = ProductHelper.getInstance(getActivity());
+                categoryDrugsTableHelper.addDrugToFavorites(drugId);
+                drugsList.getmTouchView().smoothCloseMenu();
+                View view = drugsList.getChildAt(position);
+                ImageView imageView = (ImageView) view.findViewById(R.id.category_like_img);
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.med_ic_pink_heart_checked));
+            }
         }
     };
 
     private BroadcastReceiver sortReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
+            if (SortDialog.SORT_ITEMS_EVENT.equals(intent.getAction())) {
                 final ProductHelper helper = ProductHelper.getInstance(getActivity());
                 int position = intent.getIntExtra(SortDialog.SORT_TYPE_KEY, -1);
                 if (position >= 0) {
@@ -250,7 +256,7 @@ public class CategoryDrugListFragment extends BaseFragment implements LoaderMana
     private Handler sortHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Cursor cursor = (Cursor)msg.obj;
+            Cursor cursor = (Cursor) msg.obj;
             listAdapter = new CategoryListAdapter(
                     CategoryDrugListFragment.this, cursor, false);
             drugsList.setAdapter(listAdapter);
